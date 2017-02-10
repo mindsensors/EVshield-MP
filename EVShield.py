@@ -1,5 +1,6 @@
 # main.py -- put your code here!
 
+import struct
 from pyb import I2C
 
 
@@ -72,10 +73,10 @@ class EVShieldBank(I2C):
         return self.mem_read(1, self.i2c_address, register, timeout = timeout or self.timeout)[0]
     
     def readInteger(self, register, timeout = None):
-        pass
+        return struct.unpack('H', self.mem_read(2, self.i2c_address, register, timeout = timeout or self.timeout))[0]
     
     def readLong(self, register, timeout = None):
-        pass
+        return struct.unpack('I', self.mem_read(4, self.i2c_address, register, timeout = timeout or self.timeout))[0]
     
     def readString(self, register, length, timeout = None):
         return self.mem_read(length, self.i2c_address, register, timeout = timeout or self.timeout).decode("utf-8")
@@ -87,13 +88,13 @@ class EVShieldBank(I2C):
         self.mem_write(bytes(dataByte), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def writeInteger(self, register, dataInt, timeout = None):
-        pass
+        self.mem_write(bytes(struct.pack('H', dataInt)), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def writeLong(self, register, dataLong, timeout = None):
-        pass
+        self.mem_write(bytes(struct.pack('I', dataInt)), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def checkAddress(self):
-        pass
+        return self.i2c_address in self.scan()
     
     def setAddress(self, i2c_address):
         self.i2c_address = i2c_address
@@ -123,9 +124,12 @@ class EVShieldBank(I2C):
         return self.readString(SH_FIRMWARE_VERSION, 32)
 
 
-ev = EVShield()
-print(ev.getButtonState(BTN_GO))
-ev.ledSetRGB(255,0,255)
+if __name__ == "__main__":
+    ev = EVShield()
+    print(ev.getButtonState(BTN_GO))
+    ev.ledSetRGB(177,11,87)
+    #print(ev.bank_a.readInteger(SH_RGB_LED))
+    #print (bytes(struct.pack('I', 2993)))
 
 
 '''
