@@ -2,6 +2,53 @@
 
 from pyb import I2C
 
+
+SH_Bank_A = 0x34
+SH_Bank_B = 0x36
+
+SH_BTN_PRESS = 0xDA
+#SH_RGB_LED = 0xD7
+#SH_CENTER_RGB_LED = 0xDE
+
+BTN_LEFT = 1
+BTN_GO = 2
+BTN_RIGHT = 4
+
+class EVShield:
+    def __init__(self, i2c_address_a = SH_Bank_A, i2c_address_b = SH_Bank_B):
+        self.bank_a = EVShieldBank(1, i2c_address_a)
+        self.bank_b = EVShieldBank(1, i2c_address_b)
+    
+    def getButtonState(self, btn):
+        return self.bank_a.readByte(SH_BTN_PRESS) == btn
+    
+    def waitForButtonPress(self, btn, led_pattern = 0):
+        pass
+    
+    def ledSetRGB(self, red = 0, green = 0, blue = 0):
+        pass
+    
+    def ledBreathingPattern(self):
+        pass
+    
+    def ledHeartBeatPattern(self):
+        pass
+
+class EVShieldBank(I2C):
+    def __init__(self, bus, i2c_address):
+        super().__init__()
+        self.init(I2C.MASTER, baudrate=20000)
+        self.i2c_address = i2c_address >> 1
+    
+    def readByte(self, register, timeout=1000):
+        return self.mem_read(1, self.i2c_address, register, timeout=timeout)[0]
+
+
+ev = EVShield()
+print(ev.getButtonState(BTN_GO))
+
+
+'''
 BANKA = 0x34 >> 1
 BANKB = 0x36 >> 1
 Device_ADDRESS = 0x34 >> 1
@@ -23,10 +70,6 @@ GoKeyCount = 0xDC
 RightKeyCount = 0xDD
 
 Contntrol_reg = 0x41
-
-I2C(1, I2C.MASTER, baudrate=20000).deinit()
-pyb.delay(1000)
-i2c = I2C(1, I2C.MASTER, baudrate=20000)
 
 def read_who_am_I(Dev_ADDRESS):
     list = i2c.mem_read(8,Dev_ADDRESS, Device_WHO_AM_I, timeout=1000)
@@ -107,3 +150,4 @@ while True:
     set_RGB(100,0,0,BANKA)
     set_RGB(0,100,0,BANKB)
     pyb.delay(200)
+'''
