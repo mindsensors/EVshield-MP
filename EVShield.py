@@ -296,6 +296,15 @@ class EVShieldBank():
     
     # EVShieldBank
     
+    def helper(self, readOrWriteMethod, which_motor, motor1Register, motor2Register, value = None):
+        # TODO: make enums implement iterable, change to `which_motor not in SH_Motor`
+        if which_motor != SH_Motor.SH_Motor_1 and which_motor != SH_Motor.SH_Motor_2 and which_motor != SH_Motor_Both:
+            return # invalid motor
+        if value:
+            readOrWriteMethod(motor1Register if which_motor == SH_Motor.SH_Motor_1 else motor2Register, value)
+        else:
+            return readOrWriteMethod(motor1Register if which_motor == SH_Motor.SH_Motor_1 else motor2Register)
+    
     # Voltage value returned in milli-volts.
     def evshieldGetBatteryVoltage(self):
         return self.readByte(SH_VOLTAGE) * 40
@@ -309,34 +318,34 @@ class EVShieldBank():
     
     # Motor Operation APIs.
     def motorSetEncoderTarget(self, which_motor, target):
-        self.writeLong(SH_SETPT_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_SETPT_M2, target)
+        self.helper(self.writeLong, which_motor, SH_SETPT_M1, SH_SETPT_M2, target)
     
     def motorGetEncoderTarget(self, which_motor):
-        return self.readLong(SH_SETPT_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_SETPT_M2)
+        return self.helper(self.readLong, which_motor, SH_SETPT_M1, SH_SETPT_M2)
     
     def motorSetSpeed(self, which_motor, speed):
-        self.writeByte(SH_SPEED_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_SPEED_M2, speed, speed)
+        self.helper(self.writeByte, which_motor, SH_SPEED_M1, SH_SPEED_M2, speed)
     
     def motorGetSpeed(self, which_motor):
-        return self.readByte(SH_SPEED_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_SPEED_M2)
+        return self.helper(self.readByte, which_motor, SH_SPEED_M1, SH_SPEED_M2)
     
     def motorSetTimeToRun(self, which_motor, seconds):
-        self.writeByte(SH_TIME_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_TIME_M2, seconds)
+        self.helper(self.writeByte, which_motor, SH_TIME_M1, SH_TIME_M2, seconds)
     
     def motorGetTimeToRun(self, which_motor):
-        return self.readByte(SH_TIME_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_TIME_M2)
+        return self.helper(self.readByte, which_motor, SH_TIME_M1, SH_TIME_M2)
     
     def motorSetCommandRegB(self, which_motor, value):
-        self.writeByte(SH_CMD_B_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_CMD_B_M2, value)
+        self.helper(self.writeByte, which_motor, SH_CMD_B_M1, SH_CMD_B_M2, value)
     
     def motorGetCommandRegB(self, which_motor):
-        return self.readByte(SH_CMD_B_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_CMD_B_M2, value)
+        return self.helper(self.readByte, which_motor, SH_CMD_B_M1, SH_CMD_B_M2)
     
     def motorSetCommandRegA(self, which_motor, value):
-        self.writeByte(SH_CMD_A_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_CMD_A_M2, value)
+        self.helper(self.writeByte, which_motor, SH_CMD_A_M1, SH_CMD_A_M2, value)
     
     def motorGetCommandRegA(self, which_motor):
-        return self.readByte(SH_CMD_A_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_CMD_A_M2, value)
+        return self.helper(self.readByte, which_motor, SH_CMD_A_M1, SH_CMD_A_M2)
     
     def motorGetEncoderPosition(self, which_motor):
         pass
