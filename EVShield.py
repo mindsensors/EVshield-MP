@@ -216,11 +216,11 @@ class EVShield:
         elif (self.ledHeartBeatPatternTimer >= 45 and self.ledHeartBeatPatternTimer < 60):
             intensity = (60-self.ledHeartBeatPatternTimer)/15.0 # 1.0 to 0.0
         elif (self.ledHeartBeatPatternTimer >= 60):
-            intensity = 0;
+            intensity = 0
         
         self.ledSetRGB(0, intensity*255, intensity*255)
         pyb.delay(10) # 10 ms * 100 unit period = 1 second loop
-        self.ledHeartBeatPatternTimer += 1;
+        self.ledHeartBeatPatternTimer += 1
     
     def getKeyPressCount(self, btn):
         return self.bank_a.readByte(BTN_TO_COUNT_REG[btn])
@@ -298,7 +298,7 @@ class EVShieldBank():
     
     def helper(self, readOrWriteMethod, which_motor, motor1Register, motor2Register, value = None):
         # TODO: make enums implement iterable, change to `which_motor not in SH_Motor`
-        if which_motor != SH_Motor.SH_Motor_1 and which_motor != SH_Motor.SH_Motor_2 and which_motor != SH_Motor_Both:
+        if which_motor != SH_Motor.SH_Motor_1 and which_motor != SH_Motor.SH_Motor_2:
             return # invalid motor
         if value:
             readOrWriteMethod(motor1Register if which_motor == SH_Motor.SH_Motor_1 else motor2Register, value)
@@ -348,37 +348,46 @@ class EVShieldBank():
         return self.helper(self.readByte, which_motor, SH_CMD_A_M1, SH_CMD_A_M2)
     
     def motorGetEncoderPosition(self, which_motor):
-        pass
+        return self.helper(self.readLong, which_motor, SH_POSITION_M1, SH_POSITION_M2)
     
     def motorGetStatusByte(self, which_motor):
-        pass
+        return self.helper(self.readByte, which_motor, SH_STATUS_M1, SH_STATUS_M2)
     
     def motorGetTasksRunningByte(self, which_motor):
-        pass
+        return self.helper(self.readByte, which_motor, SH_TASKS_M1, SH_TASKS_M2)
     
     def motorSetEncoderPID(self, Kp, Ki, Kd):
-        pass
+        self.writeRegisters(SH_ENCODER_PID, bytes(struct.pack('HHH', Kp,Ki,Kd)))
     
     def motorSetSpeedPID(self, Kp, Ki, Kd):
-        pass
+        self.writeRegisters(SH_SPEED_PID, bytes(struct.pack('HHH', Kp,Ki,Kd)))
     
     def motorSetPassCount(self, pass_count):
-        pass
+        self.writeByte(SH_PASS_COUNT, pass_count)
     
     def motorSetTolerance(self, tolerance):
-        pass
+        self.writeByte(SH_TOLERANCE, tolerance)
     
     def motorReset(self):
-        pass
+        self.EVShieldIssueCommand('R')
     
     def motorStartBothInSync(self):
-        pass
+        self.EVShieldIssueCommand('S')
     
     def motorResetEncoder(self, which_motor):
-        pass
+        if which_motor == SH_Motor.SH_Motor_1 or which_motor == SH_Motor.SH_Motor_Both:
+            self.EVShieldIssueCommand('r')
+        if which_motor == SH_Motor.SH_Motor_2 or which_motor == SH_Motor.SH_Motor_Both:
+            self.EVShieldIssueCommand('s')
     
     def motorSetSpeedTimeAndControl(self, which_motors, speed, duration, control):
-        pass
+        if which_motors == SH_Motor.SH_Motor_Both:
+            control &= ~SH_CONTROL_GO # Clear the 'go right now' flag
+            self.motorSetSpeedTimeAndControl(SH_Motor.SH_Motor_1, speed, duration, control)
+            self.motorSetSpeedTimeAndControl(SH_Motor.SH_Motor_2, speed, duration, control)
+            self.motorStartBothInSync()
+        else:
+            self.helper(self.writeRegisters, which_motors, SH_SPEED_M1, SH_SPEED_M2, bytes([speed, duration, 0, control]))
     
     def motorSetEncoderSpeedTimeAndControl(self, which_motors, speed, duration, control):
         pass
@@ -387,16 +396,20 @@ class EVShieldBank():
         pass
     
     def motorWaitUntilTimeDone(self, which_motors):
-        pass
+        pyb.delay(50) # this delay is required for the status byte to be available for reading.
+        while motorIsTimeDone(which_motors) & SH_STATUS_TIME != 0:
+            pyb.delay(50)
     
     def motorIsTachoDone(self, which_motors):
         pass
     
     def motorWaitUntilTachoDone(self, which_motors):
-        pass
+        pyb.delay(50) # this delay is required for the status byte to be available for reading.
+        while motorIsTachoDone(which_motors) & SH_STATUS_TACHO != 0:
+            pyb.delay(50)
     
     def motorRunUnlimited(self, which_motors, direction, speed):
-        pass
+        motorSetSpeedTimeAndControl(which_motors, speed if direction == SH_Direction.SH_Direction_Forward else -speed, 0, SH_CONTROL_SPEED | SH_CONTROL_GO);
     
     def motorRunSeconds(self, which_motors, direction, speed, duration, wait_for_completion, next_action):
         pass
@@ -405,21 +418,33 @@ class EVShieldBank():
         pass
     
     def motorRunDegrees(self, which_motors, direction, speed, degrees, wait_for_completion, next_action):
-        pass
+        self.motorRunTachometer(which_motors, direction, speed, degrees, SH_Move.SH_Move_Relative, wait_for_completion, next_action);
     
     def motorRunRotations(self, which_motors, direction, speed, rotations, wait_for_completion, next_action):
-        pass
+        self.motorRunTachometer(which_motors, direction, speed, 360 * rotations, SH_Move.SH_Move_Relative, wait_for_completion, next_action)
     
     def motorStop(self, which_motors, next_action):
-        pass
+        if (which_motor == SH_Motor.SH_Motor_1 or which_motor == SH_Motor.SH_Motor_2 or which_motor == SH_Motor.SH_Motor_Both) \
+        and (next_action == SH_Next_Action.SH_Next_Action_Float or next_action == SH_Next_Action.SH_Next_Action_Brake or next_action == SH_Next_Action.SH_Next_Action_BrakeHold):
+            # These magic numbers are documented in the advanced development guide, "Supported I2C Commands" table
+            base_code = 'A' - 1 if next_action != SH_Next_Action.SH_Next_Action_Float else 'a' - 1
+            self.EVShieldIssueCommand(base_code + which_motors)
     
     
     # EVShield sensor functions.
-    def sensorSetType(self):
-        pass
+    def sensorSetType(which_sensor, sensor_type):
+        if which_sensor == SH_S1:
+            self.readInteger(SH_S1_MODE, sensor_type)
+        elif which_sensor == SH_S2:
+            self.readInteger(SH_S2_MODE, sensor_type)
     
-    def sensorReadRaw():
-        pass
+    def sensorReadRaw(which_sensor):
+        if which_sensor == SH_S1:
+            return self.readInteger(SH_S1_ANALOG)
+        elif which_sensor == SH_S2:
+            return self.readInteger(SH_S2_ANALOG)
+        else:
+            return -1
     
     
     def ledSetRGB(self, red = 0, green = 0, blue = 0):
