@@ -185,6 +185,7 @@ class EVShield:
     
     def ledSetRGB(self, red = 0, green = 0, blue = 0):
         self.bank_a.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
+        self.bank_b.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
     
     def centerLedSetRGB(self, red = 0, green = 0, blue = 0):
         self.bank_a.writeRegisters(SH_CENTER_RGB_LED, bytes([int(red),int(green),int(blue)]))
@@ -406,15 +407,24 @@ class EVShieldBank():
     def sensorReadRaw():
         pass
     
+    
+    def ledSetRGB(self, red = 0, green = 0, blue = 0):
+        self.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
 
 
 if __name__ == "__main__":
     ev = EVShield()
+    ev.ledSetRGB(255,00,0)
+    ev.centerLedSetRGB(0,255,0)
+    ev.bank_a.ledSetRGB(0,255,255)
+    ev.bank_b.ledSetRGB(0,0,255)
+    '''
     ev.centerLedSetRGB(255,0,200)
     ev.ledSetRGB(255,0,0)
     pyb.delay(500)
     ev.waitForButtonPress(BTN_GO, led_pattern = 2)
     ev.ledSetRGB(0,255,0)
+    '''
 
 
 '''
