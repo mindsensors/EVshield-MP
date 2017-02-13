@@ -295,118 +295,118 @@ class EVShieldBank():
         return self.readString(SH_FIRMWARE_VERSION, 32)
     
     # EVShieldBank
-    def evshieldGetBatteryVoltage():
+    def evshieldGetBatteryVoltage(self):
         pass
     
-    def nxshieldGetBatteryVoltage():
+    def nxshieldGetBatteryVoltage(self):
         pass
     
-    def EVShieldIssueCommand(command):
+    def EVShieldIssueCommand(self, command):
         pass
     
     # Motor Operation APIs.
-    def motorSetEncoderTarget(which_motor, target):
+    def motorSetEncoderTarget(self, which_motor, target):
         pass
     
-    def motorGetEncoderTarget(which_motor):
+    def motorGetEncoderTarget(self, which_motor):
         pass
     
-    def motorSetSpeed(which_motor, speed):
+    def motorSetSpeed(self, which_motor, speed):
         pass
     
-    def motorGetSpeed(which_motor):
+    def motorGetSpeed(self, which_motor):
         pass
     
-    def motorSetTimeToRun(which_motor, seconds):
+    def motorSetTimeToRun(self, which_motor, seconds):
         pass
     
-    def motorGetTimeToRun(which_motor):
+    def motorGetTimeToRun(self, which_motor):
         pass
     
-    def motorSetCommandRegB(which_motor, value):
+    def motorSetCommandRegB(self, which_motor, value):
         pass
     
-    def motorGetCommandRegB(which_motor):
+    def motorGetCommandRegB(self, which_motor):
         pass
     
-    def motorSetCommandRegA(which_motor, value):
+    def motorSetCommandRegA(self, which_motor, value):
         pass
     
-    def motorGetCommandRegA(which_motor):
+    def motorGetCommandRegA(self, which_motor):
         pass
     
-    def motorGetEncoderPosition(which_motor):
+    def motorGetEncoderPosition(self, which_motor):
         pass
     
-    def motorGetStatusByte(which_motor):
+    def motorGetStatusByte(self, which_motor):
         pass
     
-    def motorGetTasksRunningByte(which_motor):
+    def motorGetTasksRunningByte(self, which_motor):
         pass
     
-    def motorSetEncoderPID(Kp, Ki, Kd):
+    def motorSetEncoderPID(self, Kp, Ki, Kd):
         pass
     
-    def motorSetSpeedPID(Kp, Ki, Kd):
+    def motorSetSpeedPID(self, Kp, Ki, Kd):
         pass
     
-    def motorSetPassCount(pass_count):
+    def motorSetPassCount(self, pass_count):
         pass
     
-    def motorSetTolerance(tolerance):
+    def motorSetTolerance(self, tolerance):
         pass
     
-    def motorReset():
+    def motorReset(self):
         pass
     
-    def motorStartBothInSync():
+    def motorStartBothInSync(self):
         pass
     
-    def motorResetEncoder(which_motor):
+    def motorResetEncoder(self, which_motor):
         pass
     
-    def motorSetSpeedTimeAndControl(which_motors, speed, duration, control):
+    def motorSetSpeedTimeAndControl(self, which_motors, speed, duration, control):
         pass
     
-    def motorSetEncoderSpeedTimeAndControl(which_motors, speed, duration, control):
+    def motorSetEncoderSpeedTimeAndControl(self, which_motors, speed, duration, control):
         pass
     
-    def motorIsTimeDone(which_motors):
+    def motorIsTimeDone(self, which_motors):
         pass
     
-    def motorWaitUntilTimeDone(which_motors):
+    def motorWaitUntilTimeDone(self, which_motors):
         pass
     
-    def motorIsTachoDone(which_motors):
+    def motorIsTachoDone(self, which_motors):
         pass
     
-    def motorWaitUntilTachoDone(which_motors):
+    def motorWaitUntilTachoDone(self, which_motors):
         pass
     
-    def motorRunUnlimited(which_motors, direction, speed):
+    def motorRunUnlimited(self, which_motors, direction, speed):
         pass
     
-    def motorRunSeconds(which_motors, direction, speed, duration, wait_for_completion, next_action):
+    def motorRunSeconds(self, which_motors, direction, speed, duration, wait_for_completion, next_action):
         pass
     
-    def motorRunTachometer(which_motors, direction, speed, tachometer, relative, wait_for_completion, next_action):
+    def motorRunTachometer(self, which_motors, direction, speed, tachometer, relative, wait_for_completion, next_action):
         pass
     
-    def motorRunDegrees(which_motors, direction, speed, degrees, wait_for_completion, next_action):
+    def motorRunDegrees(self, which_motors, direction, speed, degrees, wait_for_completion, next_action):
         pass
     
-    def motorRunRotations(which_motors, direction, speed, rotations, wait_for_completion, next_action):
+    def motorRunRotations(self, which_motors, direction, speed, rotations, wait_for_completion, next_action):
         pass
     
-    def motorStop(which_motors, next_action):
+    def motorStop(self, which_motors, next_action):
         pass
     
     
     # EVShield sensor functions.
-    def sensorSetType():
+    def sensorSetType(self):
         pass
     
-    def sensorReadRaw():
+    def sensorReadRawf:
         pass
     
     
