@@ -262,7 +262,7 @@ class EVShieldBank():
         self.i2c.mem_write(bytes(struct.pack('H', dataInt)), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def writeLong(self, register, dataLong, timeout = None):
-        self.i2c.mem_write(bytes(struct.pack('I', dataInt)), self.i2c_address, register, timeout = timeout or self.timeout)
+        self.i2c.mem_write(bytes(struct.pack('I', dataLong)), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def checkAddress(self):
         return self.i2c_address in self.i2c.scan()
@@ -295,45 +295,48 @@ class EVShieldBank():
         return self.readString(SH_FIRMWARE_VERSION, 32)
     
     # EVShieldBank
-    def evshieldGetBatteryVoltage(self):
-        pass
     
+    # Voltage value returned in milli-volts.
+    def evshieldGetBatteryVoltage(self):
+        return self.readByte(SH_VOLTAGE) * 40
+    
+    # provided for backword compatibility with nxshield programs.
     def nxshieldGetBatteryVoltage(self):
-        pass
+        return self.evshieldGetBatteryVoltage()
     
     def EVShieldIssueCommand(self, command):
-        pass
+        self.writeByte(SH_COMMAND, command)
     
     # Motor Operation APIs.
     def motorSetEncoderTarget(self, which_motor, target):
-        pass
+        self.writeLong(SH_SETPT_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_SETPT_M2, target)
     
     def motorGetEncoderTarget(self, which_motor):
-        pass
+        return self.readLong(SH_SETPT_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_SETPT_M2)
     
     def motorSetSpeed(self, which_motor, speed):
-        pass
+        self.writeByte(SH_SPEED_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_SPEED_M2, speed, speed)
     
     def motorGetSpeed(self, which_motor):
-        pass
+        return self.readByte(SH_SPEED_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_SPEED_M2)
     
     def motorSetTimeToRun(self, which_motor, seconds):
-        pass
+        self.writeByte(SH_TIME_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_TIME_M2, seconds)
     
     def motorGetTimeToRun(self, which_motor):
-        pass
+        return self.readByte(SH_TIME_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_TIME_M2)
     
     def motorSetCommandRegB(self, which_motor, value):
-        pass
+        self.writeByte(SH_CMD_B_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_CMD_B_M2, value)
     
     def motorGetCommandRegB(self, which_motor):
-        pass
+        return self.readByte(SH_CMD_B_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_CMD_B_M2, value)
     
     def motorSetCommandRegA(self, which_motor, value):
-        pass
+        self.writeByte(SH_CMD_A_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_CMD_A_M2, value)
     
     def motorGetCommandRegA(self, which_motor):
-        pass
+        return self.readByte(SH_CMD_A_M1 if which_motor == SH_Motor.SH_Motor_1 else SH_CMD_A_M2, value)
     
     def motorGetEncoderPosition(self, which_motor):
         pass
@@ -406,7 +409,7 @@ class EVShieldBank():
     def sensorSetType(self):
         pass
     
-    def sensorReadRawf:
+    def sensorReadRaw():
         pass
     
     
@@ -416,7 +419,13 @@ class EVShieldBank():
 
 if __name__ == "__main__":
     ev = EVShield()
+    ev.bank_a.motorSetSpeed(SH_Motor.SH_Motor_1, SH_Speed_Medium)
+    print(ev.bank_a.motorGetSpeed(SH_Motor.SH_Motor_1))
     
+    ev.bank_a.motorSetEncoderTarget(SH_Motor.SH_Motor_1, 15)
+    print(ev.bank_a.motorGetEncoderTarget(SH_Motor.SH_Motor_1))
+    
+    #print(SH_Speed_Medium)
 
 
 '''
