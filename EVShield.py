@@ -259,10 +259,10 @@ class EVShieldBank():
         self.i2c.mem_write(bytes(dataByte), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def writeInteger(self, register, dataInt, timeout = None):
-        self.i2c.mem_write(bytes(struct.pack('H', dataInt)), self.i2c_address, register, timeout = timeout or self.timeout)
+        self.i2c.mem_write(struct.pack('H', dataInt), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def writeLong(self, register, dataLong, timeout = None):
-        self.i2c.mem_write(bytes(struct.pack('I', dataLong)), self.i2c_address, register, timeout = timeout or self.timeout)
+        self.i2c.mem_write(struct.pack('I', dataLong), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def checkAddress(self):
         return self.i2c_address in self.i2c.scan()
@@ -357,10 +357,10 @@ class EVShieldBank():
         return self.helper(self.readByte, which_motor, SH_TASKS_M1, SH_TASKS_M2)
     
     def motorSetEncoderPID(self, Kp, Ki, Kd):
-        self.writeRegisters(SH_ENCODER_PID, bytes(struct.pack('HHH', Kp,Ki,Kd)))
+        self.writeRegisters(SH_ENCODER_PID, struct.pack('HHH', Kp,Ki,Kd))
     
     def motorSetSpeedPID(self, Kp, Ki, Kd):
-        self.writeRegisters(SH_SPEED_PID, bytes(struct.pack('HHH', Kp,Ki,Kd)))
+        self.writeRegisters(SH_SPEED_PID, struct.pack('HHH', Kp,Ki,Kd))
     
     def motorSetPassCount(self, pass_count):
         self.writeByte(SH_PASS_COUNT, pass_count)
@@ -389,11 +389,34 @@ class EVShieldBank():
         else:
             self.helper(self.writeRegisters, which_motors, SH_SPEED_M1, SH_SPEED_M2, bytes([speed, duration, 0, control]))
     
-    def motorSetEncoderSpeedTimeAndControl(self, which_motors, speed, duration, control):
-        pass
+    def motorSetEncoderSpeedTimeAndControl(self, which_motors, encoder, speed, duration, control):
+        if which_motors == SH_Motor.SH_Motor_Both: # The motor control registers are back to back, and both can be written in one command
+            control &= ~SH_CONTROL_GO # Clear the 'go right now' flag
+            self.motorSetEncoderSpeedTimeAndControl(SH_Motor.SH_Motor_1, encoder, speed, duration, control)
+            self.motorSetEncoderSpeedTimeAndControl(SH_Motor.SH_Motor_2, encoder, speed, duration, control)
+            self.motorStartBothInSync()
+        else: # Or, just issue the command for one motor
+            self.helper(self.writeRegisters, which_motors, SH_SETPT_M1, SH_SETPT_M2, struct.pack('I', encoder) + bytes([speed, duration, 0, control]))
     
     def motorIsTimeDone(self, which_motors):
-        pass
+        # because sections of this method were commented out (and there are no else blocks) it always returns 0
+        return 0
+        if which_motors == SH_Motor.SH_Motor_Both:
+            s1 = motorGetStatusByte(SH_Motor_1)
+            s2 = motorGetStatusByte(SH_Motor_2)
+            if s1 & SH_STATUS_TIME == 0 and s2 & SH_STATUS_TIME == 0:
+                # if stall bit was on there was an error
+                #if s1 & SH_STATUS_STALL != 0 ors2 & SH_STATUS_STALL != 0:
+                #    return SH_STATUS_STALL
+                #else:
+                    return 0
+        else:
+            s1 = motorGetStatusByte(which_motors)
+            if s1 & SH_STATUS_TIME == 0:
+                #if s1 & SH_STATUS_STALL != 0:
+                #    return SH_STATUS_STALL
+                #else:
+                    return 0
     
     def motorWaitUntilTimeDone(self, which_motors):
         pyb.delay(50) # this delay is required for the status byte to be available for reading.
@@ -401,7 +424,24 @@ class EVShieldBank():
             pyb.delay(50)
     
     def motorIsTachoDone(self, which_motors):
-        pass
+        # because sections of this method were commented out (and there are no else blocks) it always returns 0
+        return 0
+        if which_motors == SH_Motor.SH_Motor_Both:
+            s1 = motorGetStatusByte(SH_Motor_1)
+            s2 = motorGetStatusByte(SH_Motor_2)
+            if s1 & SH_STATUS_TACHO == 0 and s2 & SH_STATUS_TACHO == 0:
+                # if stall bit was on there was an error
+                #if s1 & SH_STATUS_STALL != 0 ors2 & SH_STATUS_STALL != 0:
+                #    return SH_STATUS_STALL
+                #else:
+                    return 0
+        else:
+            s1 = motorGetStatusByte(which_motors)
+            if s1 & SH_STATUS_TACHO == 0:
+                #if s1 & SH_STATUS_STALL != 0:
+                #    return SH_STATUS_STALL
+                #else:
+                    return 0
     
     def motorWaitUntilTachoDone(self, which_motors):
         pyb.delay(50) # this delay is required for the status byte to be available for reading.
@@ -409,16 +449,43 @@ class EVShieldBank():
             pyb.delay(50)
     
     def motorRunUnlimited(self, which_motors, direction, speed):
-        motorSetSpeedTimeAndControl(which_motors, speed if direction == SH_Direction.SH_Direction_Forward else -speed, 0, SH_CONTROL_SPEED | SH_CONTROL_GO);
+        control = SH_CONTROL_SPEED | SH_CONTROL_GO
+        if direction == SH_Direction.SH_Direction_Reverse: speed = -speed
+        self.motorSetSpeedTimeAndControl(which_motors, speed, 0, control)
     
     def motorRunSeconds(self, which_motors, direction, speed, duration, wait_for_completion, next_action):
-        pass
+        control = SH_CONTROL_SPEED | SH_CONTROL_TIME | SH_CONTROL_GO
+        if next_action == SH_Next_Action.SH_Next_Action_Brake: control |= SH_CONTROL_BRK
+        elif (next_action == SH_Next_Action.SH_Next_Action_BrakeHold): control |= SH_CONTROL_BRK | SH_CONTROL_ON
+        
+        if direction == SH_Direction.SH_Direction_Reverse: speed = -speed
+        self.motorSetSpeedTimeAndControl(which_motors, speed, duration, ctrl)
+        if wait_for_completion == SH_Completion_Wait.SH_Completion_Wait_For:
+            self.motorWaitUntilTimeDone(which_motors)
     
     def motorRunTachometer(self, which_motors, direction, speed, tachometer, relative, wait_for_completion, next_action):
-        pass
+        control = SH_CONTROL_SPEED | SH_CONTROL_TACHO | SH_CONTROL_GO
+        if next_action == SH_Next_Action.SH_Next_Action_Brake: control |= SH_CONTROL_BRK
+        elif (next_action == SH_Next_Action.SH_Next_Action_BrakeHold): control |= SH_CONTROL_BRK | SH_CONTROL_ON
+        
+        if direction == SH_Direction.SH_Direction_Reverse: speed = -speed
+        
+        # The tachometer can be absolute or relative.
+        # If it is absolute, we ignore the direction parameter.
+
+        if relative == SH_Move.SH_Move_Relative:
+            control |= SH_CONTROL_RELATIVEdg
+            # a (relative) forward command is always a positive tachometer reading
+            final_tach = abs(tachometer)
+            if speed < 0: # and a (relative) reverse command is always negative
+                tachometer = -tachometer
+
+        self.motorSetEncoderSpeedTimeAndControl(which_motors, tachometer, speed, 0, control)
+        if wait_for_completion == SH_Completion_Wait.SH_Completion_Wait_For:
+            self.motorWaitUntilTachoDone(which_motors)
     
     def motorRunDegrees(self, which_motors, direction, speed, degrees, wait_for_completion, next_action):
-        self.motorRunTachometer(which_motors, direction, speed, degrees, SH_Move.SH_Move_Relative, wait_for_completion, next_action);
+        self.motorRunTachometer(which_motors, direction, speed, degrees, SH_Move.SH_Move_Relative, wait_for_completion, next_action)
     
     def motorRunRotations(self, which_motors, direction, speed, rotations, wait_for_completion, next_action):
         self.motorRunTachometer(which_motors, direction, speed, 360 * rotations, SH_Move.SH_Move_Relative, wait_for_completion, next_action)
