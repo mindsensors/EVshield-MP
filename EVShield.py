@@ -228,6 +228,7 @@ class EVShield:
         self.bank_a.writeByte(BTN_TO_COUNT_REG[btn], 0)
 
 class EVShieldBank():
+    # EVShieldI2C
     def __init__(self, i2c_address):
         #I2C(1, I2C.MASTER, baudrate=20000).deinit()
         self.i2c = I2C(1)
@@ -291,6 +292,120 @@ class EVShieldBank():
     
     def getInfo(self):
         return self.readString(SH_FIRMWARE_VERSION, 32)
+    
+    # EVShieldBank
+    def evshieldGetBatteryVoltage():
+        pass
+    
+    def nxshieldGetBatteryVoltage():
+        pass
+    
+    
+    # Motor Operation APIs.
+    def EVShieldIssueCommand():
+        pass
+    
+    def motorSetEncoderTarget():
+        pass
+    
+    def motorSetSpeed():
+        pass
+    
+    def motorGetSpeed():
+        pass
+    
+    def motorSetTimeToRun():
+        pass
+    
+    def motorGetTimeToRun():
+        pass
+    
+    def motorSetCommandRegB():
+        pass
+    
+    def motorGetCommandRegB():
+        pass
+    
+    def motorSetCommandRegA():
+        pass
+    
+    def motorGetCommandRegA():
+        pass
+    
+    def motorGetEncoderPosition():
+        pass
+    
+    def motorGetStatusByte():
+        pass
+    
+    def motorGetTasksRunningByte():
+        pass
+    
+    def motorSetEncoderPID():
+        pass
+    
+    def motorSetSpeedPID():
+        pass
+    
+    def motorSetPassCount():
+        pass
+    
+    def motorSetTolerance():
+        pass
+    
+    def motorReset():
+        pass
+    
+    def motorStartBothInSync():
+        pass
+    
+    def motorResetEncoder():
+        pass
+    
+    def motorSetSpeedTimeAndControl():
+        pass
+    
+    def motorSetEncoderSpeedTimeAndControl():
+        pass
+    
+    def motorIsTimeDone():
+        pass
+    
+    def motorWaitUntilTimeDone():
+        pass
+    
+    def motorIsTachoDone():
+        pass
+    
+    def motorWaitUntilTachoDone():
+        pass
+    
+    def motorRunUnlimited():
+        pass
+    
+    def motorRunSeconds():
+        pass
+    
+    def motorRunTachometer():
+        pass
+    
+    def motorRunDegrees():
+        pass
+    
+    def motorRunRotations():
+        pass
+    
+    def motorStop():
+        pass
+    
+    
+    # EVShield sensor functions.
+    def sensorSetType():
+        pass
+    
+    def sensorReadRaw():
+        pass
+    
 
 
 if __name__ == "__main__":
