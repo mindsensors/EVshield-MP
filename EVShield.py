@@ -301,57 +301,59 @@ class EVShieldBank():
     def nxshieldGetBatteryVoltage():
         pass
     
+    def EVShieldIssueCommand(command):
+        pass
     
     # Motor Operation APIs.
-    def EVShieldIssueCommand():
+    def motorSetEncoderTarget(which_motor, target):
         pass
     
-    def motorSetEncoderTarget():
+    def motorGetEncoderTarget(which_motor):
         pass
     
-    def motorSetSpeed():
+    def motorSetSpeed(which_motor, speed):
         pass
     
-    def motorGetSpeed():
+    def motorGetSpeed(which_motor):
         pass
     
-    def motorSetTimeToRun():
+    def motorSetTimeToRun(which_motor, seconds):
         pass
     
-    def motorGetTimeToRun():
+    def motorGetTimeToRun(which_motor):
         pass
     
-    def motorSetCommandRegB():
+    def motorSetCommandRegB(which_motor, value):
         pass
     
-    def motorGetCommandRegB():
+    def motorGetCommandRegB(which_motor):
         pass
     
-    def motorSetCommandRegA():
+    def motorSetCommandRegA(which_motor, value):
         pass
     
-    def motorGetCommandRegA():
+    def motorGetCommandRegA(which_motor):
         pass
     
-    def motorGetEncoderPosition():
+    def motorGetEncoderPosition(which_motor):
         pass
     
-    def motorGetStatusByte():
+    def motorGetStatusByte(which_motor):
         pass
     
-    def motorGetTasksRunningByte():
+    def motorGetTasksRunningByte(which_motor):
         pass
     
-    def motorSetEncoderPID():
+    def motorSetEncoderPID(Kp, Ki, Kd):
         pass
     
-    def motorSetSpeedPID():
+    def motorSetSpeedPID(Kp, Ki, Kd):
         pass
     
-    def motorSetPassCount():
+    def motorSetPassCount(pass_count):
         pass
     
-    def motorSetTolerance():
+    def motorSetTolerance(tolerance):
         pass
     
     def motorReset():
@@ -360,43 +362,43 @@ class EVShieldBank():
     def motorStartBothInSync():
         pass
     
-    def motorResetEncoder():
+    def motorResetEncoder(which_motor):
         pass
     
-    def motorSetSpeedTimeAndControl():
+    def motorSetSpeedTimeAndControl(which_motors, speed, duration, control):
         pass
     
-    def motorSetEncoderSpeedTimeAndControl():
+    def motorSetEncoderSpeedTimeAndControl(which_motors, speed, duration, control):
         pass
     
-    def motorIsTimeDone():
+    def motorIsTimeDone(which_motors):
         pass
     
-    def motorWaitUntilTimeDone():
+    def motorWaitUntilTimeDone(which_motors):
         pass
     
-    def motorIsTachoDone():
+    def motorIsTachoDone(which_motors):
         pass
     
-    def motorWaitUntilTachoDone():
+    def motorWaitUntilTachoDone(which_motors):
         pass
     
-    def motorRunUnlimited():
+    def motorRunUnlimited(which_motors, direction, speed):
         pass
     
-    def motorRunSeconds():
+    def motorRunSeconds(which_motors, direction, speed, duration, wait_for_completion, next_action):
         pass
     
-    def motorRunTachometer():
+    def motorRunTachometer(which_motors, direction, speed, tachometer, relative, wait_for_completion, next_action):
         pass
     
-    def motorRunDegrees():
+    def motorRunDegrees(which_motors, direction, speed, degrees, wait_for_completion, next_action):
         pass
     
-    def motorRunRotations():
+    def motorRunRotations(which_motors, direction, speed, rotations, wait_for_completion, next_action):
         pass
     
-    def motorStop():
+    def motorStop(which_motors, next_action):
         pass
     
     
@@ -414,17 +416,7 @@ class EVShieldBank():
 
 if __name__ == "__main__":
     ev = EVShield()
-    ev.ledSetRGB(255,00,0)
-    ev.centerLedSetRGB(0,255,0)
-    ev.bank_a.ledSetRGB(0,255,255)
-    ev.bank_b.ledSetRGB(0,0,255)
-    '''
-    ev.centerLedSetRGB(255,0,200)
-    ev.ledSetRGB(255,0,0)
-    pyb.delay(500)
-    ev.waitForButtonPress(BTN_GO, led_pattern = 2)
-    ev.ledSetRGB(0,255,0)
-    '''
+    
 
 
 '''
