@@ -7,7 +7,7 @@ from pyb import I2C
 # Defines from SHDefines.h
 
 # For the sensor bank ports
-class SH_BankPort(Enum):
+class SH_BankPort():
     SH_BAS1 = 0x01 # Bank A Sensor Port 1
     SH_BAS2 = 0x02 # Bank A Sensor Port 2
     SH_BBS1 = 0x03 # Bank B Sensor Port 1
@@ -109,27 +109,27 @@ SH_PS_TS_UNLOCK = 0x45
 
 
 # Constants to be used by user programs.
-class SH_Motor(Enum):
+class SH_Motor():
     SH_Motor_1    = 0x01
     SH_Motor_2    = 0x02
     SH_Motor_Both = 0x03
 
-class SH_Next_Action(Enum):
+class SH_Next_Action():
     SH_Next_Action_Float     = 0x00 # stop and let the motor coast
     SH_Next_Action_Brake     = 0x01 # apply brakes, and resist change to tachometer, but if tach position is forcibly changed, do not restore position
     SH_Next_Action_BrakeHold = 0x02 # apply brakes, and restore externally forced change to tachometer
 
-class SH_Direction(Enum):
+class SH_Direction():
     SH_Direction_Reverse = 0x00
     SH_Direction_Forward = 0x01
 
 # Tachometer movement related constants
-class SH_Move(Enum):
+class SH_Move():
     SH_Move_Absolute = 0x00 # Move the tach to absolute value provided
     SH_Move_Relative = 0x01 # Move the tach relative to previous position
 
 # Whether to wait for motor to finish it's current task or not
-class SH_Completion_Wait(Enum):
+class SH_Completion_Wait():
   SH_Completion_Dont_Wait = 0x00 # Don't wait for motor to finish, program will continue with next function
   SH_Completion_Wait_For  = 0x01 # Wait for motor to finish, program will wait until current function finishes it's operation
 
