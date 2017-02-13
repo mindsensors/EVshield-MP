@@ -387,7 +387,7 @@ class EVShieldBank():
             self.motorSetSpeedTimeAndControl(SH_Motor.SH_Motor_2, speed, duration, control)
             self.motorStartBothInSync()
         else:
-            self.helper(self.writeRegisters, which_motors, SH_SPEED_M1, SH_SPEED_M2, bytes([speed, duration, 0, control]))
+            self.helper(self.writeRegisters, which_motors, SH_SPEED_M1, SH_SPEED_M2, bytes([speed%256, duration, 0, control]))
     
     def motorSetEncoderSpeedTimeAndControl(self, which_motors, encoder, speed, duration, control):
         if which_motors == SH_Motor.SH_Motor_Both: # The motor control registers are back to back, and both can be written in one command
@@ -396,7 +396,7 @@ class EVShieldBank():
             self.motorSetEncoderSpeedTimeAndControl(SH_Motor.SH_Motor_2, encoder, speed, duration, control)
             self.motorStartBothInSync()
         else: # Or, just issue the command for one motor
-            self.helper(self.writeRegisters, which_motors, SH_SETPT_M1, SH_SETPT_M2, struct.pack('I', encoder) + bytes([speed, duration, 0, control]))
+            self.helper(self.writeRegisters, which_motors, SH_SETPT_M1, SH_SETPT_M2, struct.pack('I', encoder) + bytes([speed%256, duration, 0, control]))
     
     def motorIsTimeDone(self, which_motors):
         # because sections of this method were commented out (and there are no else blocks) it always returns 0
@@ -445,7 +445,7 @@ class EVShieldBank():
     
     def motorWaitUntilTachoDone(self, which_motors):
         pyb.delay(50) # this delay is required for the status byte to be available for reading.
-        while motorIsTachoDone(which_motors) & SH_STATUS_TACHO != 0:
+        while self.motorIsTachoDone(which_motors) & SH_STATUS_TACHO != 0:
             pyb.delay(50)
     
     def motorRunUnlimited(self, which_motors, direction, speed):
@@ -474,7 +474,7 @@ class EVShieldBank():
         # If it is absolute, we ignore the direction parameter.
 
         if relative == SH_Move.SH_Move_Relative:
-            control |= SH_CONTROL_RELATIVEdg
+            control |= SH_CONTROL_RELATIVE
             # a (relative) forward command is always a positive tachometer reading
             final_tach = abs(tachometer)
             if speed < 0: # and a (relative) reverse command is always negative
@@ -520,58 +520,9 @@ class EVShieldBank():
 
 if __name__ == "__main__":
     ev = EVShield()
-    ev.bank_a.motorSetSpeed(SH_Motor.SH_Motor_1, SH_Speed_Medium)
-    print(ev.bank_a.motorGetSpeed(SH_Motor.SH_Motor_1))
-    
-    ev.bank_a.motorSetEncoderTarget(SH_Motor.SH_Motor_1, 15)
-    print(ev.bank_a.motorGetEncoderTarget(SH_Motor.SH_Motor_1))
-    
-    #print(SH_Speed_Medium)
-
-
-'''
-Servo_Base = 0x42
-SA1_base = 0x48
-SA2_base = 0x5E
-SA3_base = 0x74
-SD1_base = 0x8A
-SD2_base = 0xA0
-
-Contntrol_reg = 0x41
-
-def get_RGB(Dev_ADDRESS= BANKA):
-    list = i2c.mem_read(3,Dev_ADDRESS, Led_Base, timeout=1000)
-    return list[0],list[1],list[2],
-
-def set_Servo(device,value):
-    data = bytearray(2)
-    data[1] = int(value/256)
-    data[0] = int(value)
-    i2c.mem_write(data, Device_ADDRESS, Servo_Base +2*int(device),timeout=1000)
-
-def read_SD1():
-    if int(i2c.mem_read(1,Device_ADDRESS, SD1_base+3)[0]) == 0:
-        list = i2c.mem_read(14,Device_ADDRESS, SD1_base+4)
-        return(list)
-
-def read_analog(port):
-    list = i2c.mem_read(6,Device_ADDRESS, SA1_base +port*22)
-    if list[0] == 1 : return(list[4] +list[5]*256) 
-    else: return 0
-
-def Set_type(port ,type):
-    data = bytearray(1)
-    data[0] = int(type)
-    i2c.mem_write(data, Device_ADDRESS, SA1_base +2+port*22,timeout=1000)
-
-def Set_mode(port ,mode,type =0):
-    data = bytearray(2)
-    data[0] = int(mode)
-    data[1] = int(type)
-    i2c.mem_write(data, Device_ADDRESS, SA1_base +port*22,timeout=1000)
-
-def Set_pin(port ,mode):
-    data = bytearray(1)
-    data[0] = int(mode)
-    i2c.mem_write(data, Device_ADDRESS, SA1_base+4 +port*22,timeout=1000)
-'''
+    ev.bank_a.motorRunRotations(which_motors = SH_Motor.SH_Motor_1, 
+                                direction = SH_Direction.SH_Direction_Reverse, 
+                                speed = SH_Speed_Medium, 
+                                rotations = 2, 
+                                wait_for_completion = SH_Completion_Wait.SH_Completion_Wait_For, 
+                                next_action = SH_Next_Action.SH_Next_Action_BrakeHold)
