@@ -29,7 +29,7 @@ BTN_TO_COUNT_REG = {
 }
 
 SH_RGB_LED = 0xD7
-#SH_CENTER_RGB_LED = 0xDE
+SH_CENTER_RGB_LED = 0xDE
 
 class EVShield:
     def __init__(self, i2c_address_a = SH_Bank_A, i2c_address_b = SH_Bank_B):
@@ -52,6 +52,9 @@ class EVShield:
     
     def ledSetRGB(self, red = 0, green = 0, blue = 0):
         self.bank_a.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
+    
+    def centerLedSetRGB(self, red = 0, green = 0, blue = 0):
+        self.bank_a.writeRegisters(SH_CENTER_RGB_LED, bytes([int(red),int(green),int(blue)]))
     
     def ledBreathingPattern(self):
         if (self.ledBreathingPatternTimer > 100):
@@ -159,6 +162,7 @@ class EVShieldBank():
 
 if __name__ == "__main__":
     ev = EVShield()
+    ev.centerLedSetRGB(255,0,200)
     ev.ledSetRGB(255,0,0)
     pyb.delay(500)
     ev.waitForButtonPress(BTN_GO, led_pattern = 2)
