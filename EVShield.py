@@ -33,8 +33,8 @@ SH_RGB_LED = 0xD7
 
 class EVShield:
     def __init__(self, i2c_address_a = SH_Bank_A, i2c_address_b = SH_Bank_B):
-        self.bank_a = EVShieldBank(1, i2c_address_a)
-        self.bank_b = EVShieldBank(1, i2c_address_b)
+        self.bank_a = EVShieldBank(i2c_address_a)
+        self.bank_b = EVShieldBank(i2c_address_b)
         self.ledBreathingPatternTimer = 0
         self.ledHeartBeatPatternTimer = 0
     
@@ -91,42 +91,43 @@ class EVShield:
     def resetKeyPressCount(self, btn):
         self.bank_a.writeByte(BTN_TO_COUNT_REG[btn], 0)
 
-class EVShieldBank(I2C):
-    def __init__(self, bus, i2c_address):
-        super().__init__()
-        self.init(I2C.MASTER, baudrate=20000)
+class EVShieldBank():
+    def __init__(self, i2c_address):
+        #I2C(1, I2C.MASTER, baudrate=20000).deinit()
+        self.i2c = I2C(1)
+        self.i2c.init(I2C.MASTER, baudrate=20000)
         self.i2c_address = i2c_address >> 1
         self.timeout = 1000
     
     def readRegisters(self, register, length, timeout = None):
-        return self.mem_read(length, self.i2c_address, register, timeout = timeout or self.timeout)
+        return self.i2c.mem_read(length, self.i2c_address, register, timeout = timeout or self.timeout)
     
     def readByte(self, register, timeout = None):
-        return self.mem_read(1, self.i2c_address, register, timeout = timeout or self.timeout)[0]
+        return self.i2c.mem_read(1, self.i2c_address, register, timeout = timeout or self.timeout)[0]
     
     def readInteger(self, register, timeout = None):
-        return struct.unpack('H', self.mem_read(2, self.i2c_address, register, timeout = timeout or self.timeout))[0]
+        return struct.unpack('H', self.i2c.mem_read(2, self.i2c_address, register, timeout = timeout or self.timeout))[0]
     
     def readLong(self, register, timeout = None):
-        return struct.unpack('I', self.mem_read(4, self.i2c_address, register, timeout = timeout or self.timeout))[0]
+        return struct.unpack('I', self.i2c.mem_read(4, self.i2c_address, register, timeout = timeout or self.timeout))[0]
     
     def readString(self, register, length, timeout = None):
-        return self.mem_read(length, self.i2c_address, register, timeout = timeout or self.timeout).decode("utf-8")
+        return self.i2c.mem_read(length, self.i2c_address, register, timeout = timeout or self.timeout).decode("utf-8")
     
     def writeRegisters(self, register, data, timeout = None):
-        self.mem_write(data, self.i2c_address, register, timeout = timeout or self.timeout)
+        self.i2c.mem_write(data, self.i2c_address, register, timeout = timeout or self.timeout)
     
     def writeByte(self, register, dataByte, timeout = None):
-        self.mem_write(bytes(dataByte), self.i2c_address, register, timeout = timeout or self.timeout)
+        self.i2c.mem_write(bytes(dataByte), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def writeInteger(self, register, dataInt, timeout = None):
-        self.mem_write(bytes(struct.pack('H', dataInt)), self.i2c_address, register, timeout = timeout or self.timeout)
+        self.i2c.mem_write(bytes(struct.pack('H', dataInt)), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def writeLong(self, register, dataLong, timeout = None):
-        self.mem_write(bytes(struct.pack('I', dataInt)), self.i2c_address, register, timeout = timeout or self.timeout)
+        self.i2c.mem_write(bytes(struct.pack('I', dataInt)), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def checkAddress(self):
-        return self.i2c_address in self.scan()
+        return self.i2c_address in self.i2c.scan()
     
     def setAddress(self, i2c_address):
         self.i2c_address = i2c_address
