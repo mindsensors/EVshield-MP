@@ -164,7 +164,7 @@ class mindsensorsUI():
             try:
                 self.ts_cal = json.load(open('/tmp/ps_ts_cal', 'r'))
             except IOError:
-                print 'Touchscreen Error: Failed to read touchscreen calibration values in mindsensorsUI.py'
+                print('Touchscreen Error: Failed to read touchscreen calibration values in mindsensorsUI.py')
     
     ### @cond
     ## Dumps the screen buffer
@@ -460,7 +460,7 @@ class mindsensorsUI():
             try:
                 return  self.i2c.readInteger(self.PS_TSY)
             except:
-                print "Could not read Touch Screen X"
+                print("Could not read Touch Screen X")
                 return -1
     
     ## Reads the y-coordinate of the touchscreen press
@@ -477,21 +477,21 @@ class mindsensorsUI():
             try:
                 return  self.i2c.readInteger(self.PS_TSX)
             except:
-                print "Could not read Touch Screen Y"
+                print("Could not read Touch Screen Y")
                 return -1
     
     def RAW_X(self):
         try:
             return self.i2c.readInteger(self.PS_RAWX)
         except:
-            print "Could not read Raw Touch Screen X"
+            print("Could not read Raw Touch Screen X")
             return -1
     
     def RAW_Y(self):
         try:
             return self.i2c.readInteger(self.PS_RAWY)
         except:
-            print "Could not read Raw Touch Screen Y"
+            print("Could not read Raw Touch Screen Y")
             return -1
     
     ## Detects touchscreen presses and prevents false positives 
@@ -987,7 +987,7 @@ class mindsensorsUI():
         oldMode = self.currentMode
         self.setMode(self.PS_MODE_POPUP)
         if(len(options)>5):
-            print "warning!, buttons may be too small to read"
+            print("warning!, buttons may be too small to read")
         while(True):
             try:
                 if(goBtn and self.i2c.readByte(PiStormsCom.PS_KeyPress)):
@@ -1170,7 +1170,7 @@ if __name__ == '__main__':#following code demonstrates screen rotation, popup me
                 time.sleep(2)
                 psb.dumpTerminal()
     except KeyboardInterrupt:
-        print "\nQuitting..."
+        print("\nQuitting...")
         psb.setMode(psb.PS_MODE_TERMINAL)
         psb.termPrintln("Exiting Program...")
         sys.exit(0)

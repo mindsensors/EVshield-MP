@@ -26,7 +26,7 @@
 from mindsensors_i2c import mindsensors_i2c
 import time, math
 import sys,os
-import ctypes
+#import ctypes
 import random
 import json # for new touchscreen functionality
 
@@ -443,7 +443,7 @@ class PSMotor():
         ctrl = 0
         ctrl |= PiStormsCom.PS_CONTROL_SPEED
         
-        #print speed
+        #print(speed)
         speed = int(speed)
         
         
@@ -562,7 +562,7 @@ class PSMotor():
             array = [b0, b1, b2, b3, b4, b5, b6, b7]
             return array
         except:
-            print "Error: Could not read PID values"
+            print("Error: Could not read PID values")
             return []
             
     def SetPerformanceParameters(self, Kp_tacho, Ki_tacho, Kd_tacho, Kp_speed, Ki_speed, Kd_speed, passcount, tolerance):#untested
@@ -718,7 +718,7 @@ class PiStormsCom():
         try:
             self.bankA.readByte(self.PS_BattV)
         except:
-            print "could not connect to pistorms"
+            print("could not connect to pistorms")
         else:
             self.bankA.writeByte(self.PS_Command,self.R)
             self.bankB.writeByte(self.PS_Command,self.R)
@@ -729,7 +729,7 @@ class PiStormsCom():
             try:
                 self.ts_cal = json.load(open('/tmp/ps_ts_cal', 'r'))
             except IOError:
-                print 'Touchscreen Error: Failed to read touchscreen calibration values in PiStormsCom.py'
+                print('Touchscreen Error: Failed to read touchscreen calibration values in PiStormsCom.py')
         
     def Shutdown(self):
         self.bankA.writeByte(self.PS_Command,self.H)
@@ -860,15 +860,15 @@ class PiStormsCom():
 
 if __name__ == '__main__':
     psc = PiStormsCom()
-    print "Version = "+ str(psc.GetFirmwareVersion())
-    print "Vendor = "+ str(psc.GetVendorName())
-    print "Device = "+ str(psc.GetDeviceId())
+    print("Version = "+ str(psc.GetFirmwareVersion()))
+    print("Vendor = "+ str(psc.GetVendorName()))
+    print("Device = "+ str(psc.GetDeviceId()))
     try:
         while(True):
-            print   psc.battVoltage()
-            print psc.BAS1.SumoEyes(True)
-            print psc.BAS2.colorSensorNXT()
-            print psc.BBS1.lightSensorNXT(True)
+            print(psc.battVoltage())
+            print(psc.BAS1.SumoEyes(True))
+            print(psc.BAS2.colorSensorNXT())
+            print(psc.BBS1.lightSensorNXT(True))
             psc.BAM1.runSecs(1,100,True)
             psc.BBM1.runSecs(1,100,True)
             psc.BAM2.runSecs(1,100,True)
@@ -898,15 +898,3 @@ if __name__ == '__main__':
         psc.BAM2.float()
         psc.BBM1.float()
         psc.BBM2.float()
-
-
-
-
-
-
-
-
-
-
-
-
