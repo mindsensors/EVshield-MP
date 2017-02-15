@@ -63,8 +63,7 @@
 #
 
 from PiStormsCom import PiStormsCom
-from mindsensorsUI import mindsensorsUI
-import time,sys,os,ctypes,math,random
+import time,sys,os,math,random
 
 ## @package PiStorms
 #  This module contains classes and functions necessary for the use of PiStorms from mindsensors.com
@@ -807,7 +806,6 @@ class PiStorms:
     #  @endcode    
     def __init__(self, name = "PiStorms", rotation = 3 ):
         
-        self.screen = mindsensorsUI(name, rotation)
         self.psc = PiStormsCom()
         self.BAS1 = PiStormsSensor(self.psc.BAS1)
         self.BAS2 = PiStormsSensor(self.psc.BAS2)
