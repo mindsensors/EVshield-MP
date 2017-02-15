@@ -24,12 +24,13 @@
 # 01/30/14    Deepak            Initial authoring.
 # 02/03/14    Michael           Error message, signed byte, and integer fix
 # 03/09/14    Nitin             Changed the 16 and 32 bit read
+# 02/15/17    Seth              Overwritten for MicroPython
 
 ## @package mindsensors_i2c
 # This is the i2c module for mindsensors i2c devices.
 
-import smbus
-import ctypes
+from pyb import I2C
+import struct
 
 ## mindsensors_i2c: this class provides i2c functions
 #  for read and write operations.
@@ -37,28 +38,11 @@ class mindsensors_i2c(object):
 
     @staticmethod
     def pi_rev():
-        try:
-            with open('/proc/cpuinfo','r') as cpuinfo:
-                for line in cpuinfo: 
-                    if line.startswith('Hardware'):
-                        #print " rstrip output  " +str(line.rstrip()[-4:])
-                        cpu = 10 if line.rstrip()[-4:] in ['2709'] else 0
-                       
-                    if line.startswith('Revision'):
-                        # case '3' is for some rare pi board - Deepak
-                        #print " rstrip output  " +str(line.rstrip()[-4:])
-                        rev =  0 if line.rstrip()[-4:] in [ '0001', '0002','0003'] else 1
-                                        
-                         
-                #print "rev is ",rev        
-                return rev        
-                     
-        except:
-            return 0
+        return 0
 
     @staticmethod
     def which_bus():
-        return 1 if mindsensors_i2c.pi_rev() >= 1 else 0
+        return 1
 
     ## Initialize the class with the i2c address of your device
     #  @param self The object pointer.
@@ -66,12 +50,12 @@ class mindsensors_i2c(object):
     def __init__(self, i2c_address):
         self.address = i2c_address
         b = mindsensors_i2c.which_bus()
-        self.bus = smbus.SMBus(b)
+        self.bus = I2C(b, I2C.MASTER)
         
     ## Prints an error message if a read error is detected
     #  @param self The object pointer.
     def errMsg(self):
-        print "Error accessing 0x%02X: Check your I2C address" % self.address
+        print("Error accessing 0x%02X: Check your I2C address" % self.address)
         return -1
 
     ## Write a byte to your i2c device at a given location
@@ -80,7 +64,7 @@ class mindsensors_i2c(object):
     #  @param value Value to write.
     def writeByte(self, reg, value):
         try:
-            self.bus.write_byte_data(self.address, reg, value)
+            self.bus.mem_write(bytes(value), self.address, reg)
         except:
             pass
             
@@ -89,7 +73,7 @@ class mindsensors_i2c(object):
     #  @param reg The register to read from.
     def readByte(self, reg):
         try:
-            result = self.bus.read_byte_data(self.address, reg)
+            result = self.bus.mem_read(1, self.address, reg)[0]
             return (result)
         except:
             pass
@@ -99,17 +83,11 @@ class mindsensors_i2c(object):
     #  @param reg The register to read from.
     def readByteSigned(self, reg):
         a = self.readByte(reg)
-        signed_a = ctypes.c_byte(a).value
+        #signed_a = a if a < 128 else a-256
+        signed_a = struct.unpack('b', bytes([a]))[0]
         return signed_a
-     
-    # for read_i2c_block_data and write_i2c_block_data to work correctly,
-    # ensure that i2c speed is set correctly on your pi:
-    # ensure following file with contents as follows:
-    #    /etc/modprobe.d/i2c.conf
-    # options i2c_bcm2708 baudrate=50000
-    # (without the first # and space on line above)
-    #
     
+    '''
     ## Read a byte array from your i2c device starting at a given location
     #  @param self The object pointer.
     #  @param reg The first register in the array to read from.
@@ -214,6 +192,7 @@ class mindsensors_i2c(object):
         a = self.readLong(reg)
         signed_a = ctypes.c_long(a).value
         return signed_a
+    '''
 
     ##  Read the firmware version of the i2c device
     #  @param self The object pointer.
@@ -222,8 +201,8 @@ class mindsensors_i2c(object):
             ver = self.readString(0x00, 8)
             return ver
         except:
-            print "Error: Could not retrieve Firmware Version" 
-            print "Check I2C address and device connection to resolve issue"
+            print("Error: Could not retrieve Firmware Version")
+            print("Check I2C address and device connection to resolve issue")
             return ""
 
     ##  Read the vendor name of the i2c device
@@ -233,8 +212,8 @@ class mindsensors_i2c(object):
             vendor = self.readString(0x08, 8)
             return vendor
         except:
-            print "Error: Could not retrieve Vendor Name"
-            print "Check I2C address and device connection to resolve issue"
+            print("Error: Could not retrieve Vendor Name")
+            print("Check I2C address and device connection to resolve issue")
             return ""
             
     ##  Read the i2c device id
@@ -244,6 +223,6 @@ class mindsensors_i2c(object):
             device = self.readString(0x10, 8)
             return device
         except:
-            print "Error: Could not retrieve Device ID"
-            print "Check I2C address and device connection to resolve issue"
+            print("Error: Could not retrieve Device ID")
+            print("Check I2C address and device connection to resolve issue")
             return ""
