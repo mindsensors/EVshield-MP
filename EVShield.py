@@ -501,9 +501,9 @@ class EVShieldBank():
     # EVShield sensor functions.
     def sensorSetType(which_sensor, sensor_type):
         if which_sensor == SH_S1:
-            self.readInteger(SH_S1_MODE, sensor_type)
+            self.writeInteger(SH_S1_MODE, sensor_type)
         elif which_sensor == SH_S2:
-            self.readInteger(SH_S2_MODE, sensor_type)
+            self.writeInteger(SH_S2_MODE, sensor_type)
     
     def sensorReadRaw(which_sensor):
         if which_sensor == SH_S1:
