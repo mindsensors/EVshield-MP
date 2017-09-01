@@ -4,7 +4,9 @@ Open an Explorer window. Under This PC, Devices and drives (#), find EVSHIELD (E
 Open a command prompt and type
 ```
 E:
-pyboard.py --device COM6 myProgram.py
+python pyboard.py --device COM6 myProgram.py
 ```
+
+Alternatively, use a program such as PuTTY to open the COM port as a serial connection and use the Python interpreter.
 
 Please visit http://micropython.org/help/ for further help.
