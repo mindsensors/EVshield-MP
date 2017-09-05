@@ -1,32 +1,31 @@
 import struct
 import pyb
 
-# Defines from SHDefines.h
 
-# For the sensor bank ports
-SH_BAS1 = 0x01 # Bank A Sensor Port 1
-SH_BAS2 = 0x02 # Bank A Sensor Port 2
-SH_BBS1 = 0x03 # Bank B Sensor Port 1
-SH_BBS2 = 0x04 # Bank B Sensor Port 2
+### Defines from SHDefines.h ###
+
+SH_BAS1 = 0x01 # Bank A Sensor port 1
+SH_BAS2 = 0x02 # Bank A Sensor port 2
+SH_BBS1 = 0x03 # Bank B Sensor port 1
+SH_BBS2 = 0x04 # Bank B Sensor port 2
 
 BTN_LEFT = 1
 BTN_GO = 2
 BTN_RIGHT = 4
 
-SH_BTN_PRESS = 0xDA
+
+### New/extra defines ###
+
 SH_BTN_LEFT_COUNT = 0xDB
 SH_BTN_GO_COUNT = 0xDC
 SH_BTN_RIGHT_COUNT = 0xDD
 
-# maps button types to their count registers
+# maps button types to their corresponding count registers
 BTN_TO_COUNT_REG = {
     BTN_LEFT: SH_BTN_LEFT_COUNT,
     BTN_GO: SH_BTN_GO_COUNT,
     BTN_RIGHT: SH_BTN_RIGHT_COUNT
 }
-
-SH_RGB_LED = 0xD7
-SH_CENTER_RGB_LED = 0xDE
 
 SH_FIRMWARE_VERSION = 0x00
 SH_VENDOR_ID = 0x08
@@ -34,7 +33,7 @@ SH_DEVICE_ID = 0x10
 SH_FEATURE_SET = 0x18
 
 
-# Defines from EVShield.h
+### Defines from EVShield.h ###
 
 # Motor control related constants.
 SH_CONTROL_SPEED    = 0x01
@@ -155,72 +154,7 @@ SH_S1 = 1
 SH_S2 = 2
 
 
-class EVShield:
-    def __init__(self, i2c_address_a = SH_Bank_A, i2c_address_b = SH_Bank_B):
-        self.bank_a = EVShieldBank(i2c_address_a)
-        self.bank_b = EVShieldBank(i2c_address_b)
-        self.ledBreathingPatternTimer = 0
-        self.ledHeartBeatPatternTimer = 0
-    
-    def getButtonState(self, btn):
-        return self.bank_a.readByte(SH_BTN_PRESS) == btn
-    
-    def waitForButtonPress(self, btn, led_pattern = 1):
-        while not self.getButtonState(btn):
-            if led_pattern == 1:
-                self.ledBreathingPattern()
-            elif led_pattern == 2:
-                self.ledHeartBeatPattern()
-            else:
-                pyb.delay(300)
-    
-    def ledSetRGB(self, red = 0, green = 0, blue = 0):
-        self.bank_a.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
-        self.bank_b.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
-    
-    def centerLedSetRGB(self, red = 0, green = 0, blue = 0):
-        self.bank_a.writeRegisters(SH_CENTER_RGB_LED, bytes([int(red),int(green),int(blue)]))
-    
-    def ledBreathingPattern(self):
-        if (self.ledBreathingPatternTimer > 100):
-            self.ledBreathingPatternTimer = 0
-        
-        if (self.ledBreathingPatternTimer < 50):
-            intensity = self.ledBreathingPatternTimer/50.0 # 0.0 to 1.0
-        else:
-            intensity = (100-self.ledBreathingPatternTimer)/50.0 # 1.0 to 0.0
-        
-        self.ledSetRGB(0, intensity*255, intensity*255)
-        pyb.delay(10) # 10 ms * 100 unit period = 1 second loop
-        self.ledBreathingPatternTimer += 1
-    
-    def ledHeartBeatPattern(self):
-        if (self.ledHeartBeatPatternTimer > 100):
-            self.ledHeartBeatPatternTimer = 0
-        
-        if (self.ledHeartBeatPatternTimer < 15):
-            intensity = self.ledHeartBeatPatternTimer/15.0 # 0.0 to 1.0
-        elif (self.ledHeartBeatPatternTimer >= 15 and self.ledHeartBeatPatternTimer < 30):
-            intensity = (30-self.ledHeartBeatPatternTimer)/15.0 # 1.0 to 0.0
-        elif (self.ledHeartBeatPatternTimer >= 30 and self.ledHeartBeatPatternTimer < 45):
-            intensity = (self.ledHeartBeatPatternTimer-30)/15.0 # 0.0 to 1.0
-        elif (self.ledHeartBeatPatternTimer >= 45 and self.ledHeartBeatPatternTimer < 60):
-            intensity = (60-self.ledHeartBeatPatternTimer)/15.0 # 1.0 to 0.0
-        elif (self.ledHeartBeatPatternTimer >= 60):
-            intensity = 0
-        
-        self.ledSetRGB(0, intensity*255, intensity*255)
-        pyb.delay(10) # 10 ms * 100 unit period = 1 second loop
-        self.ledHeartBeatPatternTimer += 1
-    
-    def getKeyPressCount(self, btn):
-        return self.bank_a.readByte(BTN_TO_COUNT_REG[btn])
-    
-    def resetKeyPressCount(self, btn):
-        self.bank_a.writeByte(BTN_TO_COUNT_REG[btn], 0)
-
-class EVShieldBank():
-    # EVShieldI2C
+class BaseI2CDevice():
     def __init__(self, i2c_address):
         #pyb.I2C(1, I2C.MASTER, baudrate=20000).deinit()
         self.i2c = pyb.I2C(1)
@@ -284,16 +218,16 @@ class EVShieldBank():
     
     def getInfo(self):
         return self.readString(SH_FIRMWARE_VERSION, 32)
-    
-    # EVShieldBank
-    
+
+class EVShieldBank(BaseI2CDevice):
     def helper(self, readOrWriteMethod, which_motor, motor1Register, motor2Register, value = None):
         if which_motor not in [SH_Motor_1, SH_Motor_2]:
             return # invalid motor
+        register = motor1Register if which_motor == SH_Motor_1 else motor2Register
         if value:
-            readOrWriteMethod(motor1Register if which_motor == SH_Motor_1 else motor2Register, value)
+            readOrWriteMethod(register, value)
         else:
-            return readOrWriteMethod(motor1Register if which_motor == SH_Motor_1 else motor2Register)
+            return readOrWriteMethod(register)
     
     # Voltage value returned in milli-volts.
     def evshieldGetBatteryVoltage(self):
@@ -506,3 +440,65 @@ class EVShieldBank():
     
     def ledSetRGB(self, red = 0, green = 0, blue = 0):
         self.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
+
+
+class EVShield:
+    def __init__(self, i2c_address_a = SH_Bank_A, i2c_address_b = SH_Bank_B):
+        self.bank_a = EVShieldBank(i2c_address_a)
+        self.bank_b = EVShieldBank(i2c_address_b)
+        self.ledBreathingPatternTimer = 0
+        self.ledHeartBeatPatternTimer = 0
+    
+    def getButtonState(self, btn):
+        return self.bank_a.readByte(SH_BTN_PRESS) == btn
+    
+    def waitForButtonPress(self, btn, led_pattern = 1):
+        while not self.getButtonState(btn):
+            if led_pattern == 1:
+                self.ledBreathingPattern()
+            elif led_pattern == 2:
+                self.ledHeartBeatPattern()
+            else:
+                pyb.delay(300)
+    
+    def ledSetRGB(self, red = 0, green = 0, blue = 0):
+        self.bank_a.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
+        self.bank_b.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
+    
+    def centerLedSetRGB(self, red = 0, green = 0, blue = 0):
+        self.bank_a.writeRegisters(SH_CENTER_RGB_LED, bytes([int(red),int(green),int(blue)]))
+    
+    def ledBreathingPattern(self):
+        if (self.ledBreathingPatternTimer > 100):
+            self.ledBreathingPatternTimer = 0
+        
+        if (self.ledBreathingPatternTimer < 50):
+            intensity = self.ledBreathingPatternTimer/50.0 # 0.0 to 1.0
+        else:
+            intensity = (100-self.ledBreathingPatternTimer)/50.0 # 1.0 to 0.0
+        
+        self.ledSetRGB(0, intensity*255, intensity*255)
+        pyb.delay(10) # 10 ms * 100 unit period = 1 second loop
+        self.ledBreathingPatternTimer += 1
+    
+    def ledHeartBeatPattern(self):
+        if (self.ledHeartBeatPatternTimer > 100):
+            self.ledHeartBeatPatternTimer = 0
+        
+        if (self.ledHeartBeatPatternTimer < 15):
+            intensity = self.ledHeartBeatPatternTimer/15.0 # 0.0 to 1.0
+        elif (self.ledHeartBeatPatternTimer >= 15 and self.ledHeartBeatPatternTimer < 30):
+            intensity = (30-self.ledHeartBeatPatternTimer)/15.0 # 1.0 to 0.0
+        elif (self.ledHeartBeatPatternTimer >= 30 and self.ledHeartBeatPatternTimer < 45):
+            intensity = (self.ledHeartBeatPatternTimer-30)/15.0 # 0.0 to 1.0
+        elif (self.ledHeartBeatPatternTimer >= 45 and self.ledHeartBeatPatternTimer < 60):
+            intensity = (60-self.ledHeartBeatPatternTimer)/15.0 # 1.0 to 0.0
+        elif (self.ledHeartBeatPatternTimer >= 60):
+            intensity = 0
+        
+        self.ledSetRGB(0, intensity*255, intensity*255)
+        pyb.delay(10) # 10 ms * 100 unit period = 1 second loop
+        self.ledHeartBeatPatternTimer += 1
+    
+    def getKeyPressCount(self, btn):
+        return self.bank_a.readByte(BTN_TO_COUNT_REG[btn])
