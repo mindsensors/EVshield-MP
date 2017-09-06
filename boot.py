@@ -3,7 +3,7 @@
 
 import pyb
 
-from EVShield import SH_Bank_A
+from EVShieldDefines import SH_Bank_A
 pingEV = pyb.Timer(1)
 pingEV.init(freq=3)
 pingEV.callback(lambda _: pyb.I2C(1).is_ready(SH_Bank_A>>1))
