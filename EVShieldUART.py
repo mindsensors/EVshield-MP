@@ -1,6 +1,6 @@
 from EVShield import *
 
-class EVShieldUART:
+class EVShieldUART():
     def __init__(self, shield, bp):
         if bp not in [SH_BAS1, SH_BAS2, SH_BBS1, SH_BBS2]:
             raise ValueError("Invalid bank port!")
@@ -34,7 +34,7 @@ class EV3Touch(EVShieldUART):
         EVShieldUART.__init__(self, shield, bp)
         self.setType(SH_Type_EV3_SWITCH)
     def isPressed(self):
-        return self.readLocationByte(0x83)
+        return self.readLocationByte(0x83) == 1
     def getBumpCount(self):
         return self.readLocationByte(0x84)
     def resetBumpCount(self):

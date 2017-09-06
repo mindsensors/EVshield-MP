@@ -423,13 +423,13 @@ class EVShieldBank(BaseI2CDevice):
     
     
     # EVShield sensor functions.
-    def sensorSetType(which_sensor, sensor_type):
+    def sensorSetType(self, which_sensor, sensor_type):
         if which_sensor == SH_S1:
             self.writeInteger(SH_S1_MODE, sensor_type)
         elif which_sensor == SH_S2:
             self.writeInteger(SH_S2_MODE, sensor_type)
     
-    def sensorReadRaw(which_sensor):
+    def sensorReadRaw(self, which_sensor):
         if which_sensor == SH_S1:
             return self.readInteger(SH_S1_ANALOG)
         elif which_sensor == SH_S2:
