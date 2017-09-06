@@ -22,8 +22,6 @@ class AngleSensor(EVShieldI2C):
 class DISTNx(EVShieldI2C):
     def __init__(self, i2c_address=0x02):
         EVShieldI2C.__init__(self, i2c_address)
-    def issueCommand(self, command):
-        self.writeByte(0x41, command)
     def energize(self):
         self.issueCommand(ord('E'))
     def deEnergize(self):
@@ -73,8 +71,6 @@ class EV3Infrared(EVShieldUART):
 class EV3SensorMux(EVShieldI2C):
     def __init__(self, i2c_address=0x32):
         EVShieldI2C.__init__(self, i2c_address)
-    def issueCommand(self, command):
-        self.writeByte(0x41, command)
     def getMode(self):
         pass
     def setMode(self, newMode):

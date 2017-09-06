@@ -67,6 +67,9 @@ class EVShieldI2C():
     def getInfo(self):
         return self.readString(SH_FIRMWARE_VERSION, 32)
 
+    def issueCommand(self, command):
+        self.writeByte(SH_COMMAND, command)
+
 
 class EVShieldUART():
     def __init__(self, shield, bp):
