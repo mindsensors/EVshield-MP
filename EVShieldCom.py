@@ -1,5 +1,6 @@
 from EVShieldDefines import *
 import pyb
+import struct
 
 
 class EVShieldI2C():
