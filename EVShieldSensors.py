@@ -6,8 +6,41 @@ from EVShield import *
 class EVShieldAGS():
     pass
 
-class AbsoluteIMU():
-    pass
+class AbsoluteIMU(EVShieldI2C):
+    def __init__(self, port, i2c_address=0x22):
+        EVShieldI2C.__init__(self, i2c_address)
+        if port not in [SH_BAS1, SH_BAS2, SH_BBS1, SH_BBS2]:
+            raise ValueError("Invalid bank port!")
+        bankAddress = SH_Bank_A if port in [SH_BAS1, SH_BAS2] else SH_Bank_B
+        sensorMode = SH_S1_MODE if port in [SH_BAS1, SH_BBS1] else SH_S2_MODE
+        EVShieldI2C(bankAddress).writeByte(sensorMode, SH_Type_I2C) 
+    def readGyro(self):
+        return {
+            "gx": self.readInteger(0x53),
+            "gy": self.readInteger(0x55),
+            "gz": self.readInteger(0x57)
+        }
+    def readCompass(self):
+        return self.readInteger(0x4B)
+    def readAccelerometer(self):
+        return {
+            "tx": self.readByte(0x42),
+            "ty": self.readByte(0x43),
+            "tz": self.readByte(0x44),
+            "ax": self.readInteger(0x45),
+            "ay": self.readInteger(0x47),
+            "az": self.readInteger(0x49)
+        }
+    def readMagneticField(self):
+        return {
+            "mx": self.readInteger(0x4D),
+            "my": self.readInteger(0x4F),
+            "mz": self.readInteger(0x51)
+        }
+    def beginCompassCalibration(self):
+        self.issueCommand(ord('C'))
+    def endCompassCalibration(self):
+        self.issueCommand(ord('c'))
 
 class AngleSensor(EVShieldI2C):
     def __init__(self, i2c_address=0x30):
@@ -72,11 +105,11 @@ class EV3SensorMux(EVShieldI2C):
     def __init__(self, i2c_address=0x32):
         EVShieldI2C.__init__(self, i2c_address)
     def getMode(self):
-        pass
+        return self.readByte(0x52)
     def setMode(self, newMode):
-        pass
+        self.writeByte(0x52, newMode)
     def readValue(self):
-        pass
+        return self.readInteger(0x54)
 
 class EV3Touch(EVShieldUART):
     def __init__(self, shield, bp):
