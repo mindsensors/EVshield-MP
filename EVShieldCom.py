@@ -73,11 +73,12 @@ class EVShieldI2C():
 
 
 class EVShieldUART():
-    def __init__(self, shield, bp):
+    def __init__(self, shield, bp, type=SH_Type_EV3):
         if bp not in [SH_BAS1, SH_BAS2, SH_BBS1, SH_BBS2]:
             raise ValueError("Invalid bank port!")
         self.bank = shield.bank_a if bp in [SH_BAS1, SH_BAS2] else shield.bank_b
         self.offset = 0 if bp in [SH_BAS1, SH_BBS1] else 52
+        self.setType(type)
 
     def getMode(self):
         return self.readLocationByte(0x81)

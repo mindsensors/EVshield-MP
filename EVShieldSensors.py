@@ -62,16 +62,12 @@ class DISTNx(EVShieldI2C):
         return self.readByte(0x50)
 
 class EV3Color(EVShieldUART):
-    def __init__(self, shield, bp):
-        EVShieldUART.__init__(self, shield, bp)
-        self.setType(SH_Type_EV3)
     def getVal(self):
         return self.readValue()
 
 class EV3Gyro(EVShieldUART):
     def __init__(self, shield, bp):
         EVShieldUART.__init__(self, shield, bp)
-        self.setType(SH_Type_EV3)
         self.ref = 0
     def getAngle(self):
         return self.readValue()
@@ -81,9 +77,6 @@ class EV3Gyro(EVShieldUART):
         self.ref = self.readValue()
 
 class EV3Infrared(EVShieldUART):
-    def __init__(self, shield, bp):
-        EVShieldUART.__init__(self, shield, bp)
-        self.setType(SH_Type_EV3)
     def readProximity(self):
         return self.readValue()
     def readChannelHeading(self, channel):
@@ -108,8 +101,7 @@ class EV3SensorMux(EVShieldI2C):
 
 class EV3Touch(EVShieldUART):
     def __init__(self, shield, bp):
-        EVShieldUART.__init__(self, shield, bp)
-        self.setType(SH_Type_EV3_SWITCH)
+        EVShieldUART.__init__(self, shield, bp, type=SH_Type_EV3_SWITCH)
     def isPressed(self):
         return self.readLocationByte(0x83) == 1
     def getBumpCount(self):
@@ -118,9 +110,6 @@ class EV3Touch(EVShieldUART):
         return self.writeLocation(0x84, 0)
 
 class EV3Ultrasonic(EVShieldUART):
-    def __init__(self, shield, bp):
-        EVShieldUART.__init__(self, shield, bp)
-        self.setType(SH_Type_EV3)
     def getDist(self):
         return self.readValue()/10
     def detect(self):
@@ -230,15 +219,14 @@ class MagicWand(EVShieldI2C):
     def __init__(self, i2c_address=0x70):
         EVShieldI2C.__init__(self, i2c_address)
     def lightWand(self, byteToWrite):
-        self.writeByte(byteToWrite, byteToWrite)
+        self.writeByte(0x00, byteToWrite)
 
 class NXTCam():
     pass
 
 class NXTColor(EVShieldUART):
     def __init__(self, shield, bp):
-        EVShieldUART.__init__(self, shield, bp)
-        #self.setType(SH_Type_COLORFULL)
+        EVShieldUART.__init__(self, shield, bp, type=SH_Type_COLORFULL)
     def readValue(self):
         return self.readLocationByte(0x70)*100.0/255
     def readColor(self):
