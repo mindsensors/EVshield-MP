@@ -226,14 +226,23 @@ class LineLeader(EVShieldI2C):
     def getBlackCalibration(self):
         self.readRegisters(0x6C, 8)
 
-class MagicWand():
-    pass
+class MagicWand(EVShieldI2C):
+    def __init__(self, i2c_address=0x70):
+        EVShieldI2C.__init__(self, i2c_address)
+    def lightWand(self, byteToWrite):
+        self.writeByte(byteToWrite, byteToWrite)
 
 class NXTCam():
     pass
 
-class NXTColor():
-    pass
+class NXTColor(EVShieldUART):
+    def __init__(self, shield, bp):
+        EVShieldUART.__init__(self, shield, bp)
+        #self.setType(SH_Type_COLORFULL)
+    def readValue(self):
+        return self.readLocationByte(0x70)*100.0/255
+    def readColor(self):
+        return self.readLocationByte(0x70)
 
 class NXTCurrentMeter():
     pass
