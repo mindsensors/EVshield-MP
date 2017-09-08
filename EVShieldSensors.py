@@ -14,29 +14,24 @@ class AbsoluteIMU(EVShieldI2C):
         bankAddress = SH_Bank_A if port in [SH_BAS1, SH_BAS2] else SH_Bank_B
         sensorMode = SH_S1_MODE if port in [SH_BAS1, SH_BBS1] else SH_S2_MODE
         EVShieldI2C(bankAddress).writeByte(sensorMode, SH_Type_I2C) 
-    def readGyro(self):
-        return {
-            "gx": self.readInteger(0x53),
-            "gy": self.readInteger(0x55),
-            "gz": self.readInteger(0x57)
-        }
+    def readTilt(self):
+        return {"x": self.readByte(0x42),
+                "y": self.readByte(0x43),
+                "z": self.readByte(0x44)}
+    def readAccelerometer(self):
+        return {"x": self.readInteger(0x45),
+                "y": self.readInteger(0x47),
+                "z": self.readInteger(0x49)}
     def readCompass(self):
         return self.readInteger(0x4B)
-    def readAccelerometer(self):
-        return {
-            "tx": self.readByte(0x42),
-            "ty": self.readByte(0x43),
-            "tz": self.readByte(0x44),
-            "ax": self.readInteger(0x45),
-            "ay": self.readInteger(0x47),
-            "az": self.readInteger(0x49)
-        }
     def readMagneticField(self):
-        return {
-            "mx": self.readInteger(0x4D),
-            "my": self.readInteger(0x4F),
-            "mz": self.readInteger(0x51)
-        }
+        return {"x": self.readInteger(0x4D),
+                "y": self.readInteger(0x4F),
+                "z": self.readInteger(0x51)}
+    def readGyro(self):
+        return {"x": self.readInteger(0x53),
+                "y": self.readInteger(0x55),
+                "z": self.readInteger(0x57)}
     def beginCompassCalibration(self):
         self.issueCommand(ord('C'))
     def endCompassCalibration(self):
