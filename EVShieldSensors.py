@@ -126,11 +126,105 @@ class EV3Ultrasonic(EVShieldUART):
     def detect(self):
         return self.readValue()
 
-class LightSensorArray():
-    pass
+class LightSensorArray(EVShieldI2C):
+    def __init__(self, i2c_address=0x02):
+        EVShieldI2C.__init__(self, i2c_address)
+    def calibrateWhite(self):
+        self.issueCommand(ord('W'))
+    def calibrateBlack(self):
+        self.issueCommand(ord('B'))
+    def sleep(self):
+        self.issueCommand(ord('D'))
+    def wakeUp(self):
+        self.issueCommand(ord('P'))
+    def configureUS(self):
+        self.issueCommand(ord('A'))
+    def configureEurope(self):
+        self.issueCommand(ord('E'))
+    def configureUniversal(self):
+        self.issueCommand(ord('U'))
+    def getCalibrated(self):
+        self.readRegisters(0x42, 8)
+    def getUncalibrated(self):
+        self.readRegisters(0x6A, 16)
+    def getWhiteLimit(self):
+        self.readRegisters(0x4A, 8)
+    def getBlackLimit(self):
+        self.readRegisters(0x52, 8)
+    def getWhiteCalibration(self):
+        self.readRegisters(0x5A, 8)
+    def getBlackCalibration(self):
+        self.readRegisters(0x62, 8)
 
-class LineLeader():
-    pass
+class LineLeader(EVShieldI2C):
+    def __init__(self, i2c_address=0x02):
+        EVShieldI2C.__init__(self, i2c_address)
+    def calibrateWhite(self):
+        self.issueCommand(ord('W'))
+    def calibrateBlack(self):
+        self.issueCommand(ord('B'))
+    def sleep(self):
+        self.issueCommand(ord('D'))
+    def wakeUp(self):
+        self.issueCommand(ord('P'))
+    def invertLineColorToWhite(self):
+        self.issueCommand(ord('I'))
+    def resetColorInversion(self):
+        self.issueCommand(ord('R'))
+    def takeSnapshot(self):
+        self.issueCommand(ord('S'))
+    def configureUS(self):
+        self.issueCommand(ord('A'))
+    def configureEurope(self):
+        self.issueCommand(ord('E'))
+    def configureUniversal(self):
+        self.issueCommand(ord('U'))
+    def getSetPoint(self):
+        return self.readByte(0x45)
+    def setSetPoint(self, spoint):
+        self.writeByte(0x45, spoint)
+    def getKp(self):
+        return self.readByte(0x46)
+    def setKp(self, kp):
+        self.writeByte(0x46, kp)
+    def getKi(self):
+        return self.readByte(0x47)
+    def setKi(self, ki):
+        self.writeByte(0x47, ki)
+    def getKd(self):
+        return self.readByte(0x48)
+    def setKd(self, kd):
+        self.writeByte(0x48, kd)
+    def getKpFactor(self):
+        return self.readByte(0x61)
+    def setKpFactor(self, kpfact):
+        self.writeByte(0x61, kpfact)
+    def getKiFactor(self):
+        return self.readByte(0x62)
+    def setKiFactor(self, kifact):
+        self.writeByte(0x62, kifact)
+    def getKdFactor(self):
+        return self.readByte(0x63)
+    def setKdFactor(self, kdfact):
+        self.writeByte(0x63, kdfact)
+    def getSteering(self):
+        return self.readByte(0x42)
+    def getAverage(self):
+        return self.readByte(0x43)
+    def getResult(self):
+        return self.readByte(0x44)
+    def getRawCalibrated(self):
+        self.readRegisters(0x49, 8)
+    def getRawUncalibrated(self):
+        self.readRegisters(0x74, 16)
+    def getWhiteLimit(self):
+        self.readRegisters(0x51, 8)
+    def getBlackLimit(self):
+        self.readRegisters(0x59, 8)
+    def getWhiteCalibration(self):
+        self.readRegisters(0x64, 8)
+    def getBlackCalibration(self):
+        self.readRegisters(0x6C, 8)
 
 class MagicWand():
     pass
