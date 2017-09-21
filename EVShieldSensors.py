@@ -256,11 +256,23 @@ class NXTMMX():
 class NXTServo():
     pass
 
-class NXTTouch():
-    pass
+class NXTTouch(EVShieldAnalog):
+    def __init__(self, shield, bp):
+        EVShieldAnalog.__init__(self, shield, bp)
+    def isPressed(self):
+        return self.readRaw() < 300
 
-class NXTVoltMeter():
-    pass
+class NXTVoltMeter(EVShieldI2C):
+    def __init__(self, i2c_address=0x28):
+        EVShieldI2C.__init__(self, i2c_address)
+    def getAVoltage(self):
+        return self.readInteger(0x43)
+    def getRVoltage(self):
+        return self.readInteger(0x45)
+    def getReference(self):
+        return self.readInteger(0x47)
+    def setReferenceI(self):
+        self.issueCommand(ord('d'))
 
 class NumericPad():
     pass
