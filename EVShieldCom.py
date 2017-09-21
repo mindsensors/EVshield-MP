@@ -87,8 +87,7 @@ class EVShieldUART():
         self.writeLocation(0x81, newMode)
 
     def setType(self, type):
-        sensor = SH_S1 if self.offset == 0 else SH_S2
-        self.bank.sensorSetType(sensor, type)
+        self.writeInteger(SH_S1_MODE if self.offset == 0 else SH_S2_MODE, type)
 
     def readValue(self):
         return self.readLocationInt(0x83)
@@ -110,3 +109,16 @@ class EVShieldUART():
         for i in range(loc, loc+len):
             result += self.readLocationByte(i)
         print(result)
+
+
+class EVShieldAnalog():
+    def __init__(self, shield, bp, type=None):
+        if bp not in [SH_BAS1, SH_BAS2, SH_BBS1, SH_BBS2]:
+            raise ValueError("Invalid bank port!")
+        self.bank = shield.bank_a if bp in [SH_BAS1, SH_BAS2] else shield.bank_b
+        self.which = 1 if bp in [SH_BAS1, SH_BBS1] else 2
+        if type: self.setType(type)
+    def setType(self, type):
+        self.writeInteger(SH_S1_MODE if self.which==1 else SH_S2_MODE, type)
+    def readRaw(self):
+        return self.readInteger(SH_S1_ANALOG if self.which==1 else SH_S2_ANALOG)

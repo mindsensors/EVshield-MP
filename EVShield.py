@@ -5,15 +5,6 @@ import pyb
 
 
 class EVShieldBank(EVShieldI2C):
-    def helper(self, readOrWriteMethod, which_motor, motor1Register, motor2Register, value = None):
-        if which_motor not in [SH_Motor_1, SH_Motor_2]:
-            return # invalid motor
-        register = motor1Register if which_motor == SH_Motor_1 else motor2Register
-        if value:
-            readOrWriteMethod(register, value)
-        else:
-            return readOrWriteMethod(register)
-    
     # Voltage value returned in milli-volts.
     def evshieldGetBatteryVoltage(self):
         return self.readByte(SH_VOLTAGE) * 40
@@ -25,7 +16,19 @@ class EVShieldBank(EVShieldI2C):
     def EVShieldIssueCommand(self, command):
         self.writeByte(SH_COMMAND, command)
     
+    def ledSetRGB(self, red = 0, green = 0, blue = 0):
+        self.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
+    
     # Motor Operation APIs.
+    def helper(self, readOrWriteMethod, which_motor, motor1Register, motor2Register, value = None):
+        if which_motor not in [SH_Motor_1, SH_Motor_2]:
+            return # invalid motor
+        register = motor1Register if which_motor == SH_Motor_1 else motor2Register
+        if value:
+            readOrWriteMethod(register, value)
+        else:
+            return readOrWriteMethod(register)
+    
     def motorSetEncoderTarget(self, which_motor, target):
         self.helper(self.writeLong, which_motor, SH_SETPT_M1, SH_SETPT_M2, target)
     
@@ -205,26 +208,6 @@ class EVShieldBank(EVShieldI2C):
             # These magic numbers are documented in the advanced development guide, "Supported I2C Commands" table
             base_code = 'A' - 1 if next_action != SH_Next_Action_Float else 'a' - 1
             self.EVShieldIssueCommand(base_code + which_motors)
-    
-    
-    # EVShield sensor functions.
-    def sensorSetType(self, which_sensor, sensor_type):
-        if which_sensor == SH_S1:
-            self.writeInteger(SH_S1_MODE, sensor_type)
-        elif which_sensor == SH_S2:
-            self.writeInteger(SH_S2_MODE, sensor_type)
-    
-    def sensorReadRaw(self, which_sensor):
-        if which_sensor == SH_S1:
-            return self.readInteger(SH_S1_ANALOG)
-        elif which_sensor == SH_S2:
-            return self.readInteger(SH_S2_ANALOG)
-        else:
-            return -1
-    
-    
-    def ledSetRGB(self, red = 0, green = 0, blue = 0):
-        self.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
 
 
 class EVShield():

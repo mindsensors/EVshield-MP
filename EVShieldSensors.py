@@ -2,20 +2,6 @@ from EVShieldDefines import *
 from EVShieldCom import *
 from EVShield import *
 
-# Analog sensor
-class EVShieldAGS():
-    def __init__(self, shield, bp, type=None):
-        if bp not in [SH_BAS1, SH_BAS2, SH_BBS1, SH_BBS2]:
-            raise ValueError("Invalid bank port!")
-        self.bank = shield.bank_a if bp in [SH_BAS1, SH_BAS2] else shield.bank_b
-        self.which = SH_S1 if bp in [SH_BAS1, SH_BBS1] else SH_S2
-        self.offset = 0 if bp in [SH_BAS1, SH_BBS1] else 52
-        if type: self.setType(type)
-    def setType(self, type):
-        self.bank.sensorSetType(self.which, type)
-    def readRaw(self):
-        return self.bank.sensorReadRaw(self.which)
-
 class AbsoluteIMU(EVShieldI2C):
     def __init__(self, port, i2c_address=0x22):
         EVShieldI2C.__init__(self, i2c_address)
@@ -256,9 +242,9 @@ class NXTCurrentMeter(EVShieldI2C):
     def setReferenceI(self):
         self.issueCommand(ord('d'))
 
-class NXTLight(EVShieldAGS):
+class NXTLight(EVShieldAnalog):
     def __init__(self, shield, bp):
-        EVShieldAGS.__init__(self, shield, bp)
+        EVShieldAnalog.__init__(self, shield, bp)
     def setReflected(self):
         self.setType(SH_Type_LIGHT_REFLECTED)
     def setAmbient(self):
