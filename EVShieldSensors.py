@@ -62,6 +62,8 @@ class DISTNx(EVShieldI2C):
         return self.readByte(0x50)
 
 class EV3Color(EVShieldUART):
+    def __init__(self, shield, bp):
+        EVShieldUART.__init__(self, shield, bp)
     def getVal(self):
         return self.readValue()
 
@@ -232,8 +234,17 @@ class NXTColor(EVShieldUART):
     def readColor(self):
         return self.readLocationByte(0x70)
 
-class NXTCurrentMeter():
-    pass
+class NXTCurrentMeter(EVShieldI2C):
+    def __init__(self, i2c_address=0x28):
+        EVShieldI2C.__init__(self, i2c_address)
+    def getACurrent(self):
+        return self.readInteger(0x43)
+    def getRCurrent(self):
+        return self.readInteger(0x45)
+    def getReference(self):
+        return self.readInteger(0x47)
+    def setReferenceI(self):
+        self.issueCommand(ord('d'))
 
 class NXTLight():
     pass
