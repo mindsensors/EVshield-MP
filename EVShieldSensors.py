@@ -278,20 +278,18 @@ class NXTVoltMeter(EVShieldI2C):
 class NumericPad(EVShieldI2C):
     def __init__(self, i2c_address=0xB4):
         EVShieldI2C.__init__(self, i2c_address)
-        self.keyMap = ['4', '1', '7', '*', '5', '2', '8', '0', '3', '6', '9', '#']
-    def InitializeKeypad(self):
         for b in list(binascii.unhexlify('41090F0A0F0A0F0A0F0A0F4A080A0F0A0F0A0F0A0F52080A0F0A0F0A0F0A0F5C030B200C2B08010100000101FF027B010B7D039C658C')):
             self.issueCommand(b)
-    def GetKeyPress(self, waitPeriod=1):
+    def getKeyPress(self, waitPeriod=1):
         timeout = time.ticks_ms() + waitPeriod*1000
         while time.ticks_ms() < timeout:
             reading = self.readInteger(0)
             for j in range(12):
                 if reading & 1<<j:
-                    return self.keyMap[11-j]
+                    return '#9630825*714'[j]
             time.sleep_ms(150)
         return None
-    def GetKeysPressed(self):
+    def getKeysPressed(self):
         return self.readInteger(0)
 
 class PFMate():
