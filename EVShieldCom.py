@@ -112,13 +112,13 @@ class EVShieldUART():
 
 
 class EVShieldAnalog():
-    def __init__(self, shield, bp, type=None):
+    def __init__(self, shield, bp, type=SH_Type_ANALOG):
         if bp not in [SH_BAS1, SH_BAS2, SH_BBS1, SH_BBS2]:
             raise ValueError("Invalid bank port!")
         self.bank = shield.bank_a if bp in [SH_BAS1, SH_BAS2] else shield.bank_b
         self.which = 1 if bp in [SH_BAS1, SH_BBS1] else 2
         if type: self.setType(type)
     def setType(self, type):
-        self.writeInteger(SH_S1_MODE if self.which==1 else SH_S2_MODE, type)
+        self.bank.writeInteger(SH_S1_MODE if self.which==1 else SH_S2_MODE, type)
     def readRaw(self):
-        return self.readInteger(SH_S1_ANALOG if self.which==1 else SH_S2_ANALOG)
+        return self.bank.readInteger(SH_S1_ANALOG if self.which==1 else SH_S2_ANALOG)
