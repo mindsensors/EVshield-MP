@@ -360,22 +360,8 @@ class PSPNx(EVShieldI2C):
 	# get the current button status of button set 1 and button set 2
     def getButtons(self):
         reading = self.readInteger(0x42)
-        return { 'Select':   self.isBitSet(reading,  0),
-                 'L3':       self.isBitSet(reading,  1),
-                 'R3':       self.isBitSet(reading,  2),
-                 'Start':    self.isBitSet(reading,  3),
-                 'Up':       self.isBitSet(reading,  4),
-                 'Right':    self.isBitSet(reading,  5),
-                 'Down':     self.isBitSet(reading,  6),
-                 'Left':     self.isBitSet(reading,  7),
-                 'L2':       self.isBitSet(reading,  8),
-                 'R2':       self.isBitSet(reading,  9),
-                 'L1':       self.isBitSet(reading, 10),
-                 'R1':       self.isBitSet(reading, 11),
-                 'Triangle': self.isBitSet(reading, 12),
-                 'Circle':   self.isBitSet(reading, 13),
-                 'Cross':    self.isBitSet(reading, 14),
-                 'Square':   self.isBitSet(reading, 15) }
+        buttons = ['Select', 'L3', 'R3', 'Start', 'Up', 'Right', 'Down', 'Left', 'L2', 'R2', 'L1', 'R1', 'Triangle', 'Circle', 'Cross', 'Square']
+        return {buttonName: isBitSet(bitNum) for bitNum, buttonName in enumerate(buttons)}
 
 class PiLight():
     pass
