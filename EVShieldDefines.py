@@ -148,3 +148,21 @@ SH_Type_EV3        = 19 # In this type the sensor connected is EV3 UART sensor
 # Do not use these in programs, programs should use SH_BankPort enums.
 SH_S1 = 1
 SH_S2 = 2
+
+
+### Modes for UART sensors ###
+# EVs_EV3Color.h
+MODE_Color_ReflectedLight = 0x00
+MODE_Color_AmbientLight   = 0x01
+MODE_Color_MeasureColor   = 0x02
+# EVs_EV3Gyro.h
+MODE_Gyro_Angle = 0x00
+MODE_Gyro_Rate  = 0x01
+# EVs_EV3Infrared.h
+MODE_Infrared_Proximity = 0x00
+MODE_Infrared_Beacon    = 0x01
+MODE_Infrared_Remote    = 0x02
+# EVs_EV3Ultrasonic.h
+MODE_Sonar_CM       = 0x00
+MODE_Sonar_Inches   = 0x01
+MODE_Sonar_Presence = 0x02
