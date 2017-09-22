@@ -323,8 +323,45 @@ class PFMate(EVShieldI2C):
     def sendSignal(self):
         self.issueCommand(ord('G'))
 
-class PSPNx():
-    pass
+class PSPNx(EVShieldI2C):
+    def __init__(self, i2c_address=0x02):
+        EVShieldI2C.__init__(self, i2c_address)
+    # power on the joystick receiver
+    def energize(self):
+        self.issueCommand(ord('R'))
+	# power off the joystick receiver
+	def deEnergize(self):
+        self.issueCommand(ord('S'))
+	# set the mode of the joystick to digital
+	def setDigitalMode(self):
+        self.issueCommand(ord('A'))
+	# set the mode of the joystick to analog
+    def setAnalogMode(self):
+        self.issueCommand(ord('s'))
+    #  byte               :     0  -  255
+    #  byte/255*200       :     0  -  200
+    # (byte/255*200)-100  :  -100  -  100
+    def mapByteToSpeed(self, byte):
+        return (byte/255*200)-100
+	# get the x-coordinate of the left joystick, between -100 and +100
+	def getXLJoy(self):
+        return self.mapByteToSpeed(self.readByte(0x44))
+	# get the y-coordinate of the left joystick, between -100 and +100
+	def getYLJoy(self):
+        return self.mapByteToSpeed(self.readByte(0x45))
+	# get the x-coordinate of the right joystick, between -100 and +100
+	def getXRJoy(self):
+        return self.mapByteToSpeed(self.readByte(0x46))
+	# get the y-coordinate of the right joystick, between -100 and +100
+	def getYRJoy(self):
+        return self.mapByteToSpeed(self.readByte(0x47))
+    def isBitSet(value, bitNum):
+        return value & 1<<bitNum == 1
+	# get the current button status of button set 1 and button set 2
+    def getButtons(self):
+        reading = self.readInteger(0x42)
+        buttons = ['Select', 'L3', 'R3', 'Start', 'Up', 'Right', 'Down', 'Left', 'L2', 'R2', 'L1', 'R1', 'Triangle', 'Circle', 'Cross', 'Square']
+        return {buttonName: isBitSet(bitNum) for bitNum, buttonName in enumerate(buttons)}
 
 class PiLight():
     pass
