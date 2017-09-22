@@ -338,22 +338,24 @@ class PSPNx(EVShieldI2C):
 	# set the mode of the joystick to analog
     def setAnalogMode(self):
         self.issueCommand(ord('s'))
-    #    self.readByte(0x44)                   :      0  -   255
-    #    self.readByte(0x44) - 128             :   -128  -   127
-    #   (self.readByte(0x44) - 128)*25         :  -3200  -  3175
-    #  ((self.readByte(0x44) - 128)*25) >> 5   :   -100  -    99.22
+    #    byte                   :      0  -   255
+    #    byte - 128             :   -128  -   127
+    #   (byte - 128)*25         :  -3200  -  3175
+    #  ((byte - 128)*25) >> 5   :   -100  -    99.22
+    def mapByteToSpeed(self, byte):
+        return (((byte - 128)*25) >> 5) & 0xFF
 	# get the x-coordinate of the left joystick, between -100 and +100
 	def getXLJoy(self):
-        return (((self.readByte(0x44) - 128)*25) >> 5) & 0xFF
+        return self.mapByteToSpeed(self.readByte(0x44))
 	# get the y-coordinate of the left joystick, between -100 and +100
 	def getYLJoy(self):
-        return (((self.readByte(0x45) - 128)*25) >> 5) & 0xFF
+        return self.mapByteToSpeed(self.readByte(0x45))
 	# get the x-coordinate of the right joystick, between -100 and +100
 	def getXRJoy(self):
-        return (((self.readByte(0x46) - 128)*25) >> 5) & 0xFF
+        return self.mapByteToSpeed(self.readByte(0x46))
 	# get the y-coordinate of the right joystick, between -100 and +100
 	def getYRJoy(self):
-        return (((self.readByte(0x47) - 128)*25) >> 5) & 0xFF
+        return self.mapByteToSpeed(self.readByte(0x47))
 	# get the current button status of button set 1 and button set 2
     def getButtons(self):
         reading = self.readInteger(0x42)
