@@ -166,3 +166,76 @@ MODE_Infrared_Remote    = 0x02
 MODE_Sonar_CM       = 0x00
 MODE_Sonar_Inches   = 0x01
 MODE_Sonar_Presence = 0x02
+
+
+### Defines from EVs_NXTMMX.h ###
+# Motor selection related constants
+MMX_Motor_1    = 0x01
+MMX_Motor_2    = 0x02
+MMX_Motor_Both = 0x03
+# Next action related constants
+MMX_Next_Action_Float     = 0x00 # stop and let the motor coast
+MMX_Next_Action_Brake     = 0x01 # apply brakes, and resist change to tachometer
+MMX_Next_Action_BrakeHold = 0x02 # apply brakes, and restore externally forced change to tachometer
+# Direction related constants
+MMX_Direction_Forward = 0x01
+MMX_Direction_Reverse = 0x00
+# Tachometer related constants
+MMX_Move_Relative = 0x01
+MMX_Move_Absolute = 0x00
+# Completion related constants
+MMX_Completion_Wait_For  = 0x01
+MMX_Completion_Dont_Wait = 0x00
+# Speed constants (these are just convenience constants, you can use any value between 0 and 100)
+MMX_Speed_Full   = 90
+MMX_Speed_Medium = 60
+MMX_Speed_Slow   = 25
+
+
+### Defines from EVs_NXTServo.h ###
+Servo_1 = 1
+Servo_2 = 2
+Servo_3 = 3
+Servo_4 = 4
+Servo_5 = 5  
+Servo_6 = 6  
+Servo_7 = 7
+Servo_8 = 8
+Servo_Position_Default = 1500
+Servo_Speed_Full       = 0
+
+
+### Defines from EVs_PFMate.h ###
+PF_Channel_1 = 1
+PF_Channel_2 = 2
+PF_Channel_3 = 3
+PF_Channel_4 = 4
+PF_Control_Both = 0   
+PF_Control_A    = 1
+PF_Control_B    = 2
+PF_Speed_Slow      = 1
+PF_Speed_Medium    = 4
+PF_Speed_Full      = 7
+PF_Operation_Float   = 0
+PF_Operation_Forward = 1
+PF_Operation_Reverse = 2
+PF_Operation_Brake   = 3
+
+
+### Defines from EVs_PSPNx.h ###
+BS2_Button_L2       = 0
+BS2_Button_R2       = 1
+BS2_Button_L1       = 2
+BS2_Button_R1       = 3
+BS2_Button_Triangle = 4
+BS2_Button_Circle   = 5
+BS2_Button_Cross    = 6
+BS2_Button_Square   = 7
+BS1_Button_Select = 0
+BS1_Button_L3     = 1
+BS1_Button_R3     = 2
+BS1_Button_Start  = 3
+BS1_Button_Up     = 4
+BS1_Button_Right  = 5
+BS1_Button_Down   = 6
+BS1_Button_Left   = 7
