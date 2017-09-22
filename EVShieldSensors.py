@@ -352,7 +352,7 @@ class PSPNx(EVShieldI2C):
         return (((self.readByte(0x47) - 128)*25) >> 5) & 0xFF
 	# get the current button status of button set 1 and button set 2
     def getButtons(self):
-        return (self.readByte(0x42), self.readByte(0x43))
+        return self.readInteger(0x42)
 
 class PiLight():
     pass
