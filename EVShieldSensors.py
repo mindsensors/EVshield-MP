@@ -323,8 +323,36 @@ class PFMate(EVShieldI2C):
     def sendSignal(self):
         self.issueCommand(ord('G'))
 
-class PSPNx():
-    pass
+class PSPNx(EVShieldI2C):
+    def __init__(self, i2c_address=0x02):
+        EVShieldI2C.__init__(self, i2c_address)
+    # power on the joystick receiver
+    def energize(self):
+        self.issueCommand(ord('R'))
+	# power off the joystick receiver
+	def deEnergize(self):
+        self.issueCommand(ord('S'))
+	# set the mode of the joystick to digital
+	def setDigitalMode(self):
+        self.issueCommand(ord('A'))
+	# set the mode of the joystick to analog
+    def setAnalogMode(self):
+        self.issueCommand(ord('s'))
+	# get the x-coordinate of the left joystick, between -100 and +100
+	def getXLJoy(self):
+        return (((self.readByte(0x44) - 128)*25) >> 5) & 0xFF
+	# get the y-coordinate of the left joystick, between -100 and +100
+	def getYLJoy(self):
+        return (((self.readByte(0x45) - 128)*25) >> 5) & 0xFF
+	# get the x-coordinate of the right joystick, between -100 and +100
+	def getXRJoy(self):
+        return (((self.readByte(0x46) - 128)*25) >> 5) & 0xFF
+	# get the y-coordinate of the right joystick, between -100 and +100
+	def getYRJoy(self):
+        return (((self.readByte(0x47) - 128)*25) >> 5) & 0xFF
+	# get the current button status of button set 1 and button set 2
+    def getButtons(self):
+        return (self.readByte(0x42), self.readByte(0x43))
 
 class PiLight():
     pass
