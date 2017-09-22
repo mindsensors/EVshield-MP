@@ -338,6 +338,10 @@ class PSPNx(EVShieldI2C):
 	# set the mode of the joystick to analog
     def setAnalogMode(self):
         self.issueCommand(ord('s'))
+    #    self.readByte(0x44)                   :      0  -   255
+    #    self.readByte(0x44) - 128             :   -128  -   127
+    #   (self.readByte(0x44) - 128)*25         :  -3200  -  3175
+    #  ((self.readByte(0x44) - 128)*25) >> 5   :   -100  -    99.22
 	# get the x-coordinate of the left joystick, between -100 and +100
 	def getXLJoy(self):
         return (((self.readByte(0x44) - 128)*25) >> 5) & 0xFF
