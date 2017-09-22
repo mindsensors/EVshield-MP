@@ -393,5 +393,16 @@ class RTC(EVShieldI2C):
     def getYear(self):
         return self.BCDToInteger(self.readByte(0x06))
 
-class SumoEyes():
-    pass
+class SumoEyes(EVShieldAnalog):
+    def __init__(self, shield, bp):
+        EVShieldAnalog.__init__(self, shield, bp)
+    def setLongRange(self):
+        self.setType(SH_Type_LIGHT_AMBIENT)
+    def setShortRange(self):
+        self.setType(SH_Type_LIGHT_REFLECTED)
+    def detectObstacleZone(self):
+        reading = self.readRaw()
+        if reading in range(820, 840): return 'Front'
+        if reading in range(570, 590): return 'Left'
+        if reading in range(477, 497): return 'Right'
+        return 'None'
