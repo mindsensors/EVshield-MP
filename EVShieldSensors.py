@@ -296,8 +296,32 @@ class NumericPad(EVShieldI2C):
     def getKeysPressed(self):
         return self.readInteger(0)
 
-class PFMate():
-    pass
+class PFMate(EVShieldI2C):
+    def __init__(self, i2c_address=0x48):
+        EVShieldI2C.__init__(self, i2c_address)
+    def controlMotor(self, channel, control, operation, speed):
+        self.setChannel(channel)
+        if control in [PF_Control_A, PF_Control_Both]:
+            self.setOperationA(operation)
+            self.setSpeedA(speed)
+        if control in [PF_Control_B, PF_Control_Both]:
+            self.setOperationB(operation)
+            self.setSpeedB(speed)
+        self.sendSignal()
+    def setChannel(self, channel):
+        self.writeByte(0x42, channel)
+    def setControl(self, control):
+        self.writeByte(0x43, control)
+    def setOperationA(self, operation):
+        self.writeByte(0x44, operation)
+    def setOperationB(self, operation):
+        self.writeByte(0x46, operation)
+    def setSpeedA(self, speed):
+        self.writeByte(0x45, speed)
+    def setSpeedB(self, speed):
+        self.writeByte(0x47, speed)
+    def sendSignal(self):
+        self.issueCommand(ord('G'))
 
 class PSPNx():
     pass
