@@ -363,8 +363,15 @@ class PSPNx(EVShieldI2C):
         buttons = ['Select', 'L3', 'R3', 'Start', 'Up', 'Right', 'Down', 'Left', 'L2', 'R2', 'L1', 'R1', 'Triangle', 'Circle', 'Cross', 'Square']
         return {buttonName: isBitSet(bitNum) for bitNum, buttonName in enumerate(buttons)}
 
-class PiLight():
-    pass
+class PiLight(EVShieldI2C):
+    def __init__(self, i2c_address=0x30):
+        EVShieldI2C.__init__(self, i2c_address)
+    def readPiLight(self):
+        return map(self.readByte, [0x42,0x43,0x44])
+    def setTimeout1(self, timeoutValue):
+        self.writeRegisters(0x42, [0,0,0, timeoutValue])
+    def createPiLight(self, red, green, blue):
+        self.writeRegisters(0x42, [red, green, blue])
 
 class RTC():
     pass
