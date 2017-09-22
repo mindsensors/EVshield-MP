@@ -355,25 +355,27 @@ class PSPNx(EVShieldI2C):
 	# get the y-coordinate of the right joystick, between -100 and +100
 	def getYRJoy(self):
         return self.mapByteToSpeed(self.readByte(0x47))
+    def isBitSet(value, bitNum):
+        return value & 1<<bitNum == 1
 	# get the current button status of button set 1 and button set 2
     def getButtons(self):
         reading = self.readInteger(0x42)
-        return { 'Select':   reading & 1<<0 == 1,
-                 'L3':       reading & 1<<1 == 1,
-                 'R3':       reading & 1<<2 == 1,
-                 'Start':    reading & 1<<3 == 1,
-                 'Up':       reading & 1<<4 == 1,
-                 'Right':    reading & 1<<5 == 1,
-                 'Down':     reading & 1<<6 == 1,
-                 'Left':     reading & 1<<7 == 1,
-                 'L2':       reading & 1<<8 == 1,
-                 'R2':       reading & 1<<9 == 1,
-                 'L1':       reading & 1<<10 == 1,
-                 'R1':       reading & 1<<11 == 1,
-                 'Triangle': reading & 1<<12 == 1,
-                 'Circle':   reading & 1<<13 == 1,
-                 'Cross':    reading & 1<<14 == 1,
-                 'Square':   reading & 1<<15 == 1 }
+        return { 'Select':   self.isBitSet(reading,  0),
+                 'L3':       self.isBitSet(reading,  1),
+                 'R3':       self.isBitSet(reading,  2),
+                 'Start':    self.isBitSet(reading,  3),
+                 'Up':       self.isBitSet(reading,  4),
+                 'Right':    self.isBitSet(reading,  5),
+                 'Down':     self.isBitSet(reading,  6),
+                 'Left':     self.isBitSet(reading,  7),
+                 'L2':       self.isBitSet(reading,  8),
+                 'R2':       self.isBitSet(reading,  9),
+                 'L1':       self.isBitSet(reading, 10),
+                 'R1':       self.isBitSet(reading, 11),
+                 'Triangle': self.isBitSet(reading, 12),
+                 'Circle':   self.isBitSet(reading, 13),
+                 'Cross':    self.isBitSet(reading, 14),
+                 'Square':   self.isBitSet(reading, 15) }
 
 class PiLight():
     pass
