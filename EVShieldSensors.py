@@ -76,6 +76,8 @@ class EV3Gyro(EVShieldUART):
         self.ref = self.readValue()
 
 class EV3Infrared(EVShieldUART):
+    def __init__(self, shield, bp):
+        EVShieldUART.__init__(self, shield, bp)
     def readProximity(self):
         return self.readValue()
     def readChannelHeading(self, channel):
@@ -109,6 +111,8 @@ class EV3Touch(EVShieldUART):
         return self.writeLocation(0x84, 0)
 
 class EV3Ultrasonic(EVShieldUART):
+    def __init__(self, shield, bp):
+        EVShieldUART.__init__(self, shield, bp)
     def getDist(self):
         return self.readValue()/10
     def detect(self):
