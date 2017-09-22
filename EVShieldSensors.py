@@ -373,8 +373,25 @@ class PiLight(EVShieldI2C):
     def createPiLight(self, red, green, blue):
         self.writeRegisters(0x42, [red, green, blue])
 
-class RTC():
-    pass
+class RTC(EVShieldI2C):
+    def __init__(self, i2c_address=0xD0):
+        EVShieldI2C.__init__(self, i2c_address)
+    def BCDToInteger(self, b):
+        return (b&0x0F) + (((b>>4)&0x0F)*10)
+    def getSeconds(self):
+        return self.BCDToInteger(self.readByte(0x00))
+    def getMinutes(self):
+        return self.BCDToInteger(self.readByte(0x01))
+    def getHours(self):
+        return self.BCDToInteger(self.readByte(0x02))
+    def getDayWeek(self):
+        return self.BCDToInteger(self.readByte(0x03))
+    def getDayMonth(self):
+        return self.BCDToInteger(self.readByte(0x04))
+    def getMonth(self):
+        return self.BCDToInteger(self.readByte(0x05))
+    def getYear(self):
+        return self.BCDToInteger(self.readByte(0x06))
 
 class SumoEyes():
     pass
