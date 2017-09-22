@@ -220,22 +220,3 @@ PF_Operation_Float   = 0
 PF_Operation_Forward = 1
 PF_Operation_Reverse = 2
 PF_Operation_Brake   = 3
-
-
-### Defines from EVs_PSPNx.h ###
-PSP_Button_Select   =  0
-PSP_Button_L3       =  1
-PSP_Button_R3       =  2
-PSP_Button_Start    =  3
-PSP_Button_Up       =  4
-PSP_Button_Right    =  5
-PSP_Button_Down     =  6
-PSP_Button_Left     =  7
-PSP_Button_L2       =  8
-PSP_Button_R2       =  9
-PSP_Button_L1       = 10
-PSP_Button_R1       = 11
-PSP_Button_Triangle = 12
-PSP_Button_Circle   = 13
-PSP_Button_Cross    = 14
-PSP_Button_Square   = 15
