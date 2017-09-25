@@ -203,11 +203,12 @@ class EVShieldBank(EVShieldI2C):
         self.motorRunTachometer(which_motors, direction, speed, 360 * rotations, SH_Move_Relative, wait_for_completion, next_action)
     
     def motorStop(self, which_motors, next_action):
-        if (which_motor == SH_Motor_1 or which_motor == SH_Motor_2 or which_motor == SH_Motor_Both) \
-        and (next_action == SH_Next_Action_Float or next_action == SH_Next_Action_Brake or next_action == SH_Next_Action_BrakeHold):
-            # These magic numbers are documented in the advanced development guide, "Supported I2C Commands" table
-            base_code = 'A' - 1 if next_action != SH_Next_Action_Float else 'a' - 1
-            self.EVShieldIssueCommand(base_code + which_motors)
+        if which_motors not in [SH_Motor_1, SH_Motor_2, SH_Motor_Both] \
+        or next_action not in [SH_Next_Action_Float, SH_Next_Action_Brake, SH_Next_Action_BrakeHold]:
+            return
+        # These magic numbers are documented in the advanced development guide, "Supported I2C Commands" table
+        base_code = ord('A') - 1 if next_action != SH_Next_Action_Float else ord('a') - 1
+        self.EVShieldIssueCommand(base_code + which_motors)
 
 
 class EVShield():

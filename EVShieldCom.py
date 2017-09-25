@@ -87,7 +87,7 @@ class EVShieldUART():
         self.writeLocation(0x81, newMode)
 
     def setType(self, type):
-        self.writeInteger(SH_S1_MODE if self.offset == 0 else SH_S2_MODE, type)
+        self.bank.writeInteger(SH_S1_MODE if self.offset == 0 else SH_S2_MODE, type)
 
     def readValue(self):
         return self.readLocationInt(0x83)
