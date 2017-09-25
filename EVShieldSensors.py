@@ -10,7 +10,7 @@ class AbsoluteIMU(EVShieldI2C):
             raise ValueError("Invalid bank port!")
         bankAddress = SH_Bank_A if port in [SH_BAS1, SH_BAS2] else SH_Bank_B
         sensorMode = SH_S1_MODE if port in [SH_BAS1, SH_BBS1] else SH_S2_MODE
-        EVShieldI2C(bankAddress).writeByte(sensorMode, SH_Type_I2C) 
+        EVShieldI2C(bankAddress).writeByte(sensorMode, SH_Type_I2C)
     def readTilt(self):
         return {"x": self.readByte(0x42),
                 "y": self.readByte(0x43),
@@ -330,11 +330,11 @@ class PSPNx(EVShieldI2C):
     def energize(self):
         self.issueCommand(ord('R'))
 	# power off the joystick receiver
-	def deEnergize(self):
+    def deEnergize(self):
         self.issueCommand(ord('S'))
 	# set the mode of the joystick to digital
 	def setDigitalMode(self):
-        self.issueCommand(ord('A'))
+            self.issueCommand(ord('A'))
 	# set the mode of the joystick to analog
     def setAnalogMode(self):
         self.issueCommand(ord('s'))
@@ -344,16 +344,16 @@ class PSPNx(EVShieldI2C):
     def mapByteToSpeed(self, byte):
         return (byte/255*200)-100
 	# get the x-coordinate of the left joystick, between -100 and +100
-	def getXLJoy(self):
+    def getXLJoy(self):
         return self.mapByteToSpeed(self.readByte(0x44))
 	# get the y-coordinate of the left joystick, between -100 and +100
-	def getYLJoy(self):
+    def getYLJoy(self):
         return self.mapByteToSpeed(self.readByte(0x45))
 	# get the x-coordinate of the right joystick, between -100 and +100
-	def getXRJoy(self):
+    def getXRJoy(self):
         return self.mapByteToSpeed(self.readByte(0x46))
 	# get the y-coordinate of the right joystick, between -100 and +100
-	def getYRJoy(self):
+    def getYRJoy(self):
         return self.mapByteToSpeed(self.readByte(0x47))
     def isBitSet(value, bitNum):
         return value & 1<<bitNum == 1
