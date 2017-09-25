@@ -1,14 +1,12 @@
 # main.py -- put your code here!
 from EVShield import EVShield
-from EVShieldSensors import NXTLight
+from EVShieldSensors import EV3Infrared
 from EVShieldDefines import *
 import time
 
 evshield = EVShield()
-nxtlight = NXTLight(evshield, SH_BAS2)
+ev3ir = EV3Infrared(evshield, SH_BAS2)
 
 while not evshield.getButtonState(BTN_GO):
-    nxtlight.setReflected()
-    time.sleep(0.2)
-    nxtlight.setAmbient()
-    time.sleep(0.2)
+    print(ev3ir.readProximity())
+    time.sleep(0.1)

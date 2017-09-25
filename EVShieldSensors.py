@@ -83,10 +83,10 @@ class EV3Infrared(EVShieldUART):
     def readChannelHeading(self, channel):
         if channel not in range(4): return -1
         return self.readLocationByte(0x81 + channel*2)
-    def readChannelHeading(self, channel):
+    def readChannelProximity(self, channel):
         if channel not in range(4): return -1
         return self.readLocationByte(0x82 + channel*2)
-    def readChannelHeading(self, channel):
+    def readChannelButton(self, channel):
         if channel not in range(4): return -1
         return self.readLocationByte(0x82 + channel)
 
