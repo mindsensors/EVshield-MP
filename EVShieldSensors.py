@@ -224,8 +224,46 @@ class MagicWand(EVShieldI2C):
     def lightWand(self, byteToWrite):
         self.writeByte(0x00, byteToWrite)
 
-class NXTCam():
-    pass
+class NXTCam(EVShieldI2C):
+    def __init__(self, i2c_address=0x02):
+        EVShieldI2C.__init__(self, i2c_address)
+    def sortSize(self):
+        self.issueCommand(ord('A'))
+    def selectObjectMode(self):
+        self.issueCommand(ord('B'))
+    def writeImageRegisters(self):
+        self.issueCommand(ord('C'))
+    def disableTracking(self):
+        self.issueCommand(ord('D'))
+    def enableTracking(self):
+        self.issueCommand(ord('E'))
+    def getColorMap(self):
+        self.issueCommand(ord('G'))
+    def illuminationOn(self):
+        self.issueCommand(ord('I'))
+    def readImageRegisters(self):
+        self.issueCommand(ord('H'))
+    def selectLineMode(self):
+        self.issueCommand(ord('L'))
+    def pingCam(self):
+        self.issueCommand(ord('P'))
+    def resetCam(self):
+        self.issueCommand(ord('R'))
+    def sendColorMap(self):
+        self.issueCommand(ord('S'))
+    def illuminationOff(self):
+        self.issueCommand(ord('T'))
+    def sortColor(self):
+        self.issueCommand(ord('U'))
+    def camFirmware(self):
+        self.issueCommand(ord('V'))
+    def sortNone(self):
+        self.issueCommand(ord('X'))
+    def getNumberObjects(self):
+        return self.readByte(0x42)
+    def getBlobs(self):
+        for i in range(self.getNumberObject()):
+            return self.readString(0x43 + i*5, 5)
 
 class NXTColor(EVShieldUART):
     def __init__(self, shield, bp):
