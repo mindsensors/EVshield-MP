@@ -261,12 +261,16 @@ class NXTCam(EVShieldI2C):
         self.issueCommand(ord('X'))
     def getNumberObjects(self):
         return self.readByte(0x42)
+    class Blob():
+        def __init__(self, color, left, top, right, bottom):
+            self.color = color
+            self.left = left
+            self.top = top
+            self.right = right
+            self.bottom = bottom
     def getBlobs(self):
-        return [{"color":  self.readByte(0x43+i*5),
-                 "left":   self.readByte(0x44+i*5),
-                 "top":    self.readByte(0x45+i*5),
-                 "right":  self.readByte(0x46+i*5),
-                 "bottom": self.readByte(0x47+i*5)} for i in range(self.getNumberObject())]
+        return [Blob(*[self.readByte(0x43+j+i*5) for j in range(5)])
+                for i in range(self.getNumberObject())]
 
 class NXTColor(EVShieldUART):
     def __init__(self, shield, bp):
