@@ -1,0 +1,81 @@
+body {
+    background-color: #fff;
+    font-family: sans-serif;
+}
+h1 {
+    font-weight: normal;
+    font-size: 140%;
+}
+xml {
+    display: none;
+}
+
+#blocklyCol {
+    width: 60%;
+    float: left;
+}
+#blocklyDiv {
+    height: 480px;
+    width: 600px;
+    margin-top: 3em;
+}
+#blocklyCol button:not(:first-child) {
+    margin-left: 1em;
+}
+
+#pythonCol {
+    float: left;
+    margin-left: 2em;
+    width: calc(40% - 2em);
+}
+#pythonCol button#hide {
+    float: right;
+}
+#pythonPre {
+    margin-top: 3em;
+    background: #212121;
+    color: #eceff1;
+    padding: 1em 2em;
+    height: calc(100vh - (104px + 7em));
+    overflow: auto;
+}
+
+button#save, button#load, button#export, button#hide {
+    color: #fff;
+    padding: 6px 12px;
+    border: none;
+    font-size: 14px;
+    cursor: pointer;
+    float: left;
+}
+button#save {
+    background: #00a65a;
+}
+button#save:hover {
+    background-color: #008d4c;
+}
+button#load {
+    background: #17a2b8;
+}
+button#load:hover {
+    background-color: #0f6674;
+}
+button#export {
+    background: #0275d8;
+}
+button#export:hover {
+    background-color: #025aa5;
+}
+button#hide {
+    background: #f0ad4e;
+}
+button#hide:hover {
+    background-color: #ec971f;
+}
+
+* {
+    user-select: none;
+}
+#pythonPre {
+    user-select: text;
+}
