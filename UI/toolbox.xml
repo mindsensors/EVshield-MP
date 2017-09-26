@@ -358,13 +358,22 @@
   <sep></sep>
   <category name="Motors" colour="#5b5ba5"></category>
   <category name="Sensors" colour="#a5a55b"></category>
-  <category name="LED" colour="#5ba56d"></category>
+  <category name="LED" colour="#5ba56d">
+    <block type="led_set">
+      <field name="WHICH">A+B</field>
+      <value name="COLOR">
+        <shadow type="colour_picker">
+          <field name="COLOUR">#ff0000</field>
+        </shadow>
+      </value>
+    </block>
+  </category>
   <category name="Buttons" colour="#5b80a5"></category>
   <category name="System" colour="#a56d5b">
     <block type="system_sleep">
       <value name="TIME">
         <shadow type="math_number">
-          <field name="NUM">1</field>
+          <field name="NUM">2</field>
         </shadow>
       </value>
     </block>

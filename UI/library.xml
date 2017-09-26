@@ -50,4 +50,67 @@
         <field name="HUE">5</field>
       </block>
     </value>
+  </block><block type="factory_base" id=":kFT0}#|tc]kp%*8^I1;" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">led_set</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_value" id="t*oh8,QT(v`@@m5P3tk@">
+        <field name="INPUTNAME">COLOR</field>
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="Fsd|.#12q0WZo5`X+/FE">
+            <field name="TEXT">set LED</field>
+            <next>
+              <block type="field_dropdown" id="CFzxt/5hbx^9mOH)t^m`">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">WHICH</field>
+                <field name="USER0">A</field>
+                <field name="CPU0">A</field>
+                <field name="USER1">B</field>
+                <field name="CPU1">B</field>
+                <field name="USER2">Both</field>
+                <field name="CPU2">A+B</field>
+                <field name="USER3">Center</field>
+                <field name="CPU3">C</field>
+                <next>
+                  <block type="field_static" id="h5VZ!@`@*Yo[aCgD{sml">
+                    <field name="TEXT">to color</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="TYPE">
+          <shadow type="type_null" id="S*qWG7C|)xfZ1{BgfIE$"></shadow>
+          <block type="type_other" id="W~,:=NAOH2hHEF}9t.mI">
+            <field name="TYPE">Colour</field>
+          </block>
+        </value>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="zq{(foR*b,x|7=Sb;u-X" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="|Vo*WJBfX6:l^!_P.O*," deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="Px8,WB0TEC3t-PebF(UM"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="^O8RmM=6JtVTxz]xLX!H"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="+RJIq8(I[jYSsG)/PIF!">
+        <mutation colour="#5ba574"></mutation>
+        <field name="HUE">140</field>
+      </block>
+    </value>
   </block></xml>
