@@ -303,8 +303,59 @@ class NXTLight(EVShieldAnalog):
 class NXTMMX():
     pass
 
-class NXTServo():
-    pass
+class NXTServo(EVShieldI2C):
+    def __init__(self, i2c_address=0xB0):
+        EVShieldI2C.__init__(self, i2c_address)
+    def getBatteryVoltage(self):
+        return self.readByte(0x41)
+    def storeInitial(self, number):
+        self.issueCommand(ord('I'))
+        self.issueCommand(number)
+    def reset(self):
+        self.issueCommand(ord('S'))
+    def haltMacro(self):
+        self.issueCommand(ord('H'))
+    def resumeMacro(self):
+        self.issueCommand(ord('R'))
+    def gotoEEPROM(self, position):
+        self.issueCommand(ord('G'))
+        self.issueCommand(position)
+    def editMacro(self):
+        self.issueCommand(ord('E'))
+        self.issueCommand(ord('m'))
+    def pauseMacro(self):
+        self.issueCommand(ord('P'))
+    def setSpeed(self, number, speed):
+        self.writeByte(0x52+(number-1), speed)
+    def setPosition(self, number, position):
+        self.writeByte(0x5A+(number-1), position)
+    def runServo(self, number, position, speed):
+        self.setPosition(number, position)
+        self.setSpeed(number, speed)
+	
+	/** stop the onboard macro on the NXTServo */
+  bool haltMacro();
+	
+	/** resume the onboard macro on the NXTServo */
+  bool resumeMacro();
+	
+	/** Go to given EEPROM position (This command re-initializes the macro environment) */
+  bool gotoEEPROM(uint8_t position);
+	
+	/** edit the onboard macro */
+  bool editMacro();
+	
+	/** temporarily pause the running macro */
+  bool pauseMacro();
+	
+	/** set the speed of a specified servo */
+  bool setSpeed(uint8_t number, uint8_t speed);
+	
+	/** set the position of a specified servo */
+  bool setPosition(uint8_t number, uint8_t position);
+	
+	/** run the specified to the specified position at the specified speed */
+  void runServo(uint8_t number, uint8_t position, uint8_t speed);
 
 class NXTTouch(EVShieldAnalog):
     def __init__(self, shield, bp):

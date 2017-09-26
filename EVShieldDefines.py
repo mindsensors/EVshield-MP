@@ -193,14 +193,6 @@ MMX_Speed_Slow   = 25
 
 
 ### Defines from EVs_NXTServo.h ###
-Servo_1 = 1
-Servo_2 = 2
-Servo_3 = 3
-Servo_4 = 4
-Servo_5 = 5  
-Servo_6 = 6  
-Servo_7 = 7
-Servo_8 = 8
 Servo_Position_Default = 1500
 Servo_Speed_Full       = 0
 
