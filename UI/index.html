@@ -388,7 +388,15 @@
       <category name="Sensors" colour="60"></category>
       <category name="LED" colour="140"></category>
       <category name="Buttons" colour="200"></category>
-      <category name="System" colour="5"></category>
+      <category name="System" colour="5">
+        <block type="system_sleep">
+          <value name="TIME">
+            <shadow type="math_number">
+              <field name="NUM">1</field>
+            </shadow>
+          </value>
+        </block>
+      </category>
     </xml>
     <script src="toolbox.js"></script>
 

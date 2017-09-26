@@ -1,1 +1,53 @@
-<xml xmlns="http://www.w3.org/1999/xhtml"></xml>
+<xml xmlns="http://www.w3.org/1999/xhtml"><block type="factory_base" id="9jtthfGYxcgh)e`=A}6b" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">system_sleep</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_value" id="?;Vi7WM1AN?t}4;aBNm{">
+        <field name="INPUTNAME">TIME</field>
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="8o@Emp=};JL#D.}[c$H;">
+            <field name="TEXT">wait for</field>
+          </block>
+        </statement>
+        <value name="TYPE">
+          <shadow type="type_null" id="[)_pW=.Prd+J+Gx0$ae1"></shadow>
+          <block type="type_number" id="zYu,)V$v%TN,xcB^;]u."></block>
+        </value>
+        <next>
+          <block type="input_dummy" id="Ts+~771u6?aic.9!3CYb">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="tlPa#*caHnz;9]v[/k]b">
+                <field name="TEXT">seconds</field>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="LItV?A|6(?31IUWeXn6n" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="z?i#wDMOma`$1A%C]8p;" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="~2x?oxju8^!1A@d0pz:n"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="!2Gjk5XQZEu7M2{d~DoG"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="=41SeVydmm2d`Y^#|0^R">
+        <mutation colour="#a5615b"></mutation>
+        <field name="HUE">5</field>
+      </block>
+    </value>
+  </block></xml>
