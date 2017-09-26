@@ -2,5 +2,5 @@
 # can run arbitrary Python, but best to keep it minimal
 
 import pyb
-#pyb.main('main.py') # main script to run after this one
-pyb.main('examples/key_press_count.py')
+#pyb.main('code/main.py') # main script to run after this one
+pyb.main('code/examples/key_press_count.py')
