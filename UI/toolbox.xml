@@ -26,7 +26,7 @@
       <field name="MODE">WHILE</field>
     </block>
     <block type="controls_for">
-      <field name="VAR" id="v{RpwyDA@;Yxpw57BpH]" variabletype="">i</field>
+      <field name="VAR" id="qhW`KN`EWLSX%`!oPyVK" variabletype="">i</field>
       <value name="FROM">
         <shadow type="math_number">
           <field name="NUM">1</field>
@@ -44,28 +44,23 @@
       </value>
     </block>
     <block type="controls_forEach">
-      <field name="VAR" id=":rnf!*Yy-M[V$C!bp9Fb" variabletype="">j</field>
+      <field name="VAR" id=".I.1IR-Zlkx,hel7)}|f" variabletype="">j</field>
     </block>
     <block type="controls_flow_statements">
       <field name="FLOW">BREAK</field>
     </block>
   </category>
   <category name="Math" colour="#5C68A6">
+    <block type="math_round">
+      <field name="OP">ROUND</field>
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">3.1</field>
+        </shadow>
+      </value>
+    </block>
     <block type="math_number">
       <field name="NUM">0</field>
-    </block>
-    <block type="math_arithmetic">
-      <field name="OP">ADD</field>
-      <value name="A">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-      <value name="B">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
     </block>
     <block type="math_single">
       <field name="OP">ROOT</field>
@@ -95,11 +90,16 @@
         </shadow>
       </value>
     </block>
-    <block type="math_round">
-      <field name="OP">ROUND</field>
-      <value name="NUM">
+    <block type="math_arithmetic">
+      <field name="OP">ADD</field>
+      <value name="A">
         <shadow type="math_number">
-          <field name="NUM">3.1</field>
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="B">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
         </shadow>
       </value>
     </block>
@@ -151,14 +151,20 @@
     <block type="math_random_float"></block>
   </category>
   <category name="Text" colour="#5CA68D">
+    <block type="text_charAt">
+      <mutation at="true"></mutation>
+      <field name="WHERE">FROM_START</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="+i!kZ*whl}urH30bD*Qm" variabletype="">text</field>
+        </block>
+      </value>
+    </block>
     <block type="text">
       <field name="TEXT"></field>
     </block>
-    <block type="text_join">
-      <mutation items="2"></mutation>
-    </block>
     <block type="text_append">
-      <field name="VAR" id=",)AYta7N`:cW2pF$bfex" variabletype="">item</field>
+      <field name="VAR" id="Tb!}OOSYQ(5B_?jV_PP(" variabletype="">item</field>
       <value name="TEXT">
         <shadow type="text">
           <field name="TEXT"></field>
@@ -183,7 +189,7 @@
       <field name="END">FIRST</field>
       <value name="VALUE">
         <block type="variables_get">
-          <field name="VAR" id="/_zaWkOY%FXg[m,sfR.I" variabletype="">text</field>
+          <field name="VAR" id="+i!kZ*whl}urH30bD*Qm" variabletype="">text</field>
         </block>
       </value>
       <value name="FIND">
@@ -192,14 +198,8 @@
         </shadow>
       </value>
     </block>
-    <block type="text_charAt">
-      <mutation at="true"></mutation>
-      <field name="WHERE">FROM_START</field>
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" id="/_zaWkOY%FXg[m,sfR.I" variabletype="">text</field>
-        </block>
-      </value>
+    <block type="text_join">
+      <mutation items="2"></mutation>
     </block>
     <block type="text_getSubstring">
       <mutation at1="true" at2="true"></mutation>
@@ -207,7 +207,7 @@
       <field name="WHERE2">FROM_START</field>
       <value name="STRING">
         <block type="variables_get">
-          <field name="VAR" id="/_zaWkOY%FXg[m,sfR.I" variabletype="">text</field>
+          <field name="VAR" id="+i!kZ*whl}urH30bD*Qm" variabletype="">text</field>
         </block>
       </value>
     </block>
@@ -245,11 +245,16 @@
     </block>
   </category>
   <category name="Lists" colour="#745CA6">
-    <block type="lists_create_with">
-      <mutation items="0"></mutation>
+    <block type="lists_indexOf">
+      <field name="END">FIRST</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="*Fw1?}u10xL#|nqh$P*6" variabletype="">list</field>
+        </block>
+      </value>
     </block>
     <block type="lists_create_with">
-      <mutation items="3"></mutation>
+      <mutation items="0"></mutation>
     </block>
     <block type="lists_repeat">
       <value name="NUM">
@@ -260,13 +265,8 @@
     </block>
     <block type="lists_length"></block>
     <block type="lists_isEmpty"></block>
-    <block type="lists_indexOf">
-      <field name="END">FIRST</field>
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" id="qKwlCXCb|Rcny53a?T@L" variabletype="">list</field>
-        </block>
-      </value>
+    <block type="lists_create_with">
+      <mutation items="3"></mutation>
     </block>
     <block type="lists_getIndex">
       <mutation statement="false" at="true"></mutation>
@@ -274,7 +274,7 @@
       <field name="WHERE">FROM_START</field>
       <value name="VALUE">
         <block type="variables_get">
-          <field name="VAR" id="qKwlCXCb|Rcny53a?T@L" variabletype="">list</field>
+          <field name="VAR" id="*Fw1?}u10xL#|nqh$P*6" variabletype="">list</field>
         </block>
       </value>
     </block>
@@ -284,7 +284,7 @@
       <field name="WHERE">FROM_START</field>
       <value name="LIST">
         <block type="variables_get">
-          <field name="VAR" id="qKwlCXCb|Rcny53a?T@L" variabletype="">list</field>
+          <field name="VAR" id="*Fw1?}u10xL#|nqh$P*6" variabletype="">list</field>
         </block>
       </value>
     </block>
@@ -294,7 +294,7 @@
       <field name="WHERE2">FROM_START</field>
       <value name="LIST">
         <block type="variables_get">
-          <field name="VAR" id="qKwlCXCb|Rcny53a?T@L" variabletype="">list</field>
+          <field name="VAR" id="*Fw1?}u10xL#|nqh$P*6" variabletype="">list</field>
         </block>
       </value>
     </block>
@@ -356,322 +356,9 @@
   <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
   <category name="Functions" colour="#9A5CA6" custom="PROCEDURE"></category>
   <sep></sep>
-  <category name="System" colour="#5ba56d">
-    <block type="system_sleep">
-      <value name="TIME">
-        <shadow type="math_number">
-          <field name="NUM">1.5</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="system_led">
-      <field name="COLOR">#ff0000</field>
-      <field name="STATE">True</field>
-    </block>
-    <block type="system_switch"></block>
-  </category>
-  <category name="Grove" colour="#a5a55b">
-    <block type="grove_temperature_init">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_temperature_read">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_temperature_ctof">
-      <value name="CELSIUS">
-        <shadow type="grove_temperature_read">
-          <field name="PORT">A1</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="grove_gas_init">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_gas_read">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_light_init">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_light_read">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_loudness_init">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_loudness_read">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_sound_init">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_sound_read">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_moisture_init">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_moisture_read">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_ph_init">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_ph_read">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_piezo_init">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_piezo_read">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_rotary_angle_init">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_rotary_angle_read">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_slide_pot_init">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_slide_pot_read">
-      <field name="PORT">A1</field>
-    </block>
-    <block type="grove_ultrasonic_init">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_ultrasonic_inches">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_ultrasonic_cm">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_button_init">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_button_is_pressed">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_pir_motion_init">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_pir_motion_detect">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_led_init">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_led_on">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_led_off">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_buzzer_init">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_buzzer_on">
-      <field name="PORT">D1</field>
-    </block>
-    <block type="grove_buzzer_off">
-      <field name="PORT">D1</field>
-    </block>
-  </category>
-  <category name="Servos" colour="#5b5ba5">
-    <block type="servo_angle">
-      <field name="PORT">S1</field>
-      <field name="ANGLE">0</field>
-    </block>
-    <block type="servo_speed">
-      <field name="PORT">S1</field>
-      <field name="SPEED">0</field>
-    </block>
-  </category>
-  <category name="Display" colour="#a55ba5">
-    <block type="display_clear"></block>
-    <block type="display_fill"></block>
-    <block type="display_text">
-      <field name="X">0</field>
-      <field name="Y">0</field>
-      <field name="SIZE">1</field>
-      <value name="TEXT">
-        <shadow type="text">
-          <field name="TEXT"></field>
-        </shadow>
-      </value>
-    </block>
-    <block type="display_rect">
-      <field name="X">0</field>
-      <field name="Y">0</field>
-      <field name="W">10</field>
-      <field name="H">10</field>
-    </block>
-    <block type="display_line">
-      <field name="X0">0</field>
-      <field name="Y0">0</field>
-      <field name="X1">10</field>
-      <field name="Y1">10</field>
-    </block>
-    <block type="display_circle">
-      <field name="X">10</field>
-      <field name="Y">10</field>
-      <field name="R">5</field>
-    </block>
-    <block type="display_title">
-      <field name="SIZE">2</field>
-      <value name="TITLE">
-        <shadow type="text">
-          <field name="TEXT"></field>
-        </shadow>
-      </value>
-    </block>
-  </category>
-  <category name="Advanced" colour="#a55b5b">
-    <block type="servo_angle_advanced">
-      <field name="PORT">S1</field>
-      <value name="ANGLE">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="servo_speed_advanced">
-      <field name="PORT">S1</field>
-      <value name="SPEED">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="system_switch_callback"></block>
-    <block type="display_line_advanced">
-      <field name="COLOR">#ffffff</field>
-      <field name="REFRESH">TRUE</field>
-      <value name="X0">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="Y0">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="X1">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-      <value name="Y1">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="display_clear_no_refresh"></block>
-    <block type="display_pixel">
-      <field name="COLOR">#ffffff</field>
-      <value name="X">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="Y">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="display_text_advanced">
-      <field name="INVERTED">FALSE</field>
-      <field name="REFRESH">TRUE</field>
-      <value name="TEXT">
-        <shadow type="text">
-          <field name="TEXT"></field>
-        </shadow>
-      </value>
-      <value name="X">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="Y">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="SIZE">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="display_rect_advanced">
-      <field name="COLOR">#ffffff</field>
-      <field name="REFRESH">TRUE</field>
-      <value name="X">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="Y">
-        <shadow type="math_number">
-          <field name="NUM">0</field>
-        </shadow>
-      </value>
-      <value name="W">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-      <value name="H">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="display_circle_advanced">
-      <field name="COLOR">#ffffff</field>
-      <field name="REFRESH">TRUE</field>
-      <value name="X">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-      <value name="Y">
-        <shadow type="math_number">
-          <field name="NUM">10</field>
-        </shadow>
-      </value>
-      <value name="R">
-        <shadow type="math_number">
-          <field name="NUM">5</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="display_title_advanced">
-      <field name="INVERTED">FALSE</field>
-      <field name="REFRESH">TRUE</field>
-      <value name="TITLE">
-        <shadow type="text">
-          <field name="TEXT"></field>
-        </shadow>
-      </value>
-      <value name="SIZE">
-        <shadow type="math_number">
-          <field name="NUM">2</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="display_show"></block>
-    <block type="display_invert">
-      <field name="INVERT">TRUE</field>
-    </block>
-    <block type="display_contrast">
-      <field name="CONTRAST">255</field>
-    </block>
-    <block type="display_on"></block>
-    <block type="display_off"></block>
-  </category>
+  <category name="Motors" colour="#5b5ba5"></category>
+  <category name="Sensors" colour="#a5a55b"></category>
+  <category name="LED" colour="#5ba56d"></category>
+  <category name="Buttons" colour="#5b80a5"></category>
+  <category name="System" colour="#a56d5b"></category>
 </xml>
