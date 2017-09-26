@@ -210,7 +210,35 @@ class EVShieldBank(EVShieldI2C):
         base_code = ord('A') - 1 if next_action != SH_Next_Action_Float else ord('a') - 1
         self.EVShieldIssueCommand(base_code + which_motors)
 
-
+'''
+Along the top, from left to right, there is the RESET button, the GO button,
+the center LED, and the left and right buttons. In the top-left corner there is
+the power terminal. Bank A is on the left edge and Bank B is on the right edge.
+From top to bottom, on each bank, there is Motor 1, Motor 2, Sensor 1, and Sensor 2.
+Each bank has an LED at the bottom. On the back, opposite the power block, there are
+six servo pins, each connected to a PWM pin on the board. Finally, there are a set of
+hardware I2C pins at the bottom of the back of the board (for left to right:
+GND, 5V, SCL, SDA)
+ _________________________________________
+/       RESET  GO   LED   <    >          \
+\ +                                ...... |
+ |-                                :::::: |
+/                                         |
+|                                         |
+|       |                         |       |
+| M1    |                         |    M1 |
+|       A       EVShield-v2       B       |
+| M2                                   M2 |
+|       K     mindsensors.com     K       |
+|       N                         N       |
+|       A                         A       |
+| BAS1  B                         B  BBS1 |
+|       |                         |       |
+| BAS2  |          G5CD           |  BBS2 |
+|       |          ....           |       |
+|   LED             I2C             LED   |
+\_________________________________________/
+'''
 class EVShield():
     def __init__(self, i2c_address_a = SH_Bank_A, i2c_address_b = SH_Bank_B):
         self.bank_a = EVShieldBank(i2c_address_a)
