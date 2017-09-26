@@ -300,8 +300,9 @@ class NXTLight(EVShieldAnalog):
     def setAmbient(self):
         self.setType(SH_Type_LIGHT_AMBIENT)
 
-class NXTMMX():
-    pass
+class NXTMMX(EVShieldI2C):
+    def __init__(self, i2c_address=0x06):
+        EVShieldI2C.__init__(self, i2c_address)
 
 class NXTServo(EVShieldI2C):
     def __init__(self, i2c_address=0xB0):
