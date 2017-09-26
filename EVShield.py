@@ -266,36 +266,38 @@ class EVShield():
         self.bank_a.writeRegisters(SH_CENTER_RGB_LED, bytes([int(red),int(green),int(blue)]))
     
     def ledBreathingPattern(self):
+        t = self.ledBreathingPatternTimer
+        if (t < 50):
+            intensity = t/50.0 # 0.0 to 1.0
+        else:
+            intensity = (100-t)/50.0 # 1.0 to 0.0
+        
+        self.ledSetRGB(0, intensity*255, intensity*255)
+        pyb.delay(10) # 10 ms * 100 unit period = 1 second loop
+        
+        self.ledBreathingPatternTimer += 1
         if (self.ledBreathingPatternTimer > 100):
             self.ledBreathingPatternTimer = 0
-        
-        if (self.ledBreathingPatternTimer < 50):
-            intensity = self.ledBreathingPatternTimer/50.0 # 0.0 to 1.0
-        else:
-            intensity = (100-self.ledBreathingPatternTimer)/50.0 # 1.0 to 0.0
-        
-        self.ledSetRGB(0, intensity*255, intensity*255)
-        pyb.delay(10) # 10 ms * 100 unit period = 1 second loop
-        self.ledBreathingPatternTimer += 1
     
     def ledHeartBeatPattern(self):
-        if (self.ledHeartBeatPatternTimer > 100):
-            self.ledHeartBeatPatternTimer = 0
-        
-        if (self.ledHeartBeatPatternTimer < 15):
-            intensity = self.ledHeartBeatPatternTimer/15.0 # 0.0 to 1.0
-        elif (self.ledHeartBeatPatternTimer >= 15 and self.ledHeartBeatPatternTimer < 30):
-            intensity = (30-self.ledHeartBeatPatternTimer)/15.0 # 1.0 to 0.0
-        elif (self.ledHeartBeatPatternTimer >= 30 and self.ledHeartBeatPatternTimer < 45):
-            intensity = (self.ledHeartBeatPatternTimer-30)/15.0 # 0.0 to 1.0
-        elif (self.ledHeartBeatPatternTimer >= 45 and self.ledHeartBeatPatternTimer < 60):
-            intensity = (60-self.ledHeartBeatPatternTimer)/15.0 # 1.0 to 0.0
-        elif (self.ledHeartBeatPatternTimer >= 60):
+        t = self.ledHeartBeatPatternTimer
+        if (t < 15):
+            intensity = t/15.0 # 0.0 to 1.0
+        elif (t >= 15 and t < 30):
+            intensity = (30-t)/15.0 # 1.0 to 0.0
+        elif (t >= 30 and t < 45):
+            intensity = (t-30)/15.0 # 0.0 to 1.0
+        elif (t >= 45 and t < 60):
+            intensity = (60-t)/15.0 # 1.0 to 0.0
+        elif (t >= 60):
             intensity = 0
         
-        self.ledSetRGB(0, intensity*255, intensity*255)
+        self.ledSetRGB(intensity*255, 0, 0)
         pyb.delay(10) # 10 ms * 100 unit period = 1 second loop
+        
         self.ledHeartBeatPatternTimer += 1
+        if (self.ledHeartBeatPatternTimer > 100):
+            self.ledHeartBeatPatternTimer = 0
     
     def getKeyPressCount(self, btn):
         return self.bank_a.readByte(BTN_TO_COUNT_REG[btn])

@@ -3,4 +3,4 @@
 
 import pyb
 #pyb.main('main.py') # main script to run after this one
-pyb.main('examples/buttons_to_leds.py')
+pyb.main('examples/key_press_count.py')
