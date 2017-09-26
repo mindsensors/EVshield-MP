@@ -2,4 +2,5 @@
 # can run arbitrary Python, but best to keep it minimal
 
 import pyb
-pyb.main('main.py') # main script to run after this one
+#pyb.main('main.py') # main script to run after this one
+pyb.main('examples/buttons_to_leds.py')

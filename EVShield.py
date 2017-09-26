@@ -219,7 +219,7 @@ class EVShield():
         self.ledHeartBeatPatternTimer = 0
     
     def getButtonState(self, btn):
-        return self.bank_a.readByte(SH_BTN_PRESS) == btn
+        return self.bank_a.readByte(SH_BTN_PRESS) & btn > 0
     
     def waitForButtonPress(self, btn, led_pattern = 1):
         while not self.getButtonState(btn):
