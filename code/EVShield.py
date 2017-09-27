@@ -81,16 +81,16 @@ class EVShieldBank(EVShieldI2C):
         self.writeByte(SH_TOLERANCE, tolerance)
     
     def motorReset(self):
-        self.EVShieldIssueCommand('R')
+        self.EVShieldIssueCommand(ord('R'))
     
     def motorStartBothInSync(self):
-        self.EVShieldIssueCommand('S')
+        self.EVShieldIssueCommand(ord('S'))
     
     def motorResetEncoder(self, which_motor):
         if which_motor == SH_Motor_1 or which_motor == SH_Motor_Both:
-            self.EVShieldIssueCommand('r')
+            self.EVShieldIssueCommand(ord('r'))
         if which_motor == SH_Motor_2 or which_motor == SH_Motor_Both:
-            self.EVShieldIssueCommand('s')
+            self.EVShieldIssueCommand(ord('s'))
     
     def motorSetSpeedTimeAndControl(self, which_motors, speed, duration, control):
         if which_motors == SH_Motor_Both:
