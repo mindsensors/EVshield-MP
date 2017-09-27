@@ -256,6 +256,24 @@ Blockly.defineBlocksWithJsonArray([
 ]); // end defineBlocksWithJsonArray
 
 
+Blockly.Python['motors_setspeed'] = function(block) {
+  var motor = block.getFieldValue('MOTOR');
+  var speed = block.getFieldValue('SPEED');
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
+  return `evshield.bank_${motor[1].toLowerCase()}.motorRunUnlimited(SH_Motor_${motor[3]}, ${direction}, ${Math.abs(speed)||0})\n`;
+};
+Blockly.Python['motors_getpos'] = function(block) {
+  var motor = block.getFieldValue('MOTOR');
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  return [`evshield.bank_${motor[1].toLowerCase()}.motorGetEncoderPosition(SH_Motor_${motor[3]})`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['motors_resetpos'] = function(block) {
+  var motor = block.getFieldValue('MOTOR');
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  return `evshield.bank_${motor[1].toLowerCase()}.motorResetEncoder(SH_Motor_${motor[3]})\n`;
+};
+
 Blockly.Python['led_set'] = function(block) {
   var which = block.getFieldValue('WHICH');
   var hex_color = Blockly.Python.valueToCode(block, 'COLOR', Blockly.Python.ORDER_ATOMIC);
