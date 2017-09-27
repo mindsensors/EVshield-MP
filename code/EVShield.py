@@ -165,7 +165,7 @@ class EVShieldBank(EVShieldI2C):
         if direction == SH_Direction_Reverse: speed = -speed
         self.motorSetSpeedTimeAndControl(which_motors, speed, 0, control)
     
-    def motorRunSeconds(self, which_motors, direction, speed, duration, wait_for_completion, next_action):
+    def motorRunSeconds(self, which_motors, direction, speed, duration, wait_for_completion=SH_Completion_Wait_For, next_action=SH_Next_Action_Float):
         control = SH_CONTROL_SPEED | SH_CONTROL_TIME | SH_CONTROL_GO
         if next_action == SH_Next_Action_Brake: control |= SH_CONTROL_BRK
         elif (next_action == SH_Next_Action_BrakeHold): control |= SH_CONTROL_BRK | SH_CONTROL_ON
@@ -196,13 +196,13 @@ class EVShieldBank(EVShieldI2C):
         if wait_for_completion == SH_Completion_Wait_For:
             self.motorWaitUntilTachoDone(which_motors)
     
-    def motorRunDegrees(self, which_motors, direction, speed, degrees, wait_for_completion, next_action):
+    def motorRunDegrees(self, which_motors, direction, speed, degrees, wait_for_completion=SH_Completion_Wait_For, next_action=SH_Next_Action_Float):
         self.motorRunTachometer(which_motors, direction, speed, degrees, SH_Move_Relative, wait_for_completion, next_action)
     
-    def motorRunRotations(self, which_motors, direction, speed, rotations, wait_for_completion, next_action):
+    def motorRunRotations(self, which_motors, direction, speed, rotations, wait_for_completion=SH_Completion_Wait_For, next_action=SH_Next_Action_Float):
         self.motorRunTachometer(which_motors, direction, speed, 360 * rotations, SH_Move_Relative, wait_for_completion, next_action)
     
-    def motorStop(self, which_motors, next_action):
+    def motorStop(self, which_motors, next_action=SH_Next_Action_Float):
         if which_motors not in [SH_Motor_1, SH_Motor_2, SH_Motor_Both] \
         or next_action not in [SH_Next_Action_Float, SH_Next_Action_Brake, SH_Next_Action_BrakeHold]:
             return
