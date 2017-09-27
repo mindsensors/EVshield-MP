@@ -111,53 +111,27 @@ class EVShieldBank(EVShieldI2C):
             self.helper(self.writeRegisters, which_motors, SH_SETPT_M1, SH_SETPT_M2, struct.pack('I', encoder) + bytes([speed%256, duration, 0, control]))
     
     def motorIsTimeDone(self, which_motors):
-        # because sections of this method were commented out (and there are no else blocks) it always returns 0
-        return 0
         if which_motors == SH_Motor_Both:
-            s1 = motorGetStatusByte(SH_Motor_1)
-            s2 = motorGetStatusByte(SH_Motor_2)
-            if s1 & SH_STATUS_TIME == 0 and s2 & SH_STATUS_TIME == 0:
-                # if stall bit was on there was an error
-                #if s1 & SH_STATUS_STALL != 0 ors2 & SH_STATUS_STALL != 0:
-                #    return SH_STATUS_STALL
-                #else:
-                    return 0
-        else:
-            s1 = motorGetStatusByte(which_motors)
-            if s1 & SH_STATUS_TIME == 0:
-                #if s1 & SH_STATUS_STALL != 0:
-                #    return SH_STATUS_STALL
-                #else:
-                    return 0
+            return self.motorGetStatusByte(SH_Motor_1) & SH_STATUS_TIME == 0 \
+               and self.motorGetStatusByte(SH_Motor_2) & SH_STATUS_TIME == 0
+        else: 
+            return self.motorGetStatusByte(which_motors) & SH_STATUS_TIME == 0
     
     def motorWaitUntilTimeDone(self, which_motors):
         pyb.delay(50) # this delay is required for the status byte to be available for reading.
-        while motorIsTimeDone(which_motors) & SH_STATUS_TIME != 0:
+        while not self.motorIsTimeDone(which_motors):
             pyb.delay(50)
     
     def motorIsTachoDone(self, which_motors):
-        # because sections of this method were commented out (and there are no else blocks) it always returns 0
-        return 0
         if which_motors == SH_Motor_Both:
-            s1 = motorGetStatusByte(SH_Motor_1)
-            s2 = motorGetStatusByte(SH_Motor_2)
-            if s1 & SH_STATUS_TACHO == 0 and s2 & SH_STATUS_TACHO == 0:
-                # if stall bit was on there was an error
-                #if s1 & SH_STATUS_STALL != 0 ors2 & SH_STATUS_STALL != 0:
-                #    return SH_STATUS_STALL
-                #else:
-                    return 0
-        else:
-            s1 = motorGetStatusByte(which_motors)
-            if s1 & SH_STATUS_TACHO == 0:
-                #if s1 & SH_STATUS_STALL != 0:
-                #    return SH_STATUS_STALL
-                #else:
-                    return 0
+            return self.motorGetStatusByte(SH_Motor_1) & SH_STATUS_TACHO == 0 \
+               and self.motorGetStatusByte(SH_Motor_2) & SH_STATUS_TACHO == 0
+        else: 
+            return self.motorGetStatusByte(which_motors) & SH_STATUS_TACHO == 0
     
     def motorWaitUntilTachoDone(self, which_motors):
         pyb.delay(50) # this delay is required for the status byte to be available for reading.
-        while self.motorIsTachoDone(which_motors) & SH_STATUS_TACHO != 0:
+        while not self.motorIsTachoDone(which_motors):
             pyb.delay(50)
     
     def motorRunUnlimited(self, which_motors, direction, speed):
