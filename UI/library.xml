@@ -302,8 +302,7 @@
     <field name="INLINE">AUTO</field>
     <field name="CONNECTIONS">BOTH</field>
     <statement name="INPUTS">
-      <block type="input_value" id="@c)V~@wvM/cOLPPMh3Vv">
-        <field name="INPUTNAME">SPEED</field>
+      <block type="input_dummy" id="0Q1`H8)kaM}.;!TF60_v">
         <field name="ALIGN">LEFT</field>
         <statement name="FIELDS">
           <block type="field_static" id="iwgW}sb$vU#sx$3JSYS~">
@@ -323,16 +322,21 @@
                 <next>
                   <block type="field_static" id="A+BI@UMhhZbxgi8JwBe3">
                     <field name="TEXT">to</field>
+                    <next>
+                      <block type="field_number" id="ki;##ZGev_~mF0=7,ZZU">
+                        <field name="VALUE">0</field>
+                        <field name="FIELDNAME">SPEED</field>
+                        <field name="MIN">-100</field>
+                        <field name="MAX">100</field>
+                        <field name="PRECISION">1</field>
+                      </block>
+                    </next>
                   </block>
                 </next>
               </block>
             </next>
           </block>
         </statement>
-        <value name="TYPE">
-          <shadow type="type_null" id="W~NEgeH3@Hu0pxpd?TIP"></shadow>
-          <block type="type_number" id="EWlMh0W)5j9~KOBvB@ik"></block>
-        </value>
       </block>
     </statement>
     <value name="TOOLTIP">

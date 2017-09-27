@@ -28,15 +28,17 @@ Blockly.defineBlocksWithJsonArray([
       ]
     },
     {
-      "type": "input_value",
+      "type": "field_number",
       "name": "SPEED",
-      "check": "Number"
+      "value": 0,
+      "min": -100,
+      "max": 100,
+      "precision": 1
     }
   ],
   "previousStatement": null,
   "nextStatement": null,
-  "colour": 240,
-  "tooltip": "Speed must be between -100 and 100"
+  "colour": 240
 },
 {
   "type": "motors_getpos",
