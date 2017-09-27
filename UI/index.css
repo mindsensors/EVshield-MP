@@ -1,6 +1,7 @@
 body {
     background-color: #fff;
     font-family: sans-serif;
+    overflow: hidden; /* hide scrollbars */
 }
 h1 {
     font-weight: normal;
