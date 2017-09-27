@@ -62,9 +62,6 @@ class EVShieldBank(EVShieldI2C):
     def motorGetEncoderPosition(self, which_motor):
         return self.helper(self.readLong, which_motor, SH_POSITION_M1, SH_POSITION_M2)
     
-    def motorGetStatusByte(self, which_motor):
-        return self.helper(self.readByte, which_motor, SH_STATUS_M1, SH_STATUS_M2)
-    
     def motorGetTasksRunningByte(self, which_motor):
         return self.helper(self.readByte, which_motor, SH_TASKS_M1, SH_TASKS_M2)
     
@@ -110,12 +107,15 @@ class EVShieldBank(EVShieldI2C):
         else: # Or, just issue the command for one motor
             self.helper(self.writeRegisters, which_motors, SH_SETPT_M1, SH_SETPT_M2, struct.pack('I', encoder) + bytes([speed%256, duration, 0, control]))
     
+    def motorCheckStatusBit(self, which_motor, bit):
+        return self.helper(self.readByte, which_motor, SH_STATUS_M1, SH_STATUS_M2) & bit == 0
+    
     def motorIsTimeDone(self, which_motors):
         if which_motors == SH_Motor_Both:
-            return self.motorGetStatusByte(SH_Motor_1) & SH_STATUS_TIME == 0 \
-               and self.motorGetStatusByte(SH_Motor_2) & SH_STATUS_TIME == 0
+            return self.motorCheckStatusBit(SH_Motor_1, SH_STATUS_TIME) \
+               and self.motorCheckStatusBit(SH_Motor_2, SH_STATUS_TIME)
         else: 
-            return self.motorGetStatusByte(which_motors) & SH_STATUS_TIME == 0
+            return self.motorCheckStatusBit(which_motors, SH_STATUS_TIME)
     
     def motorWaitUntilTimeDone(self, which_motors):
         pyb.delay(50) # this delay is required for the status byte to be available for reading.
@@ -124,10 +124,10 @@ class EVShieldBank(EVShieldI2C):
     
     def motorIsTachoDone(self, which_motors):
         if which_motors == SH_Motor_Both:
-            return self.motorGetStatusByte(SH_Motor_1) & SH_STATUS_TACHO == 0 \
-               and self.motorGetStatusByte(SH_Motor_2) & SH_STATUS_TACHO == 0
+            return self.motorCheckStatusBit(SH_Motor_1, SH_STATUS_TACHO) \
+               and self.motorCheckStatusBit(SH_Motor_2, SH_STATUS_TACHO)
         else: 
-            return self.motorGetStatusByte(which_motors) & SH_STATUS_TACHO == 0
+            return self.motorCheckStatusBit(which_motors, SH_STATUS_TACHO)
     
     def motorWaitUntilTachoDone(self, which_motors):
         pyb.delay(50) # this delay is required for the status byte to be available for reading.
