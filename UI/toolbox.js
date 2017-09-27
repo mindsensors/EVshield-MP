@@ -1,7 +1,104 @@
 Blockly.defineBlocksWithJsonArray([
 
 /* MOTORS */
-
+{
+  "type": "motors_setspeed",
+  "message0": "set speed of %1 to %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "MOTOR",
+      "options": [
+        [
+          "BAM1",
+          "BAM1"
+        ],
+        [
+          "BAM2",
+          "BAM2"
+        ],
+        [
+          "BBM1",
+          "BBM1"
+        ],
+        [
+          "BBM2",
+          "BBM2"
+        ]
+      ]
+    },
+    {
+      "type": "input_value",
+      "name": "SPEED",
+      "check": "Number"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 240,
+  "tooltip": "Speed must be between -100 and 100"
+},
+{
+  "type": "motors_getpos",
+  "message0": "get position of %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "MOTOR",
+      "options": [
+        [
+          "BAM1",
+          "BAM1"
+        ],
+        [
+          "BAM2",
+          "BAM2"
+        ],
+        [
+          "BBM1",
+          "BBM1"
+        ],
+        [
+          "BBM2",
+          "BBM2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 240
+},
+{
+  "type": "motors_resetpos",
+  "message0": "reset position of %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "MOTOR",
+      "options": [
+        [
+          "BAM1",
+          "BAM1"
+        ],
+        [
+          "BAM2",
+          "BAM2"
+        ],
+        [
+          "BBM1",
+          "BBM1"
+        ],
+        [
+          "BBM2",
+          "BBM2"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 240
+},
 
 /* SENSORS */
 
