@@ -396,7 +396,18 @@
           </value>
         </block>
       </category>
-      <category name="Buttons" colour="200"></category>
+      <category name="Buttons" colour="200">
+        <block type="buttons_get">
+          <field name="WHICH">BTN_GO</field>
+        </block>
+        <block type="buttons_wait">
+          <field name="WHICH">BTN_GO</field>
+          <field name="PATTERN">1</field>
+        </block>
+        <block type="buttons_count">
+          <field name="WHICH">BTN_GO</field>
+        </block>
+      </category>
       <category name="System" colour="5">
         <block type="system_sleep">
           <value name="TIME">

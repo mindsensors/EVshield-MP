@@ -113,4 +113,187 @@
         <field name="HUE">140</field>
       </block>
     </value>
+  </block><block type="factory_base" id=";mhI2!!I!k;K3GnBj|x#" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">buttons_get</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id=":GU@Y2C!2$k5~{d6%kc0">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="x!P8[gN:v_`ffVBq=c/^">
+            <field name="TEXT">button</field>
+            <next>
+              <block type="field_dropdown" id="lq8Uxhnb_60FECCZ;OxH">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">WHICH</field>
+                <field name="USER0">GO</field>
+                <field name="CPU0">BTN_GO</field>
+                <field name="USER1">left</field>
+                <field name="CPU1">BTN_LEFT</field>
+                <field name="USER2">right</field>
+                <field name="CPU2">BTN_RIGHT</field>
+                <next>
+                  <block type="field_static" id="$4R7xZA4%Qe=D([!@dPE">
+                    <field name="TEXT">is pressed</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="*[lVW:x3NR#nK,DLT,U{" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="ZWCsgl|S]tq,Pf.q(kPm" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="fGBtOYSZG{$AMeTF5Rje"></shadow>
+      <block type="type_boolean" id="zrB2p)ba4]]_ReAd}ixL"></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="?VNqC4}7BZ2e.?Gwrzu2">
+        <mutation colour="#5b8ca5"></mutation>
+        <field name="HUE">200</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id=";mhI2!!I!k;K3GnBj|x#" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">buttons_wait</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id=":GU@Y2C!2$k5~{d6%kc0">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="x!P8[gN:v_`ffVBq=c/^">
+            <field name="TEXT">wait for button</field>
+            <next>
+              <block type="field_dropdown" id="lq8Uxhnb_60FECCZ;OxH">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">WHICH</field>
+                <field name="USER0">GO</field>
+                <field name="CPU0">BTN_GO</field>
+                <field name="USER1">left</field>
+                <field name="CPU1">BTN_LEFT</field>
+                <field name="USER2">right</field>
+                <field name="CPU2">BTN_RIGHT</field>
+                <next>
+                  <block type="field_static" id="$4R7xZA4%Qe=D([!@dPE">
+                    <field name="TEXT">to be pressed</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="input_dummy" id="YG][_D^!m=aF37Ls0qa@">
+            <field name="ALIGN">LEFT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="qw)m)x7LQ,Fz6XeE|2Of">
+                <field name="TEXT">with LED</field>
+                <next>
+                  <block type="field_dropdown" id="LQ9R`ER7^`YmAm;J{C3G">
+                    <mutation options="[&quot;text&quot;,&quot;text&quot;]"></mutation>
+                    <field name="FIELDNAME">PATTERN</field>
+                    <field name="USER0">breathing (fade)</field>
+                    <field name="CPU0">1</field>
+                    <field name="USER1">heartbeat</field>
+                    <field name="CPU1">2</field>
+                    <next>
+                      <block type="field_static" id="ou4b/8uxG~q2F){K%3@T">
+                        <field name="TEXT">pattern</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="*[lVW:x3NR#nK,DLT,U{" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="ZWCsgl|S]tq,Pf.q(kPm" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="_c-UH])SVvlCvb14_EY/"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="K82x}n8|JeppB8h~@S]F"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="?VNqC4}7BZ2e.?Gwrzu2">
+        <mutation colour="#5b8ca5"></mutation>
+        <field name="HUE">200</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id=";mhI2!!I!k;K3GnBj|x#" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">buttons_count</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id=":GU@Y2C!2$k5~{d6%kc0">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="x!P8[gN:v_`ffVBq=c/^">
+            <field name="TEXT">count times button</field>
+            <next>
+              <block type="field_dropdown" id="lq8Uxhnb_60FECCZ;OxH">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">WHICH</field>
+                <field name="USER0">GO</field>
+                <field name="CPU0">BTN_GO</field>
+                <field name="USER1">left</field>
+                <field name="CPU1">BTN_LEFT</field>
+                <field name="USER2">right</field>
+                <field name="CPU2">BTN_RIGHT</field>
+                <next>
+                  <block type="field_static" id="$4R7xZA4%Qe=D([!@dPE">
+                    <field name="TEXT">has been pressed</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="*[lVW:x3NR#nK,DLT,U{" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="ZWCsgl|S]tq,Pf.q(kPm" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="Z9_^gL,baokfiY`2]W!@"></shadow>
+      <block type="type_number" id="?;38bI=UqrK*?VNlU25D"></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="?VNqC4}7BZ2e.?Gwrzu2">
+        <mutation colour="#5b8ca5"></mutation>
+        <field name="HUE">200</field>
+      </block>
+    </value>
   </block></xml>
