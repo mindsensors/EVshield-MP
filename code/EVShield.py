@@ -14,7 +14,7 @@ class EVShieldBank(EVShieldI2C):
         return self.evshieldGetBatteryVoltage()
     
     def EVShieldIssueCommand(self, command):
-        self.writeByte(SH_COMMAND, command)
+        self.writeByte(SH_COMMAND, ord(command))
     
     def ledSetRGB(self, red = 0, green = 0, blue = 0):
         self.writeRegisters(SH_RGB_LED, bytes([int(red),int(green),int(blue)]))
@@ -81,16 +81,16 @@ class EVShieldBank(EVShieldI2C):
         self.writeByte(SH_TOLERANCE, tolerance)
     
     def motorReset(self):
-        self.EVShieldIssueCommand(ord('R'))
+        self.EVShieldIssueCommand('R')
     
     def motorStartBothInSync(self):
-        self.EVShieldIssueCommand(ord('S'))
+        self.EVShieldIssueCommand('S')
     
     def motorResetEncoder(self, which_motor):
         if which_motor == SH_Motor_1 or which_motor == SH_Motor_Both:
-            self.EVShieldIssueCommand(ord('r'))
+            self.EVShieldIssueCommand('r')
         if which_motor == SH_Motor_2 or which_motor == SH_Motor_Both:
-            self.EVShieldIssueCommand(ord('s'))
+            self.EVShieldIssueCommand('s')
     
     def motorSetSpeedTimeAndControl(self, which_motors, speed, duration, control):
         if which_motors == SH_Motor_Both:
