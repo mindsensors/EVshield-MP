@@ -6,7 +6,7 @@ Blockly.defineBlocksWithJsonArray([
 /* SENSORS */
 
 
-/* LED */
+/* EVShield */
 {
   "type": "led_set",
   "message0": "set LED %1 to color %2",
@@ -43,8 +43,6 @@ Blockly.defineBlocksWithJsonArray([
   "nextStatement": null,
   "colour": 140
 },
-
-/* BUTTONS */
 {
   "type": "buttons_get",
   "message0": "button %1 is pressed",
@@ -141,8 +139,6 @@ Blockly.defineBlocksWithJsonArray([
   "output": "Number",
   "colour": 200
 },
-
-/* SYSTEM */
 {
   "type": "system_sleep",
   "message0": "wait for %1 seconds",
@@ -178,7 +174,6 @@ Blockly.Python['led_set'] = function(block) {
   }
   return `evshield.${method}(${red}, ${green}, ${blue})\n`;
 };
-
 Blockly.Python['buttons_get'] = function(block) {
   var which = block.getFieldValue('WHICH');
   Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
@@ -195,7 +190,6 @@ Blockly.Python['buttons_count'] = function(block) {
   Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
   return [`evshield.getKeyPressCount(${which})`, Blockly.Python.ORDER_ATOMIC];
 };
-
 Blockly.Python['system_sleep'] = function(block) {
   var time = Blockly.Python.valueToCode(block, 'TIME', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_.import_time = 'import time';
