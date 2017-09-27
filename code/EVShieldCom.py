@@ -21,7 +21,7 @@ class EVShieldI2C():
         return struct.unpack('H', self.i2c.mem_read(2, self.i2c_address, register, timeout = timeout or self.timeout))[0]
     
     def readLong(self, register, timeout = None):
-        return struct.unpack('I', self.i2c.mem_read(4, self.i2c_address, register, timeout = timeout or self.timeout))[0]
+        return struct.unpack('l', self.i2c.mem_read(4, self.i2c_address, register, timeout = timeout or self.timeout))[0]
     
     def readString(self, register, length, timeout = None):
         return self.i2c.mem_read(length, self.i2c_address, register, timeout = timeout or self.timeout).decode("utf-8")
