@@ -93,7 +93,7 @@ class EVShieldBank(EVShieldI2C):
             self.motorSetSpeedTimeAndControl(SH_Motor_2, speed, duration, control)
             self.motorStartBothInSync()
         else:
-            self.helper(self.writeRegisters, which_motors, SH_SPEED_M1, SH_SPEED_M2, bytes([speed%256, duration, 0, control]))
+            self.helper(self.writeRegisters, which_motors, SH_SPEED_M1, SH_SPEED_M2, bytes([int(speed%256), int(duration), 0, control]))
     
     def motorSetEncoderSpeedTimeAndControl(self, which_motors, encoder, speed, duration, control):
         if which_motors == SH_Motor_Both: # The motor control registers are back to back, and both can be written in one command
@@ -102,7 +102,7 @@ class EVShieldBank(EVShieldI2C):
             self.motorSetEncoderSpeedTimeAndControl(SH_Motor_2, encoder, speed, duration, control)
             self.motorStartBothInSync()
         else: # Or, just issue the command for one motor
-            self.helper(self.writeRegisters, which_motors, SH_SETPT_M1, SH_SETPT_M2, struct.pack('I', encoder) + bytes([speed%256, duration, 0, control]))
+            self.helper(self.writeRegisters, which_motors, SH_SETPT_M1, SH_SETPT_M2, struct.pack('I', int(encoder)) + bytes([int(speed%256), duration, 0, control]))
     
     def motorRunUnlimited(self, which_motors, direction, speed):
         control = SH_CONTROL_SPEED | SH_CONTROL_GO
