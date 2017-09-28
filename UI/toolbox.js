@@ -387,7 +387,7 @@ Blockly.defineBlocksWithJsonArray([
 /* SENSORS */
 
 
-/* EVShield */
+/* EVSHIELD */
 {
   "type": "led_set",
   "message0": "set LED %1 to color %2",
@@ -533,6 +533,12 @@ Blockly.defineBlocksWithJsonArray([
   "previousStatement": null,
   "nextStatement": null,
   "colour": 5
+},
+{
+  "type": "system_voltage",
+  "message0": "battery voltage",
+  "output": "Number",
+  "colour": 5
 }
 
 ]); // end defineBlocksWithJsonArray
@@ -649,4 +655,8 @@ Blockly.Python['system_sleep'] = function(block) {
   var time = Blockly.Python.valueToCode(block, 'TIME', Blockly.Python.ORDER_ATOMIC);
   Blockly.Python.definitions_.import_time = 'import time';
   return `time.sleep(${time})\n`;
+};
+Blockly.Python['system_voltage'] = function(block) {
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  return [`evshield.bank_a.evshieldGetBatteryVoltage()/1000`, Blockly.Python.ORDER_NONE];
 };

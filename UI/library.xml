@@ -920,4 +920,39 @@
         <field name="HUE">240</field>
       </block>
     </value>
+  </block><block type="factory_base" id="9jtthfGYxcgh)e`=A}6b" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">system_voltage</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="Ts+~771u6?aic.9!3CYb">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="tlPa#*caHnz;9]v[/k]b">
+            <field name="TEXT">battery voltage</field>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="LItV?A|6(?31IUWeXn6n" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="z?i#wDMOma`$1A%C]8p;" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="f(c?PWODq/vd8+qF2l7w"></shadow>
+      <block type="type_number" id="3cD?p|VwhOJwEt=gB{-!"></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="=41SeVydmm2d`Y^#|0^R">
+        <mutation colour="#a5615b"></mutation>
+        <field name="HUE">5</field>
+      </block>
+    </value>
   </block></xml>
