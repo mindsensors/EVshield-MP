@@ -101,6 +101,100 @@ Blockly.defineBlocksWithJsonArray([
   "nextStatement": null,
   "colour": 240
 },
+{
+  "type": "motors_brake",
+  "message0": "brake %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "MOTOR",
+      "options": [
+        [
+          "BAM1",
+          "BAM1"
+        ],
+        [
+          "BAM2",
+          "BAM2"
+        ],
+        [
+          "BBM1",
+          "BBM1"
+        ],
+        [
+          "BBM2",
+          "BBM2"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 240
+},
+{
+  "type": "motors_float",
+  "message0": "float %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "MOTOR",
+      "options": [
+        [
+          "BAM1",
+          "BAM1"
+        ],
+        [
+          "BAM2",
+          "BAM2"
+        ],
+        [
+          "BBM1",
+          "BBM1"
+        ],
+        [
+          "BBM2",
+          "BBM2"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 240
+},
+{
+  "type": "motors_hold",
+  "message0": "brake and hold %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "MOTOR",
+      "options": [
+        [
+          "BAM1",
+          "BAM1"
+        ],
+        [
+          "BAM2",
+          "BAM2"
+        ],
+        [
+          "BBM1",
+          "BBM1"
+        ],
+        [
+          "BBM2",
+          "BBM2"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 240
+},
+
 
 /* SENSORS */
 
@@ -272,6 +366,21 @@ Blockly.Python['motors_resetpos'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
   Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
   return `evshield.bank_${motor[1].toLowerCase()}.motorResetEncoder(SH_Motor_${motor[3]})\n`;
+};
+Blockly.Python['motors_brake'] = function(block) {
+  var motor = block.getFieldValue('MOTOR');
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor[3]}, SH_Next_Action_Brake)\n`;
+};
+Blockly.Python['motors_float'] = function(block) {
+  var motor = block.getFieldValue('MOTOR');
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor[3]}, SH_Next_Action_Float)\n`;
+};
+Blockly.Python['motors_hold'] = function(block) {
+  var motor = block.getFieldValue('MOTOR');
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor[3]}, SH_Next_Action_BrakeHold)\n`;
 };
 
 Blockly.Python['led_set'] = function(block) {
