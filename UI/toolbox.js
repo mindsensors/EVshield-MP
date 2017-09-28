@@ -385,7 +385,36 @@ Blockly.defineBlocksWithJsonArray([
 },
 
 /* SENSORS */
-
+{
+  "type": "sensors_nxttouch",
+  "message0": "NXT touch sensor on port %1 is pressed",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Boolean",
+  "colour": 60
+},
 
 /* EVSHIELD */
 {
@@ -616,7 +645,13 @@ Blockly.Python['motors_rotations'] = function(block) {
                  next_action=${next_action})\n`;
 };
 
-
+Blockly.Python['sensors_nxttouch'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.import_NXTTouch = 'from EVShieldSensors import NXTTouch';
+  Blockly.Python.definitions_[`nxttouch${port}`] = `nxttouch${port} = NXTTouch(evshield, SH_${port})`;
+  return [`nxttouch${port}.isPressed()`, Blockly.Python.ORDER_ATOMIC];
+};
 
 Blockly.Python['led_set'] = function(block) {
   var which = block.getFieldValue('WHICH');

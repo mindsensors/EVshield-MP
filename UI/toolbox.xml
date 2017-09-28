@@ -407,7 +407,11 @@
       <field name="MOTOR">BAM1</field>
     </block>
   </category>
-  <category name="Sensors" colour="#a5a55b"></category>
+  <category name="Sensors" colour="#a5a55b">
+    <block type="sensors_nxttouch">
+      <field name="PORT">BAS1</field>
+    </block>
+  </category>
   <category name="EVShield" colour="#a56d5b">
     <block type="led_set">
       <field name="WHICH">A+B</field>
