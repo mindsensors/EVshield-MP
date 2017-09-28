@@ -411,6 +411,13 @@
     <block type="sensors_nxttouch">
       <field name="PORT">BAS1</field>
     </block>
+    <block type="sensors_nxtlight">
+      <field name="PORT">BAS1</field>
+    </block>
+    <block type="sensors_nxtlight_setmode">
+      <field name="PORT">BAS1</field>
+      <field name="MODE">setReflected</field>
+    </block>
   </category>
   <category name="EVShield" colour="#a56d5b">
     <block type="led_set">
