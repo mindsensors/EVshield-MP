@@ -132,13 +132,13 @@ class EVShieldBank(EVShieldI2C):
             while not self.motorCheckStatusBit(which_motors, SH_STATUS_TACHO):
                 pyb.delay(50)
     
-    def motorRunSeconds(self, which_motors, direction, speed, duration, wait_for_completion=SH_Completion_Wait_For, next_action=SH_Next_Action_Float):
+    def motorRunSeconds(self, which_motors, direction, speed, seconds, wait_for_completion=SH_Completion_Wait_For, next_action=SH_Next_Action_Float):
         control = SH_CONTROL_SPEED | SH_CONTROL_TIME | SH_CONTROL_GO
         if next_action == SH_Next_Action_Brake: control |= SH_CONTROL_BRK
         elif (next_action == SH_Next_Action_BrakeHold): control |= SH_CONTROL_BRK | SH_CONTROL_ON
         
         if direction == SH_Direction_Reverse: speed = -speed
-        self.motorSetSpeedTimeAndControl(which_motors, speed, duration, ctrl)
+        self.motorSetSpeedTimeAndControl(which_motors, speed, seconds, ctrl)
         if wait_for_completion == SH_Completion_Wait_For:
             self.motorWaitUntilTimeDone(which_motors)
     

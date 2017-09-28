@@ -579,10 +579,9 @@ Blockly.Python['motors_seconds'] = function(block) {
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
   return `evshield.bank_${motor[1].toLowerCase()}.motorRunSeconds(SH_Motor_${motor[3]},
                  ${direction},
-                 ${Math.abs(speed)||0},
-                 ${seconds},
-                 SH_Completion_Wait_For,
-                 ${next_action})\n`;
+                 speed=${Math.abs(speed)||0},
+                 seconds=${seconds},
+                 next_action=${next_action})\n`;
 };
 Blockly.Python['motors_degrees'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
@@ -593,10 +592,9 @@ Blockly.Python['motors_degrees'] = function(block) {
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
   return `evshield.bank_${motor[1].toLowerCase()}.motorRunDegrees(SH_Motor_${motor[3]},
                  ${direction},
-                 ${Math.abs(speed)||0},
-                 ${degrees},
-                 SH_Completion_Wait_For,
-                 ${next_action})\n`;
+                 speed=${Math.abs(speed)||0},
+                 degrees=${degrees},
+                 next_action=${next_action})\n`;
 };
 Blockly.Python['motors_rotations'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
@@ -607,10 +605,9 @@ Blockly.Python['motors_rotations'] = function(block) {
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
   return `evshield.bank_${motor[1].toLowerCase()}.motorRunRotations(SH_Motor_${motor[3]},
                  ${direction},
-                 ${Math.abs(speed)||0},
-                 ${rotations},
-                 SH_Completion_Wait_For,
-                 ${next_action})\n`;
+                 speed=${Math.abs(speed)||0},
+                 rotations=${rotations},
+                 next_action=${next_action})\n`;
 };
 
 
