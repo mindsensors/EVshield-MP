@@ -194,7 +194,195 @@ Blockly.defineBlocksWithJsonArray([
   "nextStatement": null,
   "colour": 240
 },
-
+{
+  "type": "motors_seconds",
+  "message0": "run %1 at speed %2 for %3 seconds and %4 when done",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "MOTOR",
+      "options": [
+        [
+          "BAM1",
+          "BAM1"
+        ],
+        [
+          "BAM2",
+          "BAM2"
+        ],
+        [
+          "BBM1",
+          "BBM1"
+        ],
+        [
+          "BBM2",
+          "BBM2"
+        ]
+      ]
+    },
+    {
+      "type": "field_number",
+      "name": "SPEED",
+      "value": 0,
+      "min": -100,
+      "max": 100,
+      "precision": 1
+    },
+    {
+      "type": "input_value",
+      "name": "SECONDS",
+      "check": "Number"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "NEXT_ACTION",
+      "options": [
+        [
+          "brake",
+          "SH_Next_Action_Brake"
+        ],
+        [
+          "float",
+          "SH_Next_Action_Float"
+        ],
+        [
+          "brake and hold",
+          "SH_Next_Action_BrakeHold"
+        ]
+      ]
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 240
+},
+{
+  "type": "motors_degrees",
+  "message0": "run %1 at speed %2 for %3 degrees and %4 when done",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "MOTOR",
+      "options": [
+        [
+          "BAM1",
+          "BAM1"
+        ],
+        [
+          "BAM2",
+          "BAM2"
+        ],
+        [
+          "BBM1",
+          "BBM1"
+        ],
+        [
+          "BBM2",
+          "BBM2"
+        ]
+      ]
+    },
+    {
+      "type": "field_number",
+      "name": "SPEED",
+      "value": 0,
+      "min": -100,
+      "max": 100,
+      "precision": 1
+    },
+    {
+      "type": "input_value",
+      "name": "DEGREES",
+      "check": "Number"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "NEXT_ACTION",
+      "options": [
+        [
+          "brake",
+          "SH_Next_Action_Brake"
+        ],
+        [
+          "float",
+          "SH_Next_Action_Float"
+        ],
+        [
+          "brake and hold",
+          "SH_Next_Action_BrakeHold"
+        ]
+      ]
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 240
+},
+{
+  "type": "motors_rotations",
+  "message0": "run %1 at speed %2 for %3 rotations and %4 when done",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "MOTOR",
+      "options": [
+        [
+          "BAM1",
+          "BAM1"
+        ],
+        [
+          "BAM2",
+          "BAM2"
+        ],
+        [
+          "BBM1",
+          "BBM1"
+        ],
+        [
+          "BBM2",
+          "BBM2"
+        ]
+      ]
+    },
+    {
+      "type": "field_number",
+      "name": "SPEED",
+      "value": 0,
+      "min": -100,
+      "max": 100,
+      "precision": 1
+    },
+    {
+      "type": "input_value",
+      "name": "ROTATIONS",
+      "check": "Number"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "NEXT_ACTION",
+      "options": [
+        [
+          "brake",
+          "SH_Next_Action_Brake"
+        ],
+        [
+          "float",
+          "SH_Next_Action_Float"
+        ],
+        [
+          "brake and hold",
+          "SH_Next_Action_BrakeHold"
+        ]
+      ]
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 240
+},
 
 /* SENSORS */
 
@@ -382,6 +570,50 @@ Blockly.Python['motors_hold'] = function(block) {
   Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
   return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor[3]}, SH_Next_Action_BrakeHold)\n`;
 };
+Blockly.Python['motors_seconds'] = function(block) {
+  var motor = block.getFieldValue('MOTOR');
+  var speed = block.getFieldValue('SPEED');
+  var seconds = Blockly.Python.valueToCode(block, 'SECONDS', Blockly.Python.ORDER_ATOMIC);
+  var next_action = block.getFieldValue('NEXT_ACTION');
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
+  return `evshield.bank_${motor[1].toLowerCase()}.motorRunSeconds(SH_Motor_${motor[3]},
+                 ${direction},
+                 ${Math.abs(speed)||0},
+                 ${seconds},
+                 SH_Completion_Wait_For,
+                 ${next_action})\n`;
+};
+Blockly.Python['motors_degrees'] = function(block) {
+  var motor = block.getFieldValue('MOTOR');
+  var speed = block.getFieldValue('SPEED');
+  var degrees = Blockly.Python.valueToCode(block, 'DEGREES', Blockly.Python.ORDER_ATOMIC);
+  var next_action = block.getFieldValue('NEXT_ACTION');
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
+  return `evshield.bank_${motor[1].toLowerCase()}.motorRunDegrees(SH_Motor_${motor[3]},
+                 ${direction},
+                 ${Math.abs(speed)||0},
+                 ${degrees},
+                 SH_Completion_Wait_For,
+                 ${next_action})\n`;
+};
+Blockly.Python['motors_rotations'] = function(block) {
+  var motor = block.getFieldValue('MOTOR');
+  var speed = block.getFieldValue('SPEED');
+  var rotations = Blockly.Python.valueToCode(block, 'ROTATIONS', Blockly.Python.ORDER_ATOMIC);
+  var next_action = block.getFieldValue('NEXT_ACTION');
+  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
+  return `evshield.bank_${motor[1].toLowerCase()}.motorRunRotations(SH_Motor_${motor[3]},
+                 ${direction},
+                 ${Math.abs(speed)||0},
+                 ${rotations},
+                 SH_Completion_Wait_For,
+                 ${next_action})\n`;
+};
+
+
 
 Blockly.Python['led_set'] = function(block) {
   var which = block.getFieldValue('WHICH');

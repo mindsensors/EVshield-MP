@@ -359,13 +359,37 @@
   <category name="Motors" colour="#5b5ba5">
     <block type="motors_setspeed">
       <field name="MOTOR">BAM1</field>
-      <field name="SPEED">0</field>
+      <field name="SPEED">75</field>
     </block>
-    <block type="motors_getpos">
+    <block type="motors_seconds">
       <field name="MOTOR">BAM1</field>
+      <field name="SPEED">75</field>
+      <field name="NEXT_ACTION">SH_Next_Action_Brake</field>
+      <value name="SECONDS">
+        <shadow type="math_number">
+          <field name="NUM">3</field>
+        </shadow>
+      </value>
     </block>
-    <block type="motors_resetpos">
+    <block type="motors_degrees">
       <field name="MOTOR">BAM1</field>
+      <field name="SPEED">75</field>
+      <field name="NEXT_ACTION">SH_Next_Action_Brake</field>
+      <value name="DEGREES">
+        <shadow type="math_number">
+          <field name="NUM">180</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="motors_rotations">
+      <field name="MOTOR">BAM1</field>
+      <field name="SPEED">75</field>
+      <field name="NEXT_ACTION">SH_Next_Action_Brake</field>
+      <value name="ROTATIONS">
+        <shadow type="math_number">
+          <field name="NUM">2</field>
+        </shadow>
+      </value>
     </block>
     <block type="motors_brake">
       <field name="MOTOR">BAM1</field>
@@ -374,6 +398,12 @@
       <field name="MOTOR">BAM1</field>
     </block>
     <block type="motors_hold">
+      <field name="MOTOR">BAM1</field>
+    </block>
+    <block type="motors_getpos">
+      <field name="MOTOR">BAM1</field>
+    </block>
+    <block type="motors_resetpos">
       <field name="MOTOR">BAM1</field>
     </block>
   </category>
