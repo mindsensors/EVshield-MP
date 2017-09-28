@@ -333,30 +333,6 @@ class NXTServo(EVShieldI2C):
     def runServo(self, number, position, speed):
         self.setPosition(number, position)
         self.setSpeed(number, speed)
-	
-	/** stop the onboard macro on the NXTServo */
-  bool haltMacro();
-	
-	/** resume the onboard macro on the NXTServo */
-  bool resumeMacro();
-	
-	/** Go to given EEPROM position (This command re-initializes the macro environment) */
-  bool gotoEEPROM(uint8_t position);
-	
-	/** edit the onboard macro */
-  bool editMacro();
-	
-	/** temporarily pause the running macro */
-  bool pauseMacro();
-	
-	/** set the speed of a specified servo */
-  bool setSpeed(uint8_t number, uint8_t speed);
-	
-	/** set the position of a specified servo */
-  bool setPosition(uint8_t number, uint8_t position);
-	
-	/** run the specified to the specified position at the specified speed */
-  void runServo(uint8_t number, uint8_t position, uint8_t speed);
 
 class NXTTouch(EVShieldAnalog):
     def __init__(self, shield, bp):
