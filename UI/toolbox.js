@@ -651,33 +651,33 @@ Blockly.defineBlocksWithJsonArray([
 Blockly.Python['motors_setspeed'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
   var speed = block.getFieldValue('SPEED');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
   return `evshield.bank_${motor[1].toLowerCase()}.motorRunUnlimited(SH_Motor_${motor[3]}, ${direction}, ${Math.abs(speed)||0})\n`;
 };
 Blockly.Python['motors_getpos'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   return [`evshield.bank_${motor[1].toLowerCase()}.motorGetEncoderPosition(SH_Motor_${motor[3]})`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['motors_resetpos'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   return `evshield.bank_${motor[1].toLowerCase()}.motorResetEncoder(SH_Motor_${motor[3]})\n`;
 };
 Blockly.Python['motors_brake'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor[3]}, SH_Next_Action_Brake)\n`;
 };
 Blockly.Python['motors_float'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor[3]}, SH_Next_Action_Float)\n`;
 };
 Blockly.Python['motors_hold'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor[3]}, SH_Next_Action_BrakeHold)\n`;
 };
 Blockly.Python['motors_seconds'] = function(block) {
@@ -685,7 +685,7 @@ Blockly.Python['motors_seconds'] = function(block) {
   var speed = block.getFieldValue('SPEED');
   var seconds = Blockly.Python.valueToCode(block, 'SECONDS', Blockly.Python.ORDER_ATOMIC);
   var next_action = block.getFieldValue('NEXT_ACTION');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
   return `evshield.bank_${motor[1].toLowerCase()}.motorRunSeconds(SH_Motor_${motor[3]},
                  ${direction},
@@ -698,7 +698,7 @@ Blockly.Python['motors_degrees'] = function(block) {
   var speed = block.getFieldValue('SPEED');
   var degrees = Blockly.Python.valueToCode(block, 'DEGREES', Blockly.Python.ORDER_ATOMIC);
   var next_action = block.getFieldValue('NEXT_ACTION');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
   return `evshield.bank_${motor[1].toLowerCase()}.motorRunDegrees(SH_Motor_${motor[3]},
                  ${direction},
@@ -711,7 +711,7 @@ Blockly.Python['motors_rotations'] = function(block) {
   var speed = block.getFieldValue('SPEED');
   var rotations = Blockly.Python.valueToCode(block, 'ROTATIONS', Blockly.Python.ORDER_ATOMIC);
   var next_action = block.getFieldValue('NEXT_ACTION');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
   return `evshield.bank_${motor[1].toLowerCase()}.motorRunRotations(SH_Motor_${motor[3]},
                  ${direction},
@@ -722,14 +722,14 @@ Blockly.Python['motors_rotations'] = function(block) {
 
 Blockly.Python['sensors_nxttouch'] = function(block) {
   var port = block.getFieldValue('PORT');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   Blockly.Python.definitions_.import_NXTTouch = 'from EVShieldSensors import NXTTouch';
   Blockly.Python.definitions_[`nxttouch${port}`] = `nxttouch${port} = NXTTouch(evshield, SH_${port})`;
   return [`nxttouch${port}.isPressed()`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_nxtlight'] = function(block) {
   var port = block.getFieldValue('PORT');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   Blockly.Python.definitions_.import_NXTLight = 'from EVShieldSensors import NXTLight';
   Blockly.Python.definitions_[`nxtlight${port}`] = `nxtlight${port} = NXTLight(evshield, SH_${port})`;
   return [`nxtlight${port}.readRaw()`, Blockly.Python.ORDER_ATOMIC];
@@ -737,7 +737,7 @@ Blockly.Python['sensors_nxtlight'] = function(block) {
 Blockly.Python['sensors_nxtlight_setmode'] = function(block) {
   var port = block.getFieldValue('PORT');
   var modeMethod = block.getFieldValue('MODE');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   Blockly.Python.definitions_.import_NXTLight = 'from EVShieldSensors import NXTLight';
   Blockly.Python.definitions_[`nxtlight${port}`] = `nxtlight${port} = NXTLight(evshield, SH_${port})`;
   return `nxtlight${port}.${modeMethod}()\n`;
@@ -746,7 +746,7 @@ Blockly.Python['sensors_nxtlight_setmode'] = function(block) {
 Blockly.Python['led_set'] = function(block) {
   var which = block.getFieldValue('WHICH');
   var hex_color = Blockly.Python.valueToCode(block, 'COLOR', Blockly.Python.ORDER_ATOMIC);
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var color = /#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})/.exec(hex_color);
   var red   = parseInt(color[1], 16);
   var green = parseInt(color[2], 16);
@@ -762,18 +762,18 @@ Blockly.Python['led_set'] = function(block) {
 };
 Blockly.Python['buttons_get'] = function(block) {
   var which = block.getFieldValue('WHICH');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   return [`evshield.getButtonState(${which})`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['buttons_wait'] = function(block) {
   var which = block.getFieldValue('WHICH');
   var pattern = block.getFieldValue('PATTERN');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   return `evshield.waitForButtonPress(${which}, led_pattern=${pattern})\n`;
 };
 Blockly.Python['buttons_count'] = function(block) {
   var which = block.getFieldValue('WHICH');
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   return [`evshield.getKeyPressCount(${which})`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['system_sleep'] = function(block) {
@@ -782,6 +782,6 @@ Blockly.Python['system_sleep'] = function(block) {
   return `time.sleep(${time})\n`;
 };
 Blockly.Python['system_voltage'] = function(block) {
-  Blockly.Python.definitions_.init_evshield = "from EVShield import EVShield\nevshield = EVShield()";
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   return [`evshield.bank_a.evshieldGetBatteryVoltage()/1000`, Blockly.Python.ORDER_NONE];
 };
