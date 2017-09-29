@@ -18,7 +18,7 @@ class EVShieldI2C():
         return self.i2c.mem_read(1, self.i2c_address, register, timeout = timeout or self.timeout)[0]
     
     def readInteger(self, register, timeout = None):
-        return struct.unpack('H', self.i2c.mem_read(2, self.i2c_address, register, timeout = timeout or self.timeout))[0]
+        return struct.unpack('h', self.i2c.mem_read(2, self.i2c_address, register, timeout = timeout or self.timeout))[0]
     
     def readLong(self, register, timeout = None):
         return struct.unpack('l', self.i2c.mem_read(4, self.i2c_address, register, timeout = timeout or self.timeout))[0]
@@ -30,7 +30,7 @@ class EVShieldI2C():
         self.i2c.mem_write(data, self.i2c_address, register, timeout = timeout or self.timeout)
     
     def writeByte(self, register, dataByte, timeout = None):
-        self.i2c.mem_write(bytes(dataByte), self.i2c_address, register, timeout = timeout or self.timeout)
+        self.i2c.mem_write(bytes([dataByte]), self.i2c_address, register, timeout = timeout or self.timeout)
     
     def writeInteger(self, register, dataInt, timeout = None):
         self.i2c.mem_write(struct.pack('H', dataInt), self.i2c_address, register, timeout = timeout or self.timeout)
