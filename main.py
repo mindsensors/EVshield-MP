@@ -1,7 +1,14 @@
 from EVShieldSensors import AbsoluteIMU
 a = AbsoluteIMU(SH_BBS1)
-print(a.readTilt())
-print(a.readAccelerometer())
-print(a.readCompass())
-print(a.readMagneticField())
-print(a.readGyro())
+
+
+import EVShieldCom
+def c():
+    EVShieldCom.pingTimer.deinit()
+
+
+def b():
+    while True:
+        print(a.readTilt())
+        pyb.delay(100)
+b()

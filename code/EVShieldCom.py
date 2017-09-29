@@ -7,7 +7,7 @@ pingI2C = pyb.I2C(1, pyb.I2C.MASTER)
 def pingMethod(ignored=None):
     try:
         pingI2C.send(0, SH_Bank_A>>1)
-        #print("pinged")
+        print("pinged")
     except: pass
 pingTimer = pyb.Timer(4, freq=4, callback=pingMethod)
 
@@ -15,13 +15,9 @@ class EVShieldI2C():
     
     def reset_ping_timeout(function):
         def function_with_pingtimeoutreset(self, *args, **kwargs):
-            pyb.disable_irq()
             global pingTimer
-            if self.i2c_address in [SH_Bank_A>>1, SH_Bank_B>>1]:
-                pingTimer.counter(0)
-            ret = function(self, *args, **kwargs)
-            pyb.enable_irq()
-            return ret
+            pingTimer.counter(0)
+            return function(self, *args, **kwargs)
         return function_with_pingtimeoutreset
     
     def __init__(self, i2c_address):
