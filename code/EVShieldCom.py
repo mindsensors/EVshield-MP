@@ -29,43 +29,42 @@ class EVShieldI2C():
         self.i2c = pyb.I2C(1)
         self.i2c.init(pyb.I2C.MASTER, baudrate=20000)
         self.i2c_address = i2c_address >> 1
-        self.timeout = 100
     
     @reset_ping_timeout
-    def readRegisters(self, register, length, timeout = None):
-        return self.i2c.mem_read(length, self.i2c_address, register, timeout = timeout or self.timeout)
+    def readRegisters(self, register, length):
+        return self.i2c.mem_read(length, self.i2c_address, register, timeout=10)
     
     @reset_ping_timeout
-    def readByte(self, register, timeout = None):
-        return self.i2c.mem_read(1, self.i2c_address, register, timeout = timeout or self.timeout)[0]
+    def readByte(self, register):
+        return self.i2c.mem_read(1, self.i2c_address, register, timeout=10)[0]
     
     @reset_ping_timeout
-    def readInteger(self, register, timeout = None):
-        return struct.unpack('h', self.i2c.mem_read(2, self.i2c_address, register, timeout = timeout or self.timeout))[0]
+    def readInteger(self, register):
+        return struct.unpack('h', self.i2c.mem_read(2, self.i2c_address, register, timeout=10))[0]
     
     @reset_ping_timeout
-    def readLong(self, register, timeout = None):
-        return struct.unpack('l', self.i2c.mem_read(4, self.i2c_address, register, timeout = timeout or self.timeout))[0]
+    def readLong(self, register):
+        return struct.unpack('l', self.i2c.mem_read(4, self.i2c_address, register, timeout=10))[0]
     
     @reset_ping_timeout
-    def readString(self, register, length, timeout = None):
-        return self.i2c.mem_read(length, self.i2c_address, register, timeout = timeout or self.timeout).decode("utf-8")
+    def readString(self, register, length):
+        return self.i2c.mem_read(length, self.i2c_address, register, timeout=10).decode("utf-8")
     
     @reset_ping_timeout
-    def writeRegisters(self, register, data, timeout = None):
-        self.i2c.mem_write(data, self.i2c_address, register, timeout = timeout or self.timeout)
+    def writeRegisters(self, register, data):
+        self.i2c.mem_write(data, self.i2c_address, register, timeout=10)
     
     @reset_ping_timeout
-    def writeByte(self, register, dataByte, timeout = None):
-        self.i2c.mem_write(bytes([dataByte]), self.i2c_address, register, timeout = timeout or self.timeout)
+    def writeByte(self, register, dataByte):
+        self.i2c.mem_write(bytes([dataByte]), self.i2c_address, register, timeout=10)
     
     @reset_ping_timeout
-    def writeInteger(self, register, dataInt, timeout = None):
-        self.i2c.mem_write(struct.pack('H', dataInt), self.i2c_address, register, timeout = timeout or self.timeout)
+    def writeInteger(self, register, dataInt):
+        self.i2c.mem_write(struct.pack('H', dataInt), self.i2c_address, register, timeout=10)
     
     @reset_ping_timeout
-    def writeLong(self, register, dataLong, timeout = None):
-        self.i2c.mem_write(struct.pack('I', dataLong), self.i2c_address, register, timeout = timeout or self.timeout)
+    def writeLong(self, register, dataLong):
+        self.i2c.mem_write(struct.pack('I', dataLong), self.i2c_address, register, timeout=10)
     
     @reset_ping_timeout
     def checkAddress(self):
@@ -76,12 +75,6 @@ class EVShieldI2C():
     
     def getAddress(self):
         return self.i2c_address
-    
-    def setTimeout(self, timeout):
-        self.timeout = timeout
-    
-    def getTimeout(self):
-        return self.timeout
     
     def getFirmwareVersion(self):
         return self.readString(SH_FIRMWARE_VERSION, 8)
