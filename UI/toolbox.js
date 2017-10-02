@@ -591,6 +591,97 @@ Blockly.defineBlocksWithJsonArray([
   "output": "Number",
   "colour": 60
 },
+{
+  "type": "sensors_ev3touch",
+  "message0": "EV3 touch sensor on port %1 is pressed",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Boolean",
+  "colour": 60
+},
+{
+  "type": "sensors_ev3touch_getbumpcount",
+  "message0": "EV3 touch sensor on port %1 bump count",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
+{
+  "type": "sensors_ev3touch_resetbumpcount",
+  "message0": "reset bump count of EV3 touch sensor on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 60
+},
 
 /* EVSHIELD */
 {
@@ -857,6 +948,21 @@ Blockly.Python['sensors_nxtcolor'] = function(block) {
   var port = block.getFieldValue('PORT');
   sensor_definition(port, 'nxtcolor', 'NXTColor');
   return [`nxtcolor_${port}.${read_method}()\n`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3touch'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'ev3touch', 'EV3Touch');
+  return [`ev3touch_${port}.isPressed()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3touch_getbumpcount'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'ev3touch', 'EV3Touch');
+  return [`ev3touch_${port}.getBumpCount()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3touch_resetbumpcount'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'ev3touch', 'EV3Touch');
+  return `ev3touch_${port}.resetBumpCount()\n`;
 };
 
 Blockly.Python['led_set'] = function(block) {

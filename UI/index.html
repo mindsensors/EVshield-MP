@@ -457,6 +457,16 @@
           <field name="READ_METHOD">readColor</field>
           <field name="PORT">BAS1</field>
         </block>
+        <label text="EV3 Touch Sensor"></label>
+        <block type="sensors_ev3touch">
+          <field name="PORT">BAS1</field>
+        </block>
+        <block type="sensors_ev3touch_getbumpcount">
+          <field name="PORT">BAS1</field>
+        </block>
+        <block type="sensors_ev3touch_resetbumpcount">
+          <field name="PORT">BAS1</field>
+        </block>
       </category>
       <category name="EVShield" colour="5">
         <block type="led_set">
