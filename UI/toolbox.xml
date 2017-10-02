@@ -442,6 +442,15 @@
       <field name="PORT">BAS1</field>
       <field name="MODE">MODE_Color_ReflectedLight</field>
     </block>
+    <block type="sensors_ev3gyro_getref">
+      <field name="PORT">BAS1</field>
+    </block>
+    <block type="sensors_ev3color_setref">
+      <field name="PORT">BAS1</field>
+    </block>
+    <block type="sensors_ev3gyro">
+      <field name="PORT">BAS1</field>
+    </block>
   </category>
   <category name="EVShield" colour="#a56d5b">
     <block type="led_set">

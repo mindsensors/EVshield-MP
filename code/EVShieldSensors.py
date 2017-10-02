@@ -70,7 +70,7 @@ class EV3Gyro(EVShieldUART):
         self.ref = 0
     def getAngle(self):
         return self.readValue()
-    def getRegAngle(self):
+    def getRefAngle(self):
         return self.readValue() - self.ref
     def setRef(self):
         self.ref = self.readValue()

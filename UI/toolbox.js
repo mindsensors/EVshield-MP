@@ -623,7 +623,7 @@ Blockly.defineBlocksWithJsonArray([
 },
 {
   "type": "sensors_ev3touch_getbumpcount",
-  "message0": "EV3 touch sensor on port %1 bump count",
+  "message0": "bump count of EV3 touch sensor on port %1",
   "args0": [
     {
       "type": "field_dropdown",
@@ -759,6 +759,97 @@ Blockly.defineBlocksWithJsonArray([
   ],
   "previousStatement": null,
   "nextStatement": null,
+  "colour": 60
+},
+{
+  "type": "sensors_ev3gyro",
+  "message0": "raw angle from EV3 gyro sensor on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
+{
+  "type": "sensors_ev3color_setref",
+  "message0": "reset reference angle of EV3 gyro sensor on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 60
+},
+{
+  "type": "sensors_ev3gyro_getref",
+  "message0": "angle of the EV3 gyro sensor on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
   "colour": 60
 },
 
@@ -1053,6 +1144,21 @@ Blockly.Python['sensors_ev3color_setmode'] = function(block) {
   var mode = block.getFieldValue('MODE');
   sensor_definition(port, 'ev3color', 'EV3Color');
   return `ev3color_${port}.setMode(${mode})\n`;
+};
+Blockly.Python['sensors_ev3gyro'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'ev3gyro', 'EV3Gyro');
+  return [`${ev3gyro}_${port}.getAngle()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3color_setref'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'ev3gyro', 'EV3Gyro');
+  return `${ev3gyro}_${port}.setRef()\n`;
+};
+Blockly.Python['sensors_ev3gyro_getref'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'ev3gyro', 'EV3Gyro');
+  return [`${ev3gyro}_${port}.getRefAngle()`, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python['led_set'] = function(block) {
