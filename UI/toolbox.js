@@ -682,6 +682,85 @@ Blockly.defineBlocksWithJsonArray([
   "nextStatement": null,
   "colour": 60
 },
+{
+  "type": "sensors_ev3color",
+  "message0": "detect color from EV3 color sensor on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
+{
+  "type": "sensors_ev3color_setmode",
+  "message0": "configure EV3 color sensor on port %1 to measure %2 light",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "MODE",
+      "options": [
+        [
+          "reflected",
+          "MODE_Color_ReflectedLight"
+        ],
+        [
+          "ambient",
+          "MODE_Color_AmbientLight"
+        ],
+        [
+          "color",
+          "MODE_Color_MeasureColor"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 60
+},
 
 /* EVSHIELD */
 {
@@ -963,6 +1042,17 @@ Blockly.Python['sensors_ev3touch_resetbumpcount'] = function(block) {
   var port = block.getFieldValue('PORT');
   sensor_definition(port, 'ev3touch', 'EV3Touch');
   return `ev3touch_${port}.resetBumpCount()\n`;
+};
+Blockly.Python['sensors_ev3color'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'ev3color', 'EV3Color');
+  return [`ev3color_${port}.getVal()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3color_setmode'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  var mode = block.getFieldValue('MODE');
+  sensor_definition(port, 'ev3color', 'EV3Color');
+  return `ev3color_${port}.setMode(${mode})\n`;
 };
 
 Blockly.Python['led_set'] = function(block) {
