@@ -490,6 +490,107 @@ Blockly.defineBlocksWithJsonArray([
   "nextStatement": null,
   "colour": 60
 },
+{
+  "type": "sensors_nxtcolor_setmode",
+  "message0": "configure NXT color sensor on port %1 to measure %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "MODE",
+      "options": [
+        [
+          "the color of light",
+          "SH_Type_COLORFULL"
+        ],
+        [
+          "reflected red light intensity",
+          "SH_Type_COLORRED"
+        ],
+        [
+          "reflected green light intensity",
+          "SH_Type_COLORGREEN"
+        ],
+        [
+          "reflected blue light intensity",
+          "SH_Type_COLORBLUE"
+        ],
+        [
+          "ambient light level",
+          "SH_Type_COLORNONE"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 60
+},
+{
+  "type": "sensors_nxtcolor",
+  "message0": "detected %1 from NXT color sensor on port %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "READ_METHOD",
+      "options": [
+        [
+          "color",
+          "readColor"
+        ],
+        [
+          "light level (intensity)",
+          "readValue"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
 
 /* EVSHIELD */
 {
@@ -720,27 +821,42 @@ Blockly.Python['motors_rotations'] = function(block) {
                  next_action=${next_action})\n`;
 };
 
+function sensor_definition(port, instanceName, className) {
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
+  Blockly.Python.definitions_[`import_${className}`] = `from EVShieldSensors import ${className}`;
+  Blockly.Python.definitions_[`${instanceName}_${port}`] = `${instanceName}_${port} = ${className}(evshield, SH_${port})`;
+}
+function sensor_definition_i2c(port, instanceName, className) {
+  Blockly.Python.definitions_[`import_${className}`] = `from EVShieldSensors import ${className}`;
+  Blockly.Python.definitions_[`${instanceName}_${port}`] = `${instanceName}_${port} = ${className}(SH_${port})`;
+}
 Blockly.Python['sensors_nxttouch'] = function(block) {
   var port = block.getFieldValue('PORT');
-  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
-  Blockly.Python.definitions_.import_NXTTouch = 'from EVShieldSensors import NXTTouch';
-  Blockly.Python.definitions_[`nxttouch${port}`] = `nxttouch${port} = NXTTouch(evshield, SH_${port})`;
-  return [`nxttouch${port}.isPressed()`, Blockly.Python.ORDER_ATOMIC];
+  sensor_definition(port, 'nxttouch', 'NXTTouch');
+  return [`nxttouch_${port}.isPressed()`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_nxtlight'] = function(block) {
   var port = block.getFieldValue('PORT');
-  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
-  Blockly.Python.definitions_.import_NXTLight = 'from EVShieldSensors import NXTLight';
-  Blockly.Python.definitions_[`nxtlight${port}`] = `nxtlight${port} = NXTLight(evshield, SH_${port})`;
-  return [`nxtlight${port}.readRaw()`, Blockly.Python.ORDER_ATOMIC];
+  sensor_definition(port, 'nxtlight', 'NXTLight');
+  return [`nxtlight_${port}.readRaw()`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_nxtlight_setmode'] = function(block) {
   var port = block.getFieldValue('PORT');
   var modeMethod = block.getFieldValue('MODE');
-  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
-  Blockly.Python.definitions_.import_NXTLight = 'from EVShieldSensors import NXTLight';
-  Blockly.Python.definitions_[`nxtlight${port}`] = `nxtlight${port} = NXTLight(evshield, SH_${port})`;
-  return `nxtlight${port}.${modeMethod}()\n`;
+  sensor_definition(port, 'nxtlight', 'NXTLight');
+  return `nxtlight_${port}.${modeMethod}()\n`;
+};
+Blockly.Python['sensors_nxtcolor_setmode'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  var mode = block.getFieldValue('MODE');
+  sensor_definition(port, 'nxtcolor', 'NXTColor');
+  return `nxtcolor_${port}.setType(${mode})\n`;
+};
+Blockly.Python['sensors_nxtcolor'] = function(block) {
+  var read_method = block.getFieldValue('READ_METHOD');
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'nxtcolor', 'NXTColor');
+  return [`nxtcolor_${port}.${read_method}()\n`, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python['led_set'] = function(block) {

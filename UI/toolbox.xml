@@ -26,7 +26,7 @@
       <field name="MODE">WHILE</field>
     </block>
     <block type="controls_for">
-      <field name="VAR" id="=r6TWVT-hIjhJwrh@c,a" variabletype="">i</field>
+      <field name="VAR" id="p_HD(y#i^_1XdY1$GuZV" variabletype="">i</field>
       <value name="FROM">
         <shadow type="math_number">
           <field name="NUM">1</field>
@@ -44,13 +44,16 @@
       </value>
     </block>
     <block type="controls_forEach">
-      <field name="VAR" id="/A/hKMBj[X_x-vv//2t`" variabletype="">j</field>
+      <field name="VAR" id="!hm;2aT5/,DZSuO_3gLq" variabletype="">j</field>
     </block>
     <block type="controls_flow_statements">
       <field name="FLOW">BREAK</field>
     </block>
   </category>
   <category name="Math" colour="#5C68A6">
+    <block type="math_number">
+      <field name="NUM">0</field>
+    </block>
     <block type="math_arithmetic">
       <field name="OP">ADD</field>
       <value name="A">
@@ -61,14 +64,6 @@
       <value name="B">
         <shadow type="math_number">
           <field name="NUM">1</field>
-        </shadow>
-      </value>
-    </block>
-    <block type="math_round">
-      <field name="OP">ROUND</field>
-      <value name="NUM">
-        <shadow type="math_number">
-          <field name="NUM">3.1</field>
         </shadow>
       </value>
     </block>
@@ -100,8 +95,13 @@
         </shadow>
       </value>
     </block>
-    <block type="math_number">
-      <field name="NUM">0</field>
+    <block type="math_round">
+      <field name="OP">ROUND</field>
+      <value name="NUM">
+        <shadow type="math_number">
+          <field name="NUM">3.1</field>
+        </shadow>
+      </value>
     </block>
     <block type="math_on_list">
       <mutation op="SUM"></mutation>
@@ -151,20 +151,14 @@
     <block type="math_random_float"></block>
   </category>
   <category name="Text" colour="#5CA68D">
+    <block type="text">
+      <field name="TEXT"></field>
+    </block>
     <block type="text_join">
       <mutation items="2"></mutation>
     </block>
-    <block type="text_charAt">
-      <mutation at="true"></mutation>
-      <field name="WHERE">FROM_START</field>
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" id="Upoys7qM-U+Io[u?e.hM" variabletype="">text</field>
-        </block>
-      </value>
-    </block>
     <block type="text_append">
-      <field name="VAR" id="gvRZI$hIEk.f4Tr~IS_d" variabletype="">item</field>
+      <field name="VAR" id="t3/A0f/+Ls-]x}];Ke=l" variabletype="">item</field>
       <value name="TEXT">
         <shadow type="text">
           <field name="TEXT"></field>
@@ -189,7 +183,7 @@
       <field name="END">FIRST</field>
       <value name="VALUE">
         <block type="variables_get">
-          <field name="VAR" id="Upoys7qM-U+Io[u?e.hM" variabletype="">text</field>
+          <field name="VAR" id="gGIt.mEw(5^b!zp%%8d`" variabletype="">text</field>
         </block>
       </value>
       <value name="FIND">
@@ -198,8 +192,14 @@
         </shadow>
       </value>
     </block>
-    <block type="text">
-      <field name="TEXT"></field>
+    <block type="text_charAt">
+      <mutation at="true"></mutation>
+      <field name="WHERE">FROM_START</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id="gGIt.mEw(5^b!zp%%8d`" variabletype="">text</field>
+        </block>
+      </value>
     </block>
     <block type="text_getSubstring">
       <mutation at1="true" at2="true"></mutation>
@@ -207,7 +207,7 @@
       <field name="WHERE2">FROM_START</field>
       <value name="STRING">
         <block type="variables_get">
-          <field name="VAR" id="Upoys7qM-U+Io[u?e.hM" variabletype="">text</field>
+          <field name="VAR" id="gGIt.mEw(5^b!zp%%8d`" variabletype="">text</field>
         </block>
       </value>
     </block>
@@ -246,15 +246,10 @@
   </category>
   <category name="Lists" colour="#745CA6">
     <block type="lists_create_with">
-      <mutation items="3"></mutation>
+      <mutation items="0"></mutation>
     </block>
-    <block type="lists_indexOf">
-      <field name="END">FIRST</field>
-      <value name="VALUE">
-        <block type="variables_get">
-          <field name="VAR" id=":XR?0/E.iU(*w/|0!U,#" variabletype="">list</field>
-        </block>
-      </value>
+    <block type="lists_create_with">
+      <mutation items="3"></mutation>
     </block>
     <block type="lists_repeat">
       <value name="NUM">
@@ -265,8 +260,13 @@
     </block>
     <block type="lists_length"></block>
     <block type="lists_isEmpty"></block>
-    <block type="lists_create_with">
-      <mutation items="0"></mutation>
+    <block type="lists_indexOf">
+      <field name="END">FIRST</field>
+      <value name="VALUE">
+        <block type="variables_get">
+          <field name="VAR" id=".~t}d:JoAXR]G4Ef*@AV" variabletype="">list</field>
+        </block>
+      </value>
     </block>
     <block type="lists_getIndex">
       <mutation statement="false" at="true"></mutation>
@@ -274,7 +274,7 @@
       <field name="WHERE">FROM_START</field>
       <value name="VALUE">
         <block type="variables_get">
-          <field name="VAR" id=":XR?0/E.iU(*w/|0!U,#" variabletype="">list</field>
+          <field name="VAR" id=".~t}d:JoAXR]G4Ef*@AV" variabletype="">list</field>
         </block>
       </value>
     </block>
@@ -284,7 +284,7 @@
       <field name="WHERE">FROM_START</field>
       <value name="LIST">
         <block type="variables_get">
-          <field name="VAR" id=":XR?0/E.iU(*w/|0!U,#" variabletype="">list</field>
+          <field name="VAR" id=".~t}d:JoAXR]G4Ef*@AV" variabletype="">list</field>
         </block>
       </value>
     </block>
@@ -294,7 +294,7 @@
       <field name="WHERE2">FROM_START</field>
       <value name="LIST">
         <block type="variables_get">
-          <field name="VAR" id=":XR?0/E.iU(*w/|0!U,#" variabletype="">list</field>
+          <field name="VAR" id=".~t}d:JoAXR]G4Ef*@AV" variabletype="">list</field>
         </block>
       </value>
     </block>
@@ -417,6 +417,14 @@
     <block type="sensors_nxtlight_setmode">
       <field name="PORT">BAS1</field>
       <field name="MODE">setReflected</field>
+    </block>
+    <block type="sensors_nxtcolor_setmode">
+      <field name="PORT">BAS1</field>
+      <field name="MODE">SH_Type_COLORFULL</field>
+    </block>
+    <block type="sensors_nxtcolor">
+      <field name="READ_METHOD">readColor</field>
+      <field name="PORT">BAS1</field>
     </block>
   </category>
   <category name="EVShield" colour="#a56d5b">

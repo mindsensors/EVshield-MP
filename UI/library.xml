@@ -1129,4 +1129,140 @@
         <field name="HUE">60</field>
       </block>
     </value>
+  </block><block type="factory_base" id="oCK@_rm(5Oi(,1EJ,sM%" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">sensors_nxtcolor_setmode</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="G~t7|@G,C2{|}OmlQ@00">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="mzOYDs5ffXy9-s=sZ5QN">
+            <field name="TEXT">configure NXT color sensor on port</field>
+            <next>
+              <block type="field_dropdown" id="Gmfvjnq^D7@B/hka1.Q:">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">PORT</field>
+                <field name="USER0">BAS1</field>
+                <field name="CPU0">BAS1</field>
+                <field name="USER1">BAS2</field>
+                <field name="CPU1">BAS2</field>
+                <field name="USER2">BBS1</field>
+                <field name="CPU2">BBS1</field>
+                <field name="USER3">BBS2</field>
+                <field name="CPU3">BBS2</field>
+                <next>
+                  <block type="field_static" id="WfQH{8~1:$|17EY5YH;y">
+                    <field name="TEXT">to measure</field>
+                    <next>
+                      <block type="field_dropdown" id="4)M}G+w.~ThTZnLNfBSx">
+                        <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                        <field name="FIELDNAME">MODE</field>
+                        <field name="USER0">the color of light</field>
+                        <field name="CPU0">SH_Type_COLORFULL</field>
+                        <field name="USER1">reflected red light intensity</field>
+                        <field name="CPU1">SH_Type_COLORRED</field>
+                        <field name="USER2">reflected green light intensity</field>
+                        <field name="CPU2">SH_Type_COLORGREEN</field>
+                        <field name="USER3">reflected blue light intensity</field>
+                        <field name="CPU3">SH_Type_COLORBLUE</field>
+                        <field name="USER4">ambient light level</field>
+                        <field name="CPU4">SH_Type_COLORNONE</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="I63[|g{JX/t~SY3KOq)*" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";9wyre+[bBZdPQ8VDns2" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="lwmc]gYTvUgw`(v5)z0C"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="m%%lPdcD=,#jlj[yipP,"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="8JQtG4Z.K`3m?UblTegQ">
+        <mutation colour="#a5a55b"></mutation>
+        <field name="HUE">60</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="oCK@_rm(5Oi(,1EJ,sM%" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">sensors_nxtcolor</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="G~t7|@G,C2{|}OmlQ@00">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="mzOYDs5ffXy9-s=sZ5QN">
+            <field name="TEXT">detected</field>
+            <next>
+              <block type="field_dropdown" id="yv60ywP;Zz{9-Ha1=3Mc">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">READ_METHOD</field>
+                <field name="USER0">color</field>
+                <field name="CPU0">readColor</field>
+                <field name="USER1">light level (intensity)</field>
+                <field name="CPU1">readValue</field>
+                <next>
+                  <block type="field_static" id="/g7Y%OvjbeIp|@jkiN?d">
+                    <field name="TEXT">from NXT color sensor on port</field>
+                    <next>
+                      <block type="field_dropdown" id="Gmfvjnq^D7@B/hka1.Q:">
+                        <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                        <field name="FIELDNAME">PORT</field>
+                        <field name="USER0">BAS1</field>
+                        <field name="CPU0">BAS1</field>
+                        <field name="USER1">BAS2</field>
+                        <field name="CPU1">BAS2</field>
+                        <field name="USER2">BBS1</field>
+                        <field name="CPU2">BBS1</field>
+                        <field name="USER3">BBS2</field>
+                        <field name="CPU3">BBS2</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="I63[|g{JX/t~SY3KOq)*" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";9wyre+[bBZdPQ8VDns2" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id=":UxDvfBdGCy5hPsQEdvm"></shadow>
+      <block type="type_number" id="2k55jzxpo?ke{XfAN=0."></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="8JQtG4Z.K`3m?UblTegQ">
+        <mutation colour="#a5a55b"></mutation>
+        <field name="HUE">60</field>
+      </block>
+    </value>
   </block></xml>

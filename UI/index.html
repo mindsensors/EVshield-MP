@@ -436,15 +436,26 @@
         </block>
       </category>
       <category name="Sensors" colour="60">
+      <label text="NXT Touch Sensor"></label>
         <block type="sensors_nxttouch">
           <field name="PORT">BAS1</field>
         </block>
+      <label text="NXT Light Sensor"></label>
         <block type="sensors_nxtlight">
           <field name="PORT">BAS1</field>
         </block>
         <block type="sensors_nxtlight_setmode">
           <field name="PORT">BAS1</field>
           <field name="MODE">setReflected</field>
+        </block>
+      <label text="NXT Color Sensor"></label>
+        <block type="sensors_nxtcolor_setmode">
+          <field name="PORT">BAS1</field>
+          <field name="MODE">SH_Type_COLORFULL</field>
+        </block>
+        <block type="sensors_nxtcolor">
+          <field name="READ_METHOD">readColor</field>
+          <field name="PORT">BAS1</field>
         </block>
       </category>
       <category name="EVShield" colour="5">
