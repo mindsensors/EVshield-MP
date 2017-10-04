@@ -1148,17 +1148,17 @@ Blockly.Python['sensors_ev3color_setmode'] = function(block) {
 Blockly.Python['sensors_ev3gyro'] = function(block) {
   var port = block.getFieldValue('PORT');
   sensor_definition(port, 'ev3gyro', 'EV3Gyro');
-  return [`${ev3gyro}_${port}.getAngle()`, Blockly.Python.ORDER_ATOMIC];
+  return [`ev3gyro_${port}.getAngle()`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_ev3color_setref'] = function(block) {
   var port = block.getFieldValue('PORT');
   sensor_definition(port, 'ev3gyro', 'EV3Gyro');
-  return `${ev3gyro}_${port}.setRef()\n`;
+  return `ev3gyro_${port}.setRef()\n`;
 };
 Blockly.Python['sensors_ev3gyro_getref'] = function(block) {
   var port = block.getFieldValue('PORT');
   sensor_definition(port, 'ev3gyro', 'EV3Gyro');
-  return [`${ev3gyro}_${port}.getRefAngle()`, Blockly.Python.ORDER_ATOMIC];
+  return [`ev3gyro_${port}.getRefAngle()`, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python['led_set'] = function(block) {
