@@ -98,7 +98,7 @@ Blockly.BlockSvg.START_HAT = true;
 
 // load previous program
 workspace.clear();
-Blockly.Xml.textToWorkspace(localStorage.getItem("Papaya"));
+Blockly.Xml.textToWorkspace(localStorage.getItem("Pyduino"));
 workspace.clearUndo();
 // save program when leaving page
-window.addEventListener("unload", e => localStorage.setItem("Papaya", Blockly.Xml.workspaceToText(workspace)));
+window.addEventListener("unload", e => localStorage.setItem("Pyduino", Blockly.Xml.workspaceToText(workspace)));
