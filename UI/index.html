@@ -501,6 +501,21 @@
           <field name="PORT">BAS1</field>
           <field name="CHANNEL">0</field>
         </block>
+        <label text="EV3 Ultrasonic Sensor"></label>
+        <block type="sensors_ev3ultra_detect">
+          <field name="PORT">BAS1</field>
+        </block>
+        <block type="sensors_ev3ultra_distance">
+          <field name="PORT">BAS1</field>
+        </block>
+        <label text="SumoEyes"></label>
+        <block type="sensors_sumoeyes_detect">
+          <field name="PORT">BAS1</field>
+        </block>
+        <block type="sensors_sumoeyes_setrange">
+          <field name="PORT">BAS1</field>
+          <field name="RANGE_METHOD">setLongRange</field>
+        </block>
       </category>
       <category name="EVShield" colour="5">
         <block type="led_set">

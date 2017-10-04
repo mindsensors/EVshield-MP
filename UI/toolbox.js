@@ -1038,6 +1038,141 @@ Blockly.defineBlocksWithJsonArray([
   "output": "Number",
   "colour": 60
 },
+{
+  "type": "sensors_ev3ultra_detect",
+  "message0": "EV3 ultrasonic sensor on port %1 detects motion",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Boolean",
+  "colour": 60
+},
+{
+  "type": "sensors_ev3ultra_distance",
+  "message0": "distance of EV3 ultrasonic sensor on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
+{
+  "type": "sensors_sumoeyes_detect",
+  "message0": "detected obstacle zone from SumoEyes on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "String",
+  "colour": 60
+},
+{
+  "type": "sensors_sumoeyes_setrange",
+  "message0": "set SumoEyes on port %1 to %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "RANGE_METHOD",
+      "options": [
+        [
+          "long range",
+          "setLongRange"
+        ],
+        [
+          "short range",
+          "setShortRange"
+        ]
+      ]
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 60
+},
 
 /* EVSHIELD */
 {
@@ -1368,6 +1503,27 @@ Blockly.Python['sensors_ev3ir_chanbutton'] = function(block) {
   var channel = block.getFieldValue('CHANNEL');
   sensor_definition(port, 'ev3infrared', 'EV3Infrared');
   return [`ev3infrared_${port}.readChannelButton(${channel})`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3ultra_detect'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'ev3ultrasonic', 'EV3Ultrasonic');
+  return [`ev3ultrasonic_${port}.detect()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3ultra_distance'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'ev3ultrasonic', 'EV3Ultrasonic');
+  return [`ev3ultrasonic_${port}.getDist()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_sumoeyes_detect'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'sumoeyes', 'SumoEyes');
+  return [`sumoeyes_${port}.detectObstacleZone()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_sumoeyes_setrange'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  var range_method = block.getFieldValue('RANGE_METHOD');
+  sensor_definition(port, 'sumoeyes', 'SumoEyes');
+  return `sumoeyes_${port}.${range_method}()\n`;
 };
 
 Blockly.Python['led_set'] = function(block) {

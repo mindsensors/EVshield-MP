@@ -466,6 +466,12 @@
       <field name="PORT">BAS1</field>
       <field name="CHANNEL">0</field>
     </block>
+    <block type="sensors_ev3ultra_detect">
+      <field name="PORT">BAS1</field>
+    </block>
+    <block type="sensors_ev3ultra_distance">
+      <field name="PORT">BAS1</field>
+    </block>
   </category>
   <category name="EVShield" colour="#a56d5b">
     <block type="led_set">
