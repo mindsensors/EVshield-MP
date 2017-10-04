@@ -852,6 +852,192 @@ Blockly.defineBlocksWithJsonArray([
   "output": "Number",
   "colour": 60
 },
+{
+  "type": "sensors_ev3ir_prox",
+  "message0": "proximity of EV3 infrared sensor on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
+{
+  "type": "sensors_ev3ir_chanheading",
+  "message0": "heading of EV3 infrared sensor on port %1 on channel %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "CHANNEL",
+      "options": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "2",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ],
+        [
+          "4",
+          "3"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
+{
+  "type": "sensors_ev3ir_chanprox",
+  "message0": "proximity of EV3 infrared sensor on port %1 on channel %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "CHANNEL",
+      "options": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "2",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ],
+        [
+          "4",
+          "3"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
+{
+  "type": "sensors_ev3ir_chanbutton",
+  "message0": "button of EV3 infrared sensor on port %1 on channel %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "CHANNEL",
+      "options": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "2",
+          "1"
+        ],
+        [
+          "3",
+          "2"
+        ],
+        [
+          "4",
+          "3"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
 
 /* EVSHIELD */
 {
@@ -1159,6 +1345,29 @@ Blockly.Python['sensors_ev3gyro_getref'] = function(block) {
   var port = block.getFieldValue('PORT');
   sensor_definition(port, 'ev3gyro', 'EV3Gyro');
   return [`ev3gyro_${port}.getRefAngle()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3ir_prox'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'ev3infrared', 'EV3Infrared');
+  return [`ev3infrared_${port}.readProximity()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3ir_chanheading'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  var channel = block.getFieldValue('CHANNEL');
+  sensor_definition(port, 'ev3infrared', 'EV3Infrared');
+  return [`ev3infrared_${port}.readChannelHeading(${channel})`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3ir_chanprox'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  var channel = block.getFieldValue('CHANNEL');
+  sensor_definition(port, 'ev3infrared', 'EV3Infrared');
+  return [`ev3infrared_${port}.readChannelProximity(${channel})`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_ev3ir_chanbutton'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  var channel = block.getFieldValue('CHANNEL');
+  sensor_definition(port, 'ev3infrared', 'EV3Infrared');
+  return [`ev3infrared_${port}.readChannelButton(${channel})`, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python['led_set'] = function(block) {
