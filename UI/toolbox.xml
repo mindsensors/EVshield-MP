@@ -510,6 +510,9 @@
     <block type="sensors_lineleader_raw">
       <field name="PORT">BAS1</field>
     </block>
+    <block type="sensors_lightsensorarray">
+      <field name="PORT">BAS1</field>
+    </block>
   </category>
   <category name="EVShield" colour="#a56d5b">
     <block type="led_set">

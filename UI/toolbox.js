@@ -1515,6 +1515,36 @@ Blockly.defineBlocksWithJsonArray([
   "output": "Array",
   "colour": 60
 },
+{
+  "type": "sensors_lightsensorarray",
+  "message0": "readings of LightSensorArray on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Array",
+  "colour": 60
+},
 
 /* EVSHIELD */
 {
@@ -1915,6 +1945,11 @@ Blockly.Python['sensors_lineleader_raw'] = function(block) {
   var port = block.getFieldValue('PORT');
   sensor_definition(port, 'lineleader', 'LineLeader');
   return [`lineleader_${port}.getRawCalibrated()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_lightsensorarray'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'lightsensorarray', 'LightSensorArray');
+  return [`lightsensorarray_${port}.getCalibrated()`, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python['led_set'] = function(block) {
