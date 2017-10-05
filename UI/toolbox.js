@@ -940,6 +940,55 @@ Blockly.defineBlocksWithJsonArray([
   "colour": 140
 },
 {
+  "type": "led_set_inputs",
+  "message0": "set LED %1 to color with red %2 green %3 blue %4",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "WHICH",
+      "options": [
+        [
+          "A",
+          "A"
+        ],
+        [
+          "B",
+          "B"
+        ],
+        [
+          "Both",
+          "A+B"
+        ],
+        [
+          "Center",
+          "C"
+        ]
+      ]
+    },
+    {
+      "type": "input_value",
+      "name": "RED",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "GREEN",
+      "check": "Number",
+      "align": "RIGHT"
+    },
+    {
+      "type": "input_value",
+      "name": "BLUE",
+      "check": "Number",
+      "align": "RIGHT"
+    }
+  ],
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 140
+},
+{
   "type": "buttons_get",
   "message0": "button %1 is pressed",
   "args0": [
@@ -1316,6 +1365,21 @@ Blockly.Python['led_set'] = function(block) {
   var red   = parseInt(color[1], 16);
   var green = parseInt(color[2], 16);
   var blue  = parseInt(color[3], 16);
+  var method;
+  switch(which) {
+      case 'A': method = 'bank_a.ledSetRGB'; break;
+      case 'B': method = 'bank_b.ledSetRGB'; break;
+      case 'A+B': method = 'ledSetRGB';      break;
+      case 'C': method = 'centerLedSetRGB';  break;
+  }
+  return `evshield.${method}(${red}, ${green}, ${blue})\n`;
+};
+Blockly.Python['led_set_inputs'] = function(block) {
+  var which = block.getFieldValue('WHICH');
+  var red = Blockly.Python.valueToCode(block, 'RED', Blockly.Python.ORDER_ATOMIC);
+  var green = Blockly.Python.valueToCode(block, 'GREEN', Blockly.Python.ORDER_ATOMIC);
+  var blue = Blockly.Python.valueToCode(block, 'BLUE', Blockly.Python.ORDER_ATOMIC);
+  Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var method;
   switch(which) {
       case 'A': method = 'bank_a.ledSetRGB'; break;

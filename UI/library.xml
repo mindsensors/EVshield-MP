@@ -2719,4 +2719,100 @@
         <field name="HUE">60</field>
       </block>
     </value>
+  </block><block type="factory_base" id=":kFT0}#|tc]kp%*8^I1;" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">led_set_inputs</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_value" id="?u=zLyN4dJt9a{0+DSV?">
+        <field name="INPUTNAME">RED</field>
+        <field name="ALIGN">RIGHT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="Fsd|.#12q0WZo5`X+/FE">
+            <field name="TEXT">set LED</field>
+            <next>
+              <block type="field_dropdown" id="CFzxt/5hbx^9mOH)t^m`">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">WHICH</field>
+                <field name="USER0">A</field>
+                <field name="CPU0">A</field>
+                <field name="USER1">B</field>
+                <field name="CPU1">B</field>
+                <field name="USER2">Both</field>
+                <field name="CPU2">A+B</field>
+                <field name="USER3">Center</field>
+                <field name="CPU3">C</field>
+                <next>
+                  <block type="field_static" id="h5VZ!@`@*Yo[aCgD{sml">
+                    <field name="TEXT">to color with</field>
+                    <next>
+                      <block type="field_static" id="pRX,uK3^ZJ{*%NSdUsD4">
+                        <field name="TEXT">red</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <value name="TYPE">
+          <shadow type="type_null" id="D6cV3/Zh1e%o-zrPytHz"></shadow>
+          <block type="type_number" id="$z6J+:gyURZldQW}#b%{"></block>
+        </value>
+        <next>
+          <block type="input_value" id="@Ly[_$7.K:Pdx8Js|o.c">
+            <field name="INPUTNAME">GREEN</field>
+            <field name="ALIGN">RIGHT</field>
+            <statement name="FIELDS">
+              <block type="field_static" id="Ej.z~1EjZhU|[2UGD)[M">
+                <field name="TEXT">green</field>
+              </block>
+            </statement>
+            <value name="TYPE">
+              <shadow type="type_null" id="D6cV3/Zh1e%o-zrPytHz"></shadow>
+              <block type="type_number" id="aFe#wISnn/D:CM)A#ENc"></block>
+            </value>
+            <next>
+              <block type="input_value" id="C2EhqXB%T(ut;8C_NCl-">
+                <field name="INPUTNAME">BLUE</field>
+                <field name="ALIGN">RIGHT</field>
+                <statement name="FIELDS">
+                  <block type="field_static" id=";@uw%}P#1};il~}2vD{S">
+                    <field name="TEXT">blue</field>
+                  </block>
+                </statement>
+                <value name="TYPE">
+                  <shadow type="type_null" id="D6cV3/Zh1e%o-zrPytHz"></shadow>
+                  <block type="type_number" id="#A%GuAm6F(kZHUy(96*K"></block>
+                </value>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="zq{(foR*b,x|7=Sb;u-X" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="|Vo*WJBfX6:l^!_P.O*," deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="Px8,WB0TEC3t-PebF(UM"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="^O8RmM=6JtVTxz]xLX!H"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="+RJIq8(I[jYSsG)/PIF!">
+        <mutation colour="#5ba574"></mutation>
+        <field name="HUE">140</field>
+      </block>
+    </value>
   </block></xml>

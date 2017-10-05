@@ -26,7 +26,7 @@
       <field name="MODE">WHILE</field>
     </block>
     <block type="controls_for">
-      <field name="VAR" id="dE=Gj;?PTd*f`4-$?O:B" variabletype="">i</field>
+      <field name="VAR" id="G}-NW$rN/qo^oMEqDSez" variabletype="">i</field>
       <value name="FROM">
         <shadow type="math_number">
           <field name="NUM">1</field>
@@ -44,13 +44,26 @@
       </value>
     </block>
     <block type="controls_forEach">
-      <field name="VAR" id="?f$2]B~6~)F.@pao?dB2" variabletype="">j</field>
+      <field name="VAR" id="R0Q,dvycuTuD8QVdnd/`" variabletype="">j</field>
     </block>
     <block type="controls_flow_statements">
       <field name="FLOW">BREAK</field>
     </block>
   </category>
   <category name="Math" colour="#5C68A6">
+    <block type="math_arithmetic">
+      <field name="OP">ADD</field>
+      <value name="A">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+      <value name="B">
+        <shadow type="math_number">
+          <field name="NUM">1</field>
+        </shadow>
+      </value>
+    </block>
     <block type="math_round">
       <field name="OP">ROUND</field>
       <value name="NUM">
@@ -58,9 +71,6 @@
           <field name="NUM">3.1</field>
         </shadow>
       </value>
-    </block>
-    <block type="math_number">
-      <field name="NUM">0</field>
     </block>
     <block type="math_single">
       <field name="OP">ROOT</field>
@@ -90,18 +100,8 @@
         </shadow>
       </value>
     </block>
-    <block type="math_arithmetic">
-      <field name="OP">ADD</field>
-      <value name="A">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
-      <value name="B">
-        <shadow type="math_number">
-          <field name="NUM">1</field>
-        </shadow>
-      </value>
+    <block type="math_number">
+      <field name="NUM">0</field>
     </block>
     <block type="math_on_list">
       <mutation op="SUM"></mutation>
@@ -151,20 +151,20 @@
     <block type="math_random_float"></block>
   </category>
   <category name="Text" colour="#5CA68D">
+    <block type="text_join">
+      <mutation items="2"></mutation>
+    </block>
     <block type="text_charAt">
       <mutation at="true"></mutation>
       <field name="WHERE">FROM_START</field>
       <value name="VALUE">
         <block type="variables_get">
-          <field name="VAR" id=":E[@^$}LMK-D,:$(uNRq" variabletype="">text</field>
+          <field name="VAR" id=";(Nu0cBG;W+(Ju{7?lb(" variabletype="">text</field>
         </block>
       </value>
     </block>
-    <block type="text">
-      <field name="TEXT"></field>
-    </block>
     <block type="text_append">
-      <field name="VAR" id="@F-`(Cxe?}G=i}Phzuh0" variabletype="">item</field>
+      <field name="VAR" id="`1HY`X`v{_,.s+o:Y+^I" variabletype="">item</field>
       <value name="TEXT">
         <shadow type="text">
           <field name="TEXT"></field>
@@ -189,7 +189,7 @@
       <field name="END">FIRST</field>
       <value name="VALUE">
         <block type="variables_get">
-          <field name="VAR" id=":E[@^$}LMK-D,:$(uNRq" variabletype="">text</field>
+          <field name="VAR" id=";(Nu0cBG;W+(Ju{7?lb(" variabletype="">text</field>
         </block>
       </value>
       <value name="FIND">
@@ -198,8 +198,8 @@
         </shadow>
       </value>
     </block>
-    <block type="text_join">
-      <mutation items="2"></mutation>
+    <block type="text">
+      <field name="TEXT"></field>
     </block>
     <block type="text_getSubstring">
       <mutation at1="true" at2="true"></mutation>
@@ -207,7 +207,7 @@
       <field name="WHERE2">FROM_START</field>
       <value name="STRING">
         <block type="variables_get">
-          <field name="VAR" id=":E[@^$}LMK-D,:$(uNRq" variabletype="">text</field>
+          <field name="VAR" id=";(Nu0cBG;W+(Ju{7?lb(" variabletype="">text</field>
         </block>
       </value>
     </block>
@@ -245,16 +245,16 @@
     </block>
   </category>
   <category name="Lists" colour="#745CA6">
+    <block type="lists_create_with">
+      <mutation items="3"></mutation>
+    </block>
     <block type="lists_indexOf">
       <field name="END">FIRST</field>
       <value name="VALUE">
         <block type="variables_get">
-          <field name="VAR" id="O8N|.n0ktbkS8xvUZDyI" variabletype="">list</field>
+          <field name="VAR" id="e1;tAhDgK!urFz5Bl]G!" variabletype="">list</field>
         </block>
       </value>
-    </block>
-    <block type="lists_create_with">
-      <mutation items="0"></mutation>
     </block>
     <block type="lists_repeat">
       <value name="NUM">
@@ -266,7 +266,7 @@
     <block type="lists_length"></block>
     <block type="lists_isEmpty"></block>
     <block type="lists_create_with">
-      <mutation items="3"></mutation>
+      <mutation items="0"></mutation>
     </block>
     <block type="lists_getIndex">
       <mutation statement="false" at="true"></mutation>
@@ -274,7 +274,7 @@
       <field name="WHERE">FROM_START</field>
       <value name="VALUE">
         <block type="variables_get">
-          <field name="VAR" id="O8N|.n0ktbkS8xvUZDyI" variabletype="">list</field>
+          <field name="VAR" id="e1;tAhDgK!urFz5Bl]G!" variabletype="">list</field>
         </block>
       </value>
     </block>
@@ -284,7 +284,7 @@
       <field name="WHERE">FROM_START</field>
       <value name="LIST">
         <block type="variables_get">
-          <field name="VAR" id="O8N|.n0ktbkS8xvUZDyI" variabletype="">list</field>
+          <field name="VAR" id="e1;tAhDgK!urFz5Bl]G!" variabletype="">list</field>
         </block>
       </value>
     </block>
@@ -294,7 +294,7 @@
       <field name="WHERE2">FROM_START</field>
       <value name="LIST">
         <block type="variables_get">
-          <field name="VAR" id="O8N|.n0ktbkS8xvUZDyI" variabletype="">list</field>
+          <field name="VAR" id="e1;tAhDgK!urFz5Bl]G!" variabletype="">list</field>
         </block>
       </value>
     </block>
@@ -408,10 +408,11 @@
     </block>
   </category>
   <category name="Sensors" colour="#a5a55b">
-    <block type="sensors_ev3gyro_getref">
+    <block type="sensors_ev3ir_chanprox">
       <field name="PORT">BAS1</field>
+      <field name="CHANNEL">0</field>
     </block>
-    <block type="sensors_nxttouch">
+    <block type="sensors_ev3gyro_getref">
       <field name="PORT">BAS1</field>
     </block>
     <block type="sensors_nxtlight_setmode">
@@ -458,9 +459,8 @@
       <field name="PORT">BAS1</field>
       <field name="CHANNEL">0</field>
     </block>
-    <block type="sensors_ev3ir_chanprox">
+    <block type="sensors_nxttouch">
       <field name="PORT">BAS1</field>
-      <field name="CHANNEL">0</field>
     </block>
     <block type="sensors_ev3ir_chanbutton">
       <field name="PORT">BAS1</field>
@@ -516,10 +516,28 @@
   </category>
   <category name="EVShield" colour="#a56d5b">
     <block type="led_set">
-      <field name="WHICH">A+B</field>
+      <field name="WHICH">A</field>
       <value name="COLOR">
         <shadow type="colour_picker">
           <field name="COLOUR">#ff0000</field>
+        </shadow>
+      </value>
+    </block>
+    <block type="led_set_inputs">
+      <field name="WHICH">A</field>
+      <value name="RED">
+        <shadow type="math_number">
+          <field name="NUM">255</field>
+        </shadow>
+      </value>
+      <value name="GREEN">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
+        </shadow>
+      </value>
+      <value name="BLUE">
+        <shadow type="math_number">
+          <field name="NUM">0</field>
         </shadow>
       </value>
     </block>

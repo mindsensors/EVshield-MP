@@ -556,10 +556,28 @@
       </category>
       <category name="EVShield" colour="5">
         <block type="led_set">
-          <field name="WHICH">A+B</field>
+          <field name="WHICH">A</field>
           <value name="COLOR">
             <shadow type="colour_picker">
               <field name="COLOUR">#ff0000</field>
+            </shadow>
+          </value>
+        </block>
+        <block type="led_set_inputs">
+          <field name="WHICH">A</field>
+          <value name="RED">
+            <shadow type="math_number">
+              <field name="NUM">255</field>
+            </shadow>
+          </value>
+          <value name="GREEN">
+            <shadow type="math_number">
+              <field name="NUM">0</field>
+            </shadow>
+          </value>
+          <value name="BLUE">
+            <shadow type="math_number">
+              <field name="NUM">0</field>
             </shadow>
           </value>
         </block>

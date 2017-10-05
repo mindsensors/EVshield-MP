@@ -1,4 +1,9 @@
 from EVShieldSensors import AbsoluteIMU
-a = AbsoluteIMU(SH_BBS1)
+from EVShield import EVShield
+evshield = EVShield()
+
+absimu_BAS1 = AbsoluteIMU(SH_BAS1)
+
+
 while True:
-    print(a.readTilt())
+  evshield.centerLedSetRGB(absimu_BAS1.readTilt()['x'], absimu_BAS1.readTilt()['y'], absimu_BAS1.readTilt()['z'])
