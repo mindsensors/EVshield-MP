@@ -2046,4 +2046,432 @@
         <field name="HUE">60</field>
       </block>
     </value>
+  </block><block type="factory_base" id="oCK@_rm(5Oi(,1EJ,sM%" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">sensors_sumoeyes_detect</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="G~t7|@G,C2{|}OmlQ@00">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="mzOYDs5ffXy9-s=sZ5QN">
+            <field name="TEXT">detected obstacle zone from SumoEyes on port</field>
+            <next>
+              <block type="field_dropdown" id="Gmfvjnq^D7@B/hka1.Q:">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">PORT</field>
+                <field name="USER0">BAS1</field>
+                <field name="CPU0">BAS1</field>
+                <field name="USER1">BAS2</field>
+                <field name="CPU1">BAS2</field>
+                <field name="USER2">BBS1</field>
+                <field name="CPU2">BBS1</field>
+                <field name="USER3">BBS2</field>
+                <field name="CPU3">BBS2</field>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="I63[|g{JX/t~SY3KOq)*" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";9wyre+[bBZdPQ8VDns2" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id=":UxDvfBdGCy5hPsQEdvm"></shadow>
+      <block type="type_string" id="Jf4MmFIarvMGBL#H,u4O"></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="8JQtG4Z.K`3m?UblTegQ">
+        <mutation colour="#a5a55b"></mutation>
+        <field name="HUE">60</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="oCK@_rm(5Oi(,1EJ,sM%" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">sensors_sumoeyes_setrange</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="G~t7|@G,C2{|}OmlQ@00">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="mzOYDs5ffXy9-s=sZ5QN">
+            <field name="TEXT">set SumoEyes on port</field>
+            <next>
+              <block type="field_dropdown" id="Gmfvjnq^D7@B/hka1.Q:">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">PORT</field>
+                <field name="USER0">BAS1</field>
+                <field name="CPU0">BAS1</field>
+                <field name="USER1">BAS2</field>
+                <field name="CPU1">BAS2</field>
+                <field name="USER2">BBS1</field>
+                <field name="CPU2">BBS1</field>
+                <field name="USER3">BBS2</field>
+                <field name="CPU3">BBS2</field>
+                <next>
+                  <block type="field_static" id="4a0L`xp``~_Zs*cgcD;W">
+                    <field name="TEXT">to</field>
+                    <next>
+                      <block type="field_dropdown" id="5E778R`GKIz:Y)*$q)KM">
+                        <mutation options="[&quot;text&quot;,&quot;text&quot;]"></mutation>
+                        <field name="FIELDNAME">RANGE_METHOD</field>
+                        <field name="USER0">long range</field>
+                        <field name="CPU0">setLongRange</field>
+                        <field name="USER1">short range</field>
+                        <field name="CPU1">setShortRange</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="I63[|g{JX/t~SY3KOq)*" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";9wyre+[bBZdPQ8VDns2" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="~nwqIwpm.6VizQ!?8~Sw"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="}#Lx@Kdz|xWt5VTKSg`S"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="8JQtG4Z.K`3m?UblTegQ">
+        <mutation colour="#a5a55b"></mutation>
+        <field name="HUE">60</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="oCK@_rm(5Oi(,1EJ,sM%" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">sensors_absimu_tilt</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="G~t7|@G,C2{|}OmlQ@00">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="mzOYDs5ffXy9-s=sZ5QN">
+            <field name="TEXT">read tilt on the</field>
+            <next>
+              <block type="field_dropdown" id="srMbeU22n_n1mGe~UB+:">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">AXIS</field>
+                <field name="USER0">X</field>
+                <field name="CPU0">x</field>
+                <field name="USER1">Y</field>
+                <field name="CPU1">y</field>
+                <field name="USER2">Z</field>
+                <field name="CPU2">z</field>
+                <next>
+                  <block type="field_static" id="W/o_pUtgU;FZ.+5qfSr:">
+                    <field name="TEXT">axis from AbsoluteIMU on port</field>
+                    <next>
+                      <block type="field_dropdown" id="Gmfvjnq^D7@B/hka1.Q:">
+                        <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                        <field name="FIELDNAME">PORT</field>
+                        <field name="USER0">BAS1</field>
+                        <field name="CPU0">BAS1</field>
+                        <field name="USER1">BAS2</field>
+                        <field name="CPU1">BAS2</field>
+                        <field name="USER2">BBS1</field>
+                        <field name="CPU2">BBS1</field>
+                        <field name="USER3">BBS2</field>
+                        <field name="CPU3">BBS2</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="I63[|g{JX/t~SY3KOq)*" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";9wyre+[bBZdPQ8VDns2" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id=":UxDvfBdGCy5hPsQEdvm"></shadow>
+      <block type="type_number" id="6l1tTkv-I?yH{ZV9HbH."></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="8JQtG4Z.K`3m?UblTegQ">
+        <mutation colour="#a5a55b"></mutation>
+        <field name="HUE">60</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="oCK@_rm(5Oi(,1EJ,sM%" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">sensors_absimu_acc</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="G~t7|@G,C2{|}OmlQ@00">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="mzOYDs5ffXy9-s=sZ5QN">
+            <field name="TEXT">read accelerometer on the</field>
+            <next>
+              <block type="field_dropdown" id="srMbeU22n_n1mGe~UB+:">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">AXIS</field>
+                <field name="USER0">X</field>
+                <field name="CPU0">x</field>
+                <field name="USER1">Y</field>
+                <field name="CPU1">y</field>
+                <field name="USER2">Z</field>
+                <field name="CPU2">z</field>
+                <next>
+                  <block type="field_static" id="W/o_pUtgU;FZ.+5qfSr:">
+                    <field name="TEXT">axis from AbsoluteIMU on port</field>
+                    <next>
+                      <block type="field_dropdown" id="Gmfvjnq^D7@B/hka1.Q:">
+                        <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                        <field name="FIELDNAME">PORT</field>
+                        <field name="USER0">BAS1</field>
+                        <field name="CPU0">BAS1</field>
+                        <field name="USER1">BAS2</field>
+                        <field name="CPU1">BAS2</field>
+                        <field name="USER2">BBS1</field>
+                        <field name="CPU2">BBS1</field>
+                        <field name="USER3">BBS2</field>
+                        <field name="CPU3">BBS2</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="I63[|g{JX/t~SY3KOq)*" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";9wyre+[bBZdPQ8VDns2" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id=":UxDvfBdGCy5hPsQEdvm"></shadow>
+      <block type="type_number" id="6l1tTkv-I?yH{ZV9HbH."></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="8JQtG4Z.K`3m?UblTegQ">
+        <mutation colour="#a5a55b"></mutation>
+        <field name="HUE">60</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="oCK@_rm(5Oi(,1EJ,sM%" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">sensors_absimu_mag</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="G~t7|@G,C2{|}OmlQ@00">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="mzOYDs5ffXy9-s=sZ5QN">
+            <field name="TEXT">read magnetic field on the</field>
+            <next>
+              <block type="field_dropdown" id="srMbeU22n_n1mGe~UB+:">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">AXIS</field>
+                <field name="USER0">X</field>
+                <field name="CPU0">x</field>
+                <field name="USER1">Y</field>
+                <field name="CPU1">y</field>
+                <field name="USER2">Z</field>
+                <field name="CPU2">z</field>
+                <next>
+                  <block type="field_static" id="W/o_pUtgU;FZ.+5qfSr:">
+                    <field name="TEXT">axis from AbsoluteIMU on port</field>
+                    <next>
+                      <block type="field_dropdown" id="Gmfvjnq^D7@B/hka1.Q:">
+                        <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                        <field name="FIELDNAME">PORT</field>
+                        <field name="USER0">BAS1</field>
+                        <field name="CPU0">BAS1</field>
+                        <field name="USER1">BAS2</field>
+                        <field name="CPU1">BAS2</field>
+                        <field name="USER2">BBS1</field>
+                        <field name="CPU2">BBS1</field>
+                        <field name="USER3">BBS2</field>
+                        <field name="CPU3">BBS2</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="I63[|g{JX/t~SY3KOq)*" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";9wyre+[bBZdPQ8VDns2" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id=":UxDvfBdGCy5hPsQEdvm"></shadow>
+      <block type="type_number" id="6l1tTkv-I?yH{ZV9HbH."></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="8JQtG4Z.K`3m?UblTegQ">
+        <mutation colour="#a5a55b"></mutation>
+        <field name="HUE">60</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="oCK@_rm(5Oi(,1EJ,sM%" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">sensors_absimu_gyro</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="G~t7|@G,C2{|}OmlQ@00">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="mzOYDs5ffXy9-s=sZ5QN">
+            <field name="TEXT">read gyroscope on the</field>
+            <next>
+              <block type="field_dropdown" id="srMbeU22n_n1mGe~UB+:">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">AXIS</field>
+                <field name="USER0">X</field>
+                <field name="CPU0">x</field>
+                <field name="USER1">Y</field>
+                <field name="CPU1">y</field>
+                <field name="USER2">Z</field>
+                <field name="CPU2">z</field>
+                <next>
+                  <block type="field_static" id="W/o_pUtgU;FZ.+5qfSr:">
+                    <field name="TEXT">axis from AbsoluteIMU on port</field>
+                    <next>
+                      <block type="field_dropdown" id="Gmfvjnq^D7@B/hka1.Q:">
+                        <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                        <field name="FIELDNAME">PORT</field>
+                        <field name="USER0">BAS1</field>
+                        <field name="CPU0">BAS1</field>
+                        <field name="USER1">BAS2</field>
+                        <field name="CPU1">BAS2</field>
+                        <field name="USER2">BBS1</field>
+                        <field name="CPU2">BBS1</field>
+                        <field name="USER3">BBS2</field>
+                        <field name="CPU3">BBS2</field>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="I63[|g{JX/t~SY3KOq)*" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";9wyre+[bBZdPQ8VDns2" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id=":UxDvfBdGCy5hPsQEdvm"></shadow>
+      <block type="type_number" id="6l1tTkv-I?yH{ZV9HbH."></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="8JQtG4Z.K`3m?UblTegQ">
+        <mutation colour="#a5a55b"></mutation>
+        <field name="HUE">60</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="oCK@_rm(5Oi(,1EJ,sM%" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">sensors_absimu_compass</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="G~t7|@G,C2{|}OmlQ@00">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="W/o_pUtgU;FZ.+5qfSr:">
+            <field name="TEXT">read the compass from AbsoluteIMU on port</field>
+            <next>
+              <block type="field_dropdown" id="Gmfvjnq^D7@B/hka1.Q:">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">PORT</field>
+                <field name="USER0">BAS1</field>
+                <field name="CPU0">BAS1</field>
+                <field name="USER1">BAS2</field>
+                <field name="CPU1">BAS2</field>
+                <field name="USER2">BBS1</field>
+                <field name="CPU2">BBS1</field>
+                <field name="USER3">BBS2</field>
+                <field name="CPU3">BBS2</field>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="I63[|g{JX/t~SY3KOq)*" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id=";9wyre+[bBZdPQ8VDns2" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id=":UxDvfBdGCy5hPsQEdvm"></shadow>
+      <block type="type_number" id="6l1tTkv-I?yH{ZV9HbH."></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="8JQtG4Z.K`3m?UblTegQ">
+        <mutation colour="#a5a55b"></mutation>
+        <field name="HUE">60</field>
+      </block>
+    </value>
   </block></xml>

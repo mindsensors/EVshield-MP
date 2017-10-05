@@ -1173,6 +1173,238 @@ Blockly.defineBlocksWithJsonArray([
   "nextStatement": null,
   "colour": 60
 },
+{
+  "type": "sensors_absimu_tilt",
+  "message0": "read tilt on the %1 axis from AbsoluteIMU on port %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "AXIS",
+      "options": [
+        [
+          "X",
+          "x"
+        ],
+        [
+          "Y",
+          "y"
+        ],
+        [
+          "Z",
+          "z"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "sensors_absimu_acc",
+  "message0": "read accelerometer on the %1 axis from AbsoluteIMU on port %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "AXIS",
+      "options": [
+        [
+          "X",
+          "x"
+        ],
+        [
+          "Y",
+          "y"
+        ],
+        [
+          "Z",
+          "z"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "sensors_absimu_mag",
+  "message0": "read magnetic field on the %1 axis from AbsoluteIMU on port %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "AXIS",
+      "options": [
+        [
+          "X",
+          "x"
+        ],
+        [
+          "Y",
+          "y"
+        ],
+        [
+          "Z",
+          "z"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "sensors_absimu_gyro",
+  "message0": "read gyroscope on the %1 axis from AbsoluteIMU on port %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "AXIS",
+      "options": [
+        [
+          "X",
+          "x"
+        ],
+        [
+          "Y",
+          "y"
+        ],
+        [
+          "Z",
+          "z"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "sensors_absimu_compass",
+  "message0": "read the compass from AbsoluteIMU on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60,
+  "tooltip": "",
+  "helpUrl": ""
+},
 
 /* EVSHIELD */
 {
@@ -1524,6 +1756,35 @@ Blockly.Python['sensors_sumoeyes_setrange'] = function(block) {
   var range_method = block.getFieldValue('RANGE_METHOD');
   sensor_definition(port, 'sumoeyes', 'SumoEyes');
   return `sumoeyes_${port}.${range_method}()\n`;
+};
+Blockly.Python['sensors_absimu_tilt'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  var axis = block.getFieldValue('AXIS');
+  sensor_definition(port, 'absimu', 'AbsoluteIMU');
+  return [`absimu_${port}.readTilt()['${axis}']`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_absimu_acc'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  var axis = block.getFieldValue('AXIS');
+  sensor_definition(port, 'absimu', 'AbsoluteIMU');
+  return [`absimu_${port}.readAccelerometer()['${axis}']`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_absimu_mag'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  var axis = block.getFieldValue('AXIS');
+  sensor_definition(port, 'absimu', 'AbsoluteIMU');
+  return [`absimu_${port}.readMagneticField()['${axis}']`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_absimu_gyro'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  var axis = block.getFieldValue('AXIS');
+  sensor_definition(port, 'absimu', 'AbsoluteIMU');
+  return [`absimu_${port}.readGyro()['${axis}']`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_absimu_compass'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'absimu', 'AbsoluteIMU');
+  return [`absimu_${port}.readCompass()`, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python['led_set'] = function(block) {
