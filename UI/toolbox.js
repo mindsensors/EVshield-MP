@@ -1,3 +1,39 @@
+let motor_ports = [
+    [
+      "BAM1",
+      "BAM1"
+    ],
+    [
+      "BAM2",
+      "BAM2"
+    ],
+    [
+      "BBM1",
+      "BBM1"
+    ],
+    [
+      "BBM2",
+      "BBM2"
+    ]
+];
+let sensor_ports = [
+    [
+      "BAS1",
+      "BAS1"
+    ],
+    [
+      "BAS2",
+      "BAS2"
+    ],
+    [
+      "BBS1",
+      "BBS1"
+    ],
+    [
+      "BBS2",
+      "BBS2"
+    ]
+];
 Blockly.defineBlocksWithJsonArray([
 
 /* MOTORS */
@@ -8,24 +44,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": [
-        [
-          "BAM1",
-          "BAM1"
-        ],
-        [
-          "BAM2",
-          "BAM2"
-        ],
-        [
-          "BBM1",
-          "BBM1"
-        ],
-        [
-          "BBM2",
-          "BBM2"
-        ]
-      ]
+      "options": motor_ports
     },
     {
       "type": "field_number",
@@ -47,24 +66,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": [
-        [
-          "BAM1",
-          "BAM1"
-        ],
-        [
-          "BAM2",
-          "BAM2"
-        ],
-        [
-          "BBM1",
-          "BBM1"
-        ],
-        [
-          "BBM2",
-          "BBM2"
-        ]
-      ]
+      "options": motor_ports
     }
   ],
   "output": "Number",
@@ -77,24 +79,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": [
-        [
-          "BAM1",
-          "BAM1"
-        ],
-        [
-          "BAM2",
-          "BAM2"
-        ],
-        [
-          "BBM1",
-          "BBM1"
-        ],
-        [
-          "BBM2",
-          "BBM2"
-        ]
-      ]
+      "options": motor_ports
     }
   ],
   "previousStatement": null,
@@ -108,24 +93,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": [
-        [
-          "BAM1",
-          "BAM1"
-        ],
-        [
-          "BAM2",
-          "BAM2"
-        ],
-        [
-          "BBM1",
-          "BBM1"
-        ],
-        [
-          "BBM2",
-          "BBM2"
-        ]
-      ]
+      "options": motor_ports
     }
   ],
   "previousStatement": null,
@@ -139,24 +107,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": [
-        [
-          "BAM1",
-          "BAM1"
-        ],
-        [
-          "BAM2",
-          "BAM2"
-        ],
-        [
-          "BBM1",
-          "BBM1"
-        ],
-        [
-          "BBM2",
-          "BBM2"
-        ]
-      ]
+      "options": motor_ports
     }
   ],
   "previousStatement": null,
@@ -170,24 +121,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": [
-        [
-          "BAM1",
-          "BAM1"
-        ],
-        [
-          "BAM2",
-          "BAM2"
-        ],
-        [
-          "BBM1",
-          "BBM1"
-        ],
-        [
-          "BBM2",
-          "BBM2"
-        ]
-      ]
+      "options": motor_ports
     }
   ],
   "previousStatement": null,
@@ -201,24 +135,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": [
-        [
-          "BAM1",
-          "BAM1"
-        ],
-        [
-          "BAM2",
-          "BAM2"
-        ],
-        [
-          "BBM1",
-          "BBM1"
-        ],
-        [
-          "BBM2",
-          "BBM2"
-        ]
-      ]
+      "options": motor_ports
     },
     {
       "type": "field_number",
@@ -264,24 +181,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": [
-        [
-          "BAM1",
-          "BAM1"
-        ],
-        [
-          "BAM2",
-          "BAM2"
-        ],
-        [
-          "BBM1",
-          "BBM1"
-        ],
-        [
-          "BBM2",
-          "BBM2"
-        ]
-      ]
+      "options": motor_ports
     },
     {
       "type": "field_number",
@@ -327,24 +227,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": [
-        [
-          "BAM1",
-          "BAM1"
-        ],
-        [
-          "BAM2",
-          "BAM2"
-        ],
-        [
-          "BBM1",
-          "BBM1"
-        ],
-        [
-          "BBM2",
-          "BBM2"
-        ]
-      ]
+      "options": motor_ports
     },
     {
       "type": "field_number",
@@ -392,24 +275,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Boolean",
@@ -422,24 +288,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -452,24 +301,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     },
     {
       "type": "field_dropdown",
@@ -497,24 +329,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     },
     {
       "type": "field_dropdown",
@@ -568,24 +383,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -598,24 +396,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Boolean",
@@ -628,24 +409,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -658,24 +422,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "previousStatement": null,
@@ -689,24 +436,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -719,24 +449,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     },
     {
       "type": "field_dropdown",
@@ -768,24 +481,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -798,24 +494,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "previousStatement": null,
@@ -829,24 +508,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -859,24 +521,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -889,24 +534,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     },
     {
       "type": "field_dropdown",
@@ -941,24 +569,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     },
     {
       "type": "field_dropdown",
@@ -993,24 +604,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     },
     {
       "type": "field_dropdown",
@@ -1045,24 +639,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Boolean",
@@ -1075,24 +652,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -1105,24 +665,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "String",
@@ -1135,24 +678,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     },
     {
       "type": "field_dropdown",
@@ -1198,24 +724,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -1246,24 +755,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -1294,24 +786,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -1342,24 +817,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -1372,24 +830,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -1402,24 +843,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -1432,24 +856,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -1462,24 +869,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Number",
@@ -1492,24 +882,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Array",
@@ -1522,24 +895,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "PORT",
-      "options": [
-        [
-          "BAS1",
-          "BAS1"
-        ],
-        [
-          "BAS2",
-          "BAS2"
-        ],
-        [
-          "BBS1",
-          "BBS1"
-        ],
-        [
-          "BBS2",
-          "BBS2"
-        ]
-      ]
+      "options": sensor_ports
     }
   ],
   "output": "Array",
