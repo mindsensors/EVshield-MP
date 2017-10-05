@@ -1256,55 +1256,55 @@ Blockly.Python['sensors_sumoeyes_setrange'] = function(block) {
 Blockly.Python['sensors_absimu_tilt'] = function(block) {
   var port = block.getFieldValue('PORT');
   var axis = block.getFieldValue('AXIS');
-  sensor_definition(port, 'absimu', 'AbsoluteIMU');
+  sensor_definition_i2c(port, 'absimu', 'AbsoluteIMU');
   return [`absimu_${port}.readTilt()['${axis}']`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_absimu_acc'] = function(block) {
   var port = block.getFieldValue('PORT');
   var axis = block.getFieldValue('AXIS');
-  sensor_definition(port, 'absimu', 'AbsoluteIMU');
+  sensor_definition_i2c(port, 'absimu', 'AbsoluteIMU');
   return [`absimu_${port}.readAccelerometer()['${axis}']`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_absimu_mag'] = function(block) {
   var port = block.getFieldValue('PORT');
   var axis = block.getFieldValue('AXIS');
-  sensor_definition(port, 'absimu', 'AbsoluteIMU');
+  sensor_definition_i2c(port, 'absimu', 'AbsoluteIMU');
   return [`absimu_${port}.readMagneticField()['${axis}']`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_absimu_gyro'] = function(block) {
   var port = block.getFieldValue('PORT');
   var axis = block.getFieldValue('AXIS');
-  sensor_definition(port, 'absimu', 'AbsoluteIMU');
+  sensor_definition_i2c(port, 'absimu', 'AbsoluteIMU');
   return [`absimu_${port}.readGyro()['${axis}']`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_absimu_compass'] = function(block) {
   var port = block.getFieldValue('PORT');
-  sensor_definition(port, 'absimu', 'AbsoluteIMU');
+  sensor_definition_i2c(port, 'absimu', 'AbsoluteIMU');
   return [`absimu_${port}.readCompass()`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_lineleader_steering'] = function(block) {
   var port = block.getFieldValue('PORT');
-  sensor_definition(port, 'lineleader', 'LineLeader');
+  sensor_definition_i2c(port, 'lineleader', 'LineLeader');
   return [`lineleader_${port}.getSteering()`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_lineleader_average'] = function(block) {
   var port = block.getFieldValue('PORT');
-  sensor_definition(port, 'lineleader', 'LineLeader');
+  sensor_definition_i2c(port, 'lineleader', 'LineLeader');
   return [`lineleader_${port}.getAverage()`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_lineleader_result'] = function(block) {
   var port = block.getFieldValue('PORT');
-  sensor_definition(port, 'lineleader', 'LineLeader');
+  sensor_definition_i2c(port, 'lineleader', 'LineLeader');
   return [`lineleader_${port}.getResult()`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_lineleader_raw'] = function(block) {
   var port = block.getFieldValue('PORT');
-  sensor_definition(port, 'lineleader', 'LineLeader');
+  sensor_definition_i2c(port, 'lineleader', 'LineLeader');
   return [`lineleader_${port}.getRawCalibrated()`, Blockly.Python.ORDER_ATOMIC];
 };
 Blockly.Python['sensors_lightsensorarray'] = function(block) {
   var port = block.getFieldValue('PORT');
-  sensor_definition(port, 'lightsensorarray', 'LightSensorArray');
+  sensor_definition_i2c(port, 'lightsensorarray', 'LightSensorArray');
   return [`lightsensorarray_${port}.getCalibrated()`, Blockly.Python.ORDER_ATOMIC];
 };
 
