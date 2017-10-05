@@ -498,6 +498,18 @@
     <block type="sensors_absimu_compass">
       <field name="PORT">BAS1</field>
     </block>
+    <block type="sensors_lineleader_steering">
+      <field name="PORT">BAS1</field>
+    </block>
+    <block type="sensors_lineleader_average">
+      <field name="PORT">BAS1</field>
+    </block>
+    <block type="sensors_lineleader_result">
+      <field name="PORT">BAS1</field>
+    </block>
+    <block type="sensors_lineleader_raw">
+      <field name="PORT">BAS1</field>
+    </block>
   </category>
   <category name="EVShield" colour="#a56d5b">
     <block type="led_set">

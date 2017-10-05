@@ -1219,9 +1219,7 @@ Blockly.defineBlocksWithJsonArray([
     }
   ],
   "output": "Number",
-  "colour": 60,
-  "tooltip": "",
-  "helpUrl": ""
+  "colour": 60
 },
 {
   "type": "sensors_absimu_acc",
@@ -1269,9 +1267,7 @@ Blockly.defineBlocksWithJsonArray([
     }
   ],
   "output": "Number",
-  "colour": 60,
-  "tooltip": "",
-  "helpUrl": ""
+  "colour": 60
 },
 {
   "type": "sensors_absimu_mag",
@@ -1319,9 +1315,7 @@ Blockly.defineBlocksWithJsonArray([
     }
   ],
   "output": "Number",
-  "colour": 60,
-  "tooltip": "",
-  "helpUrl": ""
+  "colour": 60
 },
 {
   "type": "sensors_absimu_gyro",
@@ -1369,9 +1363,7 @@ Blockly.defineBlocksWithJsonArray([
     }
   ],
   "output": "Number",
-  "colour": 60,
-  "tooltip": "",
-  "helpUrl": ""
+  "colour": 60
 },
 {
   "type": "sensors_absimu_compass",
@@ -1401,9 +1393,127 @@ Blockly.defineBlocksWithJsonArray([
     }
   ],
   "output": "Number",
-  "colour": 60,
-  "tooltip": "",
-  "helpUrl": ""
+  "colour": 60
+},
+{
+  "type": "sensors_lineleader_steering",
+  "message0": "steering value of LineLeader on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
+{
+  "type": "sensors_lineleader_average",
+  "message0": "average value of LineLeader on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
+{
+  "type": "sensors_lineleader_result",
+  "message0": "result of LineLeader on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 60
+},
+{
+  "type": "sensors_lineleader_raw",
+  "message0": "raw values of LineLeader on port %1",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "BAS1",
+          "BAS1"
+        ],
+        [
+          "BAS2",
+          "BAS2"
+        ],
+        [
+          "BBS1",
+          "BBS1"
+        ],
+        [
+          "BBS2",
+          "BBS2"
+        ]
+      ]
+    }
+  ],
+  "output": "Array",
+  "colour": 60
 },
 
 /* EVSHIELD */
@@ -1785,6 +1895,26 @@ Blockly.Python['sensors_absimu_compass'] = function(block) {
   var port = block.getFieldValue('PORT');
   sensor_definition(port, 'absimu', 'AbsoluteIMU');
   return [`absimu_${port}.readCompass()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_lineleader_steering'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'lineleader', 'LineLeader');
+  return [`lineleader_${port}.getSteering()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_lineleader_average'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'lineleader', 'LineLeader');
+  return [`lineleader_${port}.getAverage()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_lineleader_result'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'lineleader', 'LineLeader');
+  return [`lineleader_${port}.getResult()`, Blockly.Python.ORDER_ATOMIC];
+};
+Blockly.Python['sensors_lineleader_raw'] = function(block) {
+  var port = block.getFieldValue('PORT');
+  sensor_definition(port, 'lineleader', 'LineLeader');
+  return [`lineleader_${port}.getRawCalibrated()`, Blockly.Python.ORDER_ATOMIC];
 };
 
 Blockly.Python['led_set'] = function(block) {
