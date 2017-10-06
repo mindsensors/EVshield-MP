@@ -56,8 +56,7 @@
     <field name="INLINE">AUTO</field>
     <field name="CONNECTIONS">BOTH</field>
     <statement name="INPUTS">
-      <block type="input_value" id="t*oh8,QT(v`@@m5P3tk@">
-        <field name="INPUTNAME">COLOR</field>
+      <block type="input_dummy" id="NJq!z3uY(NPG6dq|V0Io">
         <field name="ALIGN">LEFT</field>
         <statement name="FIELDS">
           <block type="field_static" id="Fsd|.#12q0WZo5`X+/FE">
@@ -77,18 +76,18 @@
                 <next>
                   <block type="field_static" id="h5VZ!@`@*Yo[aCgD{sml">
                     <field name="TEXT">to color</field>
+                    <next>
+                      <block type="field_colour" id="(={-AHM_G$ujY.x/(LbW">
+                        <field name="COLOUR">#ff0000</field>
+                        <field name="FIELDNAME">COLOR</field>
+                      </block>
+                    </next>
                   </block>
                 </next>
               </block>
             </next>
           </block>
         </statement>
-        <value name="TYPE">
-          <shadow type="type_null" id="S*qWG7C|)xfZ1{BgfIE$"></shadow>
-          <block type="type_other" id="W~,:=NAOH2hHEF}9t.mI">
-            <field name="TYPE">Colour</field>
-          </block>
-        </value>
       </block>
     </statement>
     <value name="TOOLTIP">

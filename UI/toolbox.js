@@ -930,9 +930,9 @@ Blockly.defineBlocksWithJsonArray([
       ]
     },
     {
-      "type": "input_value",
+      "type": "field_colour",
       "name": "COLOR",
-      "check": "Colour"
+      "colour": "#ff0000"
     }
   ],
   "previousStatement": null,
@@ -1359,7 +1359,7 @@ Blockly.Python['sensors_lightsensorarray'] = function(block) {
 
 Blockly.Python['led_set'] = function(block) {
   var which = block.getFieldValue('WHICH');
-  var hex_color = Blockly.Python.valueToCode(block, 'COLOR', Blockly.Python.ORDER_ATOMIC);
+  var hex_color = block.getFieldValue('COLOR');
   Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var color = /#([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})/.exec(hex_color);
   var red   = parseInt(color[1], 16);
