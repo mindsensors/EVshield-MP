@@ -1,4 +1,4 @@
-let motor_ports = [
+var motor_ports = [
     [
       "BAM1",
       "BAM1"
@@ -16,7 +16,7 @@ let motor_ports = [
       "BBM2"
     ]
 ];
-let sensor_ports = [
+var sensor_ports = [
     [
       "BAS1",
       "BAS1"
