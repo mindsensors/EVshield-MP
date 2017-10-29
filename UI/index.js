@@ -32,7 +32,7 @@ updatePython();
 
 function exportPython() {
     var tempLink = document.createElement("a");
-    tempLink.setAttribute("href", "data:text/plain," + encodeURIComponent(pythonPre.innerHTML));
+    tempLink.setAttribute("href", "data:text/plain," + encodeURIComponent(Blockly.Python.workspaceToCode(workspace)));
     tempLink.setAttribute("download", "main.py");
     document.body.appendChild(tempLink); // Firefox requires the link to be in the body
     tempLink.click();
