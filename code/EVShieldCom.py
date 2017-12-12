@@ -19,6 +19,8 @@ class EVShieldI2C():
         return function_with_pingtimeoutreset
     
     def __init__(self, i2c_address):
+        I2C(1, I2C.MASTER, baudrate=20000).deinit()
+        pyb.delay(100) 
         self.i2c = pyb.I2C(1, pyb.I2C.MASTER, baudrate=20000)
         self.i2c_address = i2c_address >> 1
     

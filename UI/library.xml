@@ -2814,4 +2814,144 @@
         <field name="HUE">140</field>
       </block>
     </value>
+  </block><block type="factory_base" id="xEJpyo]xY(^@^iAui{Dp" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="BOTH"></mutation>
+    <field name="NAME">servo_advanced</field>
+    <field name="INLINE">INT</field>
+    <field name="CONNECTIONS">BOTH</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="7HpH@]%D~VY7YX}%{x~~">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="rfi0uDa,Q%4eT#YHz7s7">
+            <field name="TEXT">Set Servo</field>
+            <next>
+              <block type="field_dropdown" id="5jhp.cyneb#S^HQ3Q/t2">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">PORT</field>
+                <field name="USER0">S3</field>
+                <field name="CPU0">3</field>
+                <field name="USER1">S5</field>
+                <field name="CPU1">5</field>
+                <field name="USER2">S6</field>
+                <field name="CPU2">6</field>
+                <field name="USER3">S9</field>
+                <field name="CPU3">9</field>
+                <field name="USER4">S10</field>
+                <field name="CPU4">10</field>
+                <field name="USER5">S11</field>
+                <field name="CPU5">11</field>
+                <next>
+                  <block type="field_static" id="naLvs@?r}O2cWK?6_:WN">
+                    <field name="TEXT">to</field>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </statement>
+        <next>
+          <block type="input_value" id="D]pFG0:I+bDuPMP1^D|b">
+            <field name="INPUTNAME">Pulse Width</field>
+            <field name="ALIGN">LEFT</field>
+            <value name="TYPE">
+              <shadow type="type_null" id="o8DwAehK_vx}B|PR-Z`;"></shadow>
+              <block type="type_number" id="(#A~H-zPw0_oR(vKC1!("></block>
+            </value>
+            <next>
+              <block type="input_dummy" id="x3#h672%q$S56H98eL?d">
+                <field name="ALIGN">LEFT</field>
+                <statement name="FIELDS">
+                  <block type="field_dropdown" id="tes@AEv^otW}**U2f*`(">
+                    <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                    <field name="FIELDNAME">Setmode</field>
+                    <field name="USER0">microseconds</field>
+                    <field name="CPU0">US</field>
+                    <field name="USER1">Angle</field>
+                    <field name="CPU1">ANGLE</field>
+                    <field name="USER2">Speed</field>
+                    <field name="CPU2">SPD</field>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="s_MhfTq67Gat5XA/W[s~" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="W@Qg/Nwtx$!$Z-YZ0Ktg" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="TOPTYPE">
+      <shadow type="type_null" id="_0Is]%@yMS=SQGc5/Fu}"></shadow>
+    </value>
+    <value name="BOTTOMTYPE">
+      <shadow type="type_null" id="RO_{E52*=5b3qW$4P7y^"></shadow>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="I*Bp}#tsmERo*bQxa[22">
+        <mutation colour="#5b67a5"></mutation>
+        <field name="HUE">230</field>
+      </block>
+    </value>
+  </block><block type="factory_base" id="9jtthfGYxcgh)e`=A}6b" deletable="false" movable="false" x="0" y="0">
+    <mutation connections="LEFT"></mutation>
+    <field name="NAME">Get_servo</field>
+    <field name="INLINE">AUTO</field>
+    <field name="CONNECTIONS">LEFT</field>
+    <statement name="INPUTS">
+      <block type="input_dummy" id="Ts+~771u6?aic.9!3CYb">
+        <field name="ALIGN">LEFT</field>
+        <statement name="FIELDS">
+          <block type="field_static" id="tlPa#*caHnz;9]v[/k]b">
+            <field name="TEXT">Get position </field>
+            <next>
+              <block type="field_dropdown" id="nhkEL_ii2?M$:$LD(*?7">
+                <mutation options="[&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;,&quot;text&quot;]"></mutation>
+                <field name="FIELDNAME">Port</field>
+                <field name="USER0">S3</field>
+                <field name="CPU0">3</field>
+                <field name="USER1">S5</field>
+                <field name="CPU1">5</field>
+                <field name="USER2">S6</field>
+                <field name="CPU2">6</field>
+                <field name="USER3">S9</field>
+                <field name="CPU3">9</field>
+                <field name="USER4">S10</field>
+                <field name="CPU4">10</field>
+                <field name="USER5">S11</field>
+                <field name="CPU5">11</field>
+              </block>
+            </next>
+          </block>
+        </statement>
+      </block>
+    </statement>
+    <value name="TOOLTIP">
+      <block type="text" id="LItV?A|6(?31IUWeXn6n" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="HELPURL">
+      <block type="text" id="z?i#wDMOma`$1A%C]8p;" deletable="false" movable="false">
+        <field name="TEXT"></field>
+      </block>
+    </value>
+    <value name="OUTPUTTYPE">
+      <shadow type="type_null" id="c{1M$p[wUTa200Y!`j]D"></shadow>
+      <block type="type_number" id="S%g.h$~o{pMv]vEl;zL5"></block>
+    </value>
+    <value name="COLOUR">
+      <block type="colour_hue" id="2D=~ieB6]?==qYRb!8{J">
+        <mutation colour="#5b67a5"></mutation>
+        <field name="HUE">230</field>
+      </block>
+    </value>
   </block></xml>

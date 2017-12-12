@@ -3,6 +3,7 @@ from EVShieldCom import *
 import struct
 import pyb
 
+      
 
 class EVShieldBank(EVShieldI2C):
     # Voltage value returned in milli-volts.
@@ -18,8 +19,13 @@ class EVShieldBank(EVShieldI2C):
     
     # Motor Operation APIs.
     def helper(self, readOrWriteMethod, which_motor, motor1Register, motor2Register, value = None):
-        if which_motor not in [SH_Motor_1, SH_Motor_2]:
+        if which_motor not in [SH_Motor_1, SH_Motor_2,SH_Motor_Both]:
             return # invalid motor
+        if which_motor ==  SH_Motor_Both:
+            if value:
+                readOrWriteMethod(motor1Register, value)
+                readOrWriteMethod(motor2Register, value)
+                return
         register = motor1Register if which_motor == SH_Motor_1 else motor2Register
         if value:
             readOrWriteMethod(register, value)
@@ -138,7 +144,7 @@ class EVShieldBank(EVShieldI2C):
         elif (next_action == SH_Next_Action_BrakeHold): control |= SH_CONTROL_BRK | SH_CONTROL_ON
         
         if direction == SH_Direction_Reverse: speed = -speed
-        self.motorSetSpeedTimeAndControl(which_motors, speed, seconds, ctrl)
+        self.motorSetSpeedTimeAndControl(which_motors, speed, seconds, control)
         if wait_for_completion == SH_Completion_Wait_For:
             self.motorWaitUntilTimeDone(which_motors)
     
@@ -268,3 +274,40 @@ class EVShield():
     
     def getKeyPressCount(self, btn):
         return self.bank_a.readByte(BTN_TO_COUNT_REG[btn])
+    
+    class Servo():
+        pwmTimer ={3:[pyb.Pin.cpu.A1,2,2],
+               5:[pyb.Pin.cpu.A3,2,4],
+               6:[pyb.Pin.cpu.A6,13,1],
+               9:[pyb.Pin.cpu.B8,4,3],
+               10:[pyb.Pin.cpu.B9,4,4],
+               11:[pyb.Pin.cpu.B15,12,2]
+               }
+        def __init__(self,pin_number):
+            self.tim = pyb.Timer(self.pwmTimer[pin_number][1], freq=50)
+            self.ch = self.tim.channel(self.pwmTimer[pin_number][2], pyb.Timer.PWM, pin=self.pwmTimer[pin_number][0])
+            
+        def writeuS(self,value):
+            value = value if value < 2500 else 2500
+            value = value if value > 500 else 500
+            self.value = value 
+            self.ch.pulse_width_percent(self.value*self.tim.freq()/10000)  
+        def readuS(self):
+            return int((self.value))        
+        
+        def writeSpeed(self,value):
+            value = int(500+value*11.11)
+            value = value if value < 2500 else 2500
+            value = value if value >500 else 500
+            self.value = value
+            self.ch.pulse_width_percent(self.value*self.tim.freq()/10000) 
+        def readSpeed(self):
+            return int((self.value-500)/11.11)        
+        
+        def writeAngle(self,value):
+            self.value = int(500+value*11.11)
+            value = value if value < 2500 else 2500
+            value = value if value >500 else 500
+            self.ch.pulse_width_percent(self.value*self.tim.freq()/10000) 
+        def readAngle(self):
+            return int((self.value-500)/11.11)      

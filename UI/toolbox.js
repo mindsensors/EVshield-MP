@@ -16,6 +16,32 @@ var motor_ports = [
       "BBM2"
     ]
 ];
+var motor_ports_sync = [
+    [
+      "BAM1",
+      "BAM1"
+    ],
+    [
+      "BAM2",
+      "BAM2"
+    ],
+    [
+      "BAM1 & BAM2",
+      "BAMBoth"
+    ],
+    [
+      "BBM1",
+      "BBM1"
+    ],
+    [
+      "BBM2",
+      "BBM2"
+    ],
+    [
+      "BBM1 & BBM2",
+      "BBMBoth"
+    ],
+];
 var sensor_ports = [
     [
       "BAS1",
@@ -44,7 +70,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": motor_ports
+      "options": motor_ports_sync
     },
     {
       "type": "field_number",
@@ -93,7 +119,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": motor_ports
+      "options": motor_ports_sync
     }
   ],
   "previousStatement": null,
@@ -107,7 +133,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": motor_ports
+      "options": motor_ports_sync
     }
   ],
   "previousStatement": null,
@@ -121,7 +147,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": motor_ports
+      "options": motor_ports_sync
     }
   ],
   "previousStatement": null,
@@ -135,7 +161,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": motor_ports
+      "options": motor_ports_sync
     },
     {
       "type": "field_number",
@@ -181,7 +207,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": motor_ports
+      "options": motor_ports_sync
     },
     {
       "type": "field_number",
@@ -227,7 +253,7 @@ Blockly.defineBlocksWithJsonArray([
     {
       "type": "field_dropdown",
       "name": "MOTOR",
-      "options": motor_ports
+      "options": motor_ports_sync
     },
     {
       "type": "field_number",
@@ -266,7 +292,132 @@ Blockly.defineBlocksWithJsonArray([
   "nextStatement": null,
   "colour": 240
 },
-
+{
+  "type": "servo_advanced",
+  "message0": "Set Servo %1 to %2 %3 %4",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "PORT",
+      "options": [
+        [
+          "S3",
+          "3"
+        ],
+        [
+          "S5",
+          "5"
+        ],
+        [
+          "S6",
+          "6"
+        ],
+        [
+          "S9",
+          "9"
+        ],
+        [
+          "S10",
+          "10"
+        ],
+        [
+          "S11",
+          "11"
+        ]
+      ]
+    },
+    {
+      "type": "input_dummy"
+    },
+    {
+      "type": "input_value",
+      "name": "Pulse Width",
+      "check": "Number"
+    },
+    {
+      "type": "field_dropdown",
+      "name": "Setmode",
+      "options": [
+        [
+          "microseconds",
+          "US"
+        ],
+        [
+          "Angle",
+          "ANG"
+        ],
+        [
+          "Speed",
+          "SPD"
+        ]
+      ]
+    }
+  ],
+  "inputsInline": true,
+  "previousStatement": null,
+  "nextStatement": null,
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+},
+{
+  "type": "get_servo",
+  "message0": "Get position  %1 %2",
+  "args0": [
+    {
+      "type": "field_dropdown",
+      "name": "Port",
+      "options": [
+        [
+          "S3",
+          "3"
+        ],
+        [
+          "S5",
+          "5"
+        ],
+        [
+          "S6",
+          "6"
+        ],
+        [
+          "S9",
+          "9"
+        ],
+        [
+          "S10",
+          "10"
+        ],
+        [
+          "S11",
+          "11"
+        ]
+      ]
+    },
+    {
+      "type": "field_dropdown",
+      "name": "Mode",
+      "options": [
+        [
+          "in microseconds",
+          "US"
+        ],
+        [
+          "in angle",
+          "ANG"
+        ],
+        [
+          "in speed",
+          "SPD"
+        ]
+      ]
+    }
+  ],
+  "output": "Number",
+  "colour": 230,
+  "tooltip": "",
+  "helpUrl": ""
+},
 /* SENSORS */
 {
   "type": "sensors_nxttouch",
@@ -1113,7 +1264,7 @@ Blockly.Python['motors_setspeed'] = function(block) {
   var speed = block.getFieldValue('SPEED');
   Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
-  return `evshield.bank_${motor[1].toLowerCase()}.motorRunUnlimited(SH_Motor_${motor[3]}, ${direction}, ${Math.abs(speed)||0})\n`;
+  return `evshield.bank_${motor[1].toLowerCase()}.motorRunUnlimited(SH_Motor_${motor.substring(3)}, ${direction}, ${Math.abs(speed)||0})\n`;
 };
 Blockly.Python['motors_getpos'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
@@ -1128,17 +1279,17 @@ Blockly.Python['motors_resetpos'] = function(block) {
 Blockly.Python['motors_brake'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
   Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
-  return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor[3]}, SH_Next_Action_Brake)\n`;
+  return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor.substring(3)}, SH_Next_Action_Brake)\n`;
 };
 Blockly.Python['motors_float'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
   Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
-  return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor[3]}, SH_Next_Action_Float)\n`;
+  return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor.substring(3)}, SH_Next_Action_Float)\n`;
 };
 Blockly.Python['motors_hold'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
   Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
-  return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor[3]}, SH_Next_Action_BrakeHold)\n`;
+  return `evshield.bank_${motor[1].toLowerCase()}.motorStop(SH_Motor_${motor.substring(3)}, SH_Next_Action_BrakeHold)\n`;
 };
 Blockly.Python['motors_seconds'] = function(block) {
   var motor = block.getFieldValue('MOTOR');
@@ -1147,7 +1298,7 @@ Blockly.Python['motors_seconds'] = function(block) {
   var next_action = block.getFieldValue('NEXT_ACTION');
   Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
-  return `evshield.bank_${motor[1].toLowerCase()}.motorRunSeconds(SH_Motor_${motor[3]},
+  return `evshield.bank_${motor[1].toLowerCase()}.motorRunSeconds(SH_Motor_${motor.substring(3)},
                  ${direction},
                  speed=${Math.abs(speed)||0},
                  seconds=${seconds},
@@ -1160,7 +1311,7 @@ Blockly.Python['motors_degrees'] = function(block) {
   var next_action = block.getFieldValue('NEXT_ACTION');
   Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
-  return `evshield.bank_${motor[1].toLowerCase()}.motorRunDegrees(SH_Motor_${motor[3]},
+  return `evshield.bank_${motor[1].toLowerCase()}.motorRunDegrees(SH_Motor_${motor.substring(3)},
                  ${direction},
                  speed=${Math.abs(speed)||0},
                  degrees=${degrees},
@@ -1173,11 +1324,52 @@ Blockly.Python['motors_rotations'] = function(block) {
   var next_action = block.getFieldValue('NEXT_ACTION');
   Blockly.Python.definitions_.init_evshield = 'from EVShield import EVShield\nevshield = EVShield()';
   var direction = parseInt(speed) >= 0 ? 'SH_Direction_Forward' : 'SH_Direction_Reverse';
-  return `evshield.bank_${motor[1].toLowerCase()}.motorRunRotations(SH_Motor_${motor[3]},
+  return `evshield.bank_${motor[1].toLowerCase()}.motorRunRotations(SH_Motor_${motor.substring(3)},
                  ${direction},
                  speed=${Math.abs(speed)||0},
                  rotations=${rotations},
                  next_action=${next_action})\n`;
+};
+Blockly.Python['servo_advanced'] = function(block) {
+  var dropdown_port = block.getFieldValue('PORT');
+  var value_pulse_width = Blockly.Python.valueToCode(block, 'Pulse Width', Blockly.Python.ORDER_ATOMIC);
+  var dropdown_setmode = block.getFieldValue('Setmode');
+  // TODO: Assemble Python into code variable.
+  var code = `evshield.Servo(${dropdown_port}).writeuS(${value_pulse_width})\n`;
+  switch(dropdown_setmode) {
+    case 'US':
+        code =`evshield.Servo(${dropdown_port}).writeuS(${value_pulse_width})\n`;
+        break;
+    case 'ANG':
+        code =`evshield.Servo(${dropdown_port}).writeAngle(${value_pulse_width})\n`;
+        break;
+    case 'SPD':
+        code =`evshield.Servo(${dropdown_port}).writeSpeed(${value_pulse_width})\n`;
+        break;
+        
+    } 
+  
+  return code;
+};
+Blockly.Python['get_servo'] = function(block) {
+  var dropdown_port = block.getFieldValue('Port');
+  var dropdown_mode = block.getFieldValue('Mode');
+  var code = `evshield.Servo(${dropdown_port}).readuS()`;
+  switch(dropdown_mode) {
+    case 'US':
+        code =`evshield.Servo(${dropdown_port}).readuS()`;
+        break;
+    case 'ANG':
+        code =`evshield.Servo(${dropdown_port}).readAngle()`;
+        break;
+    case 'SPD':
+        code =`evshield.Servo(${dropdown_port}).readSpeed()`;
+        break;
+        
+    }
+    
+  // TODO: Change ORDER_NONE to the correct strength.
+  return [code, Blockly.Python.ORDER_NONE];
 };
 
 function sensor_definition(port, instanceName, className) {
@@ -1189,6 +1381,7 @@ function sensor_definition_i2c(port, instanceName, className) {
   Blockly.Python.definitions_[`import_${className}`] = `from EVShieldSensors import ${className}`;
   Blockly.Python.definitions_[`${instanceName}_${port}`] = `${instanceName}_${port} = ${className}(SH_${port})`;
 }
+
 Blockly.Python['sensors_nxttouch'] = function(block) {
   var port = block.getFieldValue('PORT');
   sensor_definition(port, 'nxttouch', 'NXTTouch');
